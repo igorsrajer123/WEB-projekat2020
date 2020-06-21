@@ -1,0 +1,31 @@
+label {
+    width: 120px;
+    clear: left;
+    text-align: right;
+    padding-right: 10px;
+    margin-bottom: 10px;
+}
+
+input, label {
+    float: left;
+}
+
+.btn1 {
+		
+	 height: 20px; 
+	 width: 70px;
+	 margin: 10px;
+	 position: absolute;
+	 left: 7%;
+	 top: 22%;
+}
+
+.btn2 {
+		
+	 height: 20px; 
+	 width: 70px;
+	 margin: 10px;
+	 position: absolute;
+	 left: 14%;
+	 top: 22%;
+}
