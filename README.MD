@@ -1,2 +1,3 @@
-Putanja do servise poèinje sa /rest
+Putanja do servise poï¿½inje sa /rest
 Servise stavljati u "services" paket
+Vezbanje  git-a :)
