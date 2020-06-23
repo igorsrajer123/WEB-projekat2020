@@ -11,13 +11,11 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import com.sun.research.ws.wadl.Request;
-
+import beans.Gost;
 import beans.Korisnik;
 import dao.KorisnikDAO;
 
@@ -122,5 +120,39 @@ public class KorisnikServis {
 			System.out.println("Korisnik pronadjen!");
 			return k;
 		}
+	}
+	
+	@POST
+	@Path("/registruj")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response registruj(Korisnik k, @Context HttpServletRequest req) {
+		KorisnikDAO korisnici = (KorisnikDAO) ctx.getAttribute("korisnikDAO");
+		System.out.println("KURCINAAA");
+		
+		if (korisnici == null) {
+			System.out.println("KEPASAAAAAAAAAAAAAAa");
+			return Response.status(500).build();
+		}
+		
+		if (korisnici.postojiKorisnickoIme(k.getKorisnicko_ime())) {
+			System.out.println("USAO SAM OVDEEEE");
+			return Response.status(500).entity("Korisnicko ime").build();
+		}
+		
+		
+		Gost noviGost = new Gost(k);
+		
+		korisnici.dodajKorisnik(noviGost);
+		korisnici.sacuvajKorisnika();
+		
+		req.getSession().setAttribute("korisnik", noviGost);
+		System.out.println("Ulogovani korisnik: " + noviGost);
+		
+		System.out.println(noviGost.toString() + "DUPEEEEEEEEEEEE");
+		
+		return Response.ok().build();
+		
+		
+		
 	}
 }

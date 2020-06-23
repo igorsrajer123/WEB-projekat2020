@@ -78,7 +78,6 @@ $(document).ready(function(){
 			$('#greskaImePor').html("Unesite ime");
 			$('#greskaImePor').show();
 			greskaIme = true;
-			alert(greskaIme);
 		} else {
 			$('#greskaImePor').hide();
 		}
@@ -112,32 +111,37 @@ $(document).ready(function(){
 		proveriPonLozinku();
 		proveriIme();
 		proveriPrezime();
-		alert(greskaIme);
+		
 
 		if (greskaKorIme == false && greskaLoz == false && greskaPonLoz == false && greskaIme == false && greskaPrz == false) {
-			alert("aaaaaaaaaaa");
 			
-			let podaci = JSON.stringify({
+			
+			let podaci = {
 				"korisnicko_ime": $('#korIme').val(),
-				"lzinka": $('#loz').val(),
+				"lozinka": $('#loz').val(),
 				"ime": $('#imeKorisnika').val(),
 				"prezime": $('#przKorisnika').val(),
 				"pol": $('#pol option:selected').text()
-			});
-
-			alert($('#pol option:selected').text());
+			};
+			
+			var s = JSON.stringify(podaci);
+			
+			alert(s);
 
 			$.ajax ({
 				url: 'rest/korisnik/registruj',
 				type: 'POST',
-				data: podaci,
+				data: s,
 				contentType: 'application/json',
 				dataType: 'json',
 				complete: function(data) {
-					if (data["status"] == 500) {
+					if (data["status"] == 200) {
+						alert("uspesno registrovan i ulogovan");
+						window.location.href = "index.html";
+					} else if(data["status"] == 500){
 						alert("postojij korisnik sa istim korisnickim imenom");
 					} else {
-						alert("bravo majstore uspesno si se registrovao");
+						alert("Neuspesna registracija!");
 					}
 				}
 			});
