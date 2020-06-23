@@ -49,6 +49,16 @@ public class KorisnikDAO {
 		return korisnici.containsKey(korisnickoIme);
 	}
 	
+	//da li postoji korisnik?
+	public boolean postojiKorisnik(String korisnickoIme, String lozinka) {
+		for(Korisnik korisnik : korisnici.values()) {
+			if(korisnik.getKorisnicko_ime().equals(korisnickoIme) && korisnik.getLozinka().equals(lozinka)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	//vraca korisnika sa zadatim korisnickim imenom
 	public Korisnik getOneKorisnik(String ki) {
 		return korisnici.get(ki);

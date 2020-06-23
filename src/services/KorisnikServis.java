@@ -45,8 +45,13 @@ public class KorisnikServis {
 		if(req.getSession().getAttribute("korisnik") != null)
 			req.getSession().invalidate();
 		
+		//ako korisnik ne postoji
+		if(!dao.postojiKorisnik(korisnicko_ime, lozinka)) 
+			return Response.status(500).build();
+					
 		Korisnik k = dao.getOneKorisnik(korisnicko_ime);
 		
+		//ulogovan korisnik 
 		req.getSession().setAttribute("korisnik", k);
 		System.out.println("Ulogovani korisnik: " + k);
 		

@@ -6,6 +6,7 @@ $(document).ready(function(){
 		complete: function(data){
 			odlogujSe();
 			sakrijDugmad(data.responseJSON);
+			dodatneOpcije(data.responseJSON);
 		}		
 	})
 	
@@ -21,6 +22,16 @@ function sakrijDugmad(korisnik){
 		$("#login_buttons").hide();
 		$("#acc_buttons").show();
 	}	
+}
+
+function dodatneOpcije(korisnik){
+	
+	if(korisnik == undefined)
+		return;
+
+	if(korisnik.uloga == "Administrator"){
+		$("#acc_buttons").append("<button type='submit' id='nalogBtn' onclick=pregledKorisnika()>Pregled korisnika </button> <br/>")
+	}
 }
 
 function odlogujSe(){
@@ -42,4 +53,8 @@ function odlogujSe(){
 	
 		window.location.href = "nalog.html";
 	});
+}
+
+function pregledKorisnika(){
+	window.location.href = "pregledKorisnika.html";
 }
