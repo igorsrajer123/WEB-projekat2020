@@ -23,13 +23,6 @@ public class Gost extends Korisnik {
 		iznajmljeniAp = new ArrayList<Apartman>();
 		rezervacije = new ArrayList<Rezervacija>();
 	}
-	
-	public Gost(Korisnik k) {
-		super(k.getIme(), k.getLozinka(), k.getIme(), k.getPrezime(), k.getPol(), Uloga.Gost);
-		iznajmljeniAp = new ArrayList<Apartman>();
-		rezervacije = new ArrayList<Rezervacija>();
-		
-	}
 
 	public List<Apartman> getIznajmljeniAp() {
 		return iznajmljeniAp;

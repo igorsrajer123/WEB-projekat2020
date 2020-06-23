@@ -1,5 +1,7 @@
 package services;
 
+import java.util.List;
+
 import javax.annotation.PostConstruct;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -9,11 +11,13 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import beans.Gost;
+import com.sun.research.ws.wadl.Request;
+
 import beans.Korisnik;
 import dao.KorisnikDAO;
 
@@ -46,8 +50,13 @@ public class KorisnikServis {
 		if(req.getSession().getAttribute("korisnik") != null)
 			req.getSession().invalidate();
 		
+		//ako korisnik ne postoji
+		if(!dao.postojiKorisnik(korisnicko_ime, lozinka)) 
+			return Response.status(500).build();
+					
 		Korisnik k = dao.getOneKorisnik(korisnicko_ime);
 		
+		//ulogovan korisnik 
 		req.getSession().setAttribute("korisnik", k);
 		System.out.println("Ulogovani korisnik: " + k);
 		
@@ -82,33 +91,36 @@ public class KorisnikServis {
 		return k;
 	}
 	
-	@POST
-	@Path("/registruj")
-	@Consumes(MediaType.APPLICATION_JSON)
+	@GET
+	@Path("/getSveKorisnike")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response registruj(Korisnik k) {
-		KorisnikDAO korisnici = (KorisnikDAO) ctx.getAttribute("korisnikDAO");
-		System.out.println("KURCINAAA");
+	public List<Korisnik> getSveKorisnike(){
 		
-		if (korisnici == null) {
-			System.out.println("KEPASAAAAAAAAAAAAAAa");
-			return Response.status(500).build();
+		KorisnikDAO dao = (KorisnikDAO) ctx.getAttribute("korisnikDAO");
+		
+		if(dao == null)
+			return null;
+		
+		return dao.getKorisnici();		
+	}
+	
+	@GET
+	@Path("/pretraga/{korisnicko_ime}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Korisnik pretraziKorisnike(@PathParam("korisnicko_ime") String korIme){
+		
+		KorisnikDAO dao = (KorisnikDAO) ctx.getAttribute("korisnikDAO");
+		
+		if(dao == null)
+			return null;
+		
+		Korisnik k = dao.getOneKorisnik(korIme);
+		if(k == null) {
+			System.out.println("Taj korisnik ne postoji!");
+			 return k;
+		}else {
+			System.out.println("Korisnik pronadjen!");
+			return k;
 		}
-		
-		if (korisnici.postojiKorisnickoIme(k.getKorisnicko_ime())) {
-			System.out.println("USAO SAM OVDEEEE");
-			return Response.status(500).entity("Korisnicko ime").build();
-		}
-		
-		Gost noviGost = new Gost(k);
-		
-		korisnici.dodajKorisnik(noviGost);
-		
-		System.out.println(noviGost.toString() + "DUPEEEEEEEEEEEE");
-		
-		return Response.ok().build();
-		
-		
-		
 	}
 }

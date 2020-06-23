@@ -12,7 +12,6 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import beans.Administrator;
-import beans.Gost;
 import beans.Korisnik;
 
 public class KorisnikDAO {
@@ -42,6 +41,7 @@ public class KorisnikDAO {
 	//dodaj korisnika
 	public void dodajKorisnik(Korisnik korisnik) {
 		korisnici.put(korisnik.getKorisnicko_ime(), korisnik);
+		System.out.println(korisnik.toString() + " " + "dodat u listu korisnika!");
 	}
 	
 	//da li korisnicko ime postoji?
@@ -112,29 +112,7 @@ public class KorisnikDAO {
 				this.korisnici.put(a.getKorisnicko_ime(), a);
 				System.out.println(a.toString());
 			}
-		}
-		
-		file = new File(this.contextPath + "data"+ java.io.File.separator +"gosti.json");
-		json = "";
-		
-		if(file.exists()) {
-			try(BufferedReader br = new BufferedReader(new FileReader(file))) { 
-				while ((temp = br.readLine()) != null) {
-					json += temp;
-			}
-			}
-			
-			ArrayList<Gost> list2 = mapper.readValue(json, 
-					new TypeReference<ArrayList<Gost>>() {});
-			
-			for(Gost gost: list2) {
-				this.korisnici.put(gost.getKorisnicko_ime(), gost);
-				System.out.println("jel radi ovo??");
-				System.out.println(gost.toString());
-			}
-				
-		}
-		
+		}		
 	}
 	
 	
