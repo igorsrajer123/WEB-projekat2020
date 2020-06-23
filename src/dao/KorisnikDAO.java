@@ -61,7 +61,15 @@ public class KorisnikDAO {
 	
 	//vraca korisnika sa zadatim korisnickim imenom
 	public Korisnik getOneKorisnik(String ki) {
-		return korisnici.get(ki);
+		
+		Korisnik value = korisnici.get(ki);
+		
+		if(value != null) {
+			return value;
+		}else {
+			return null;
+		}
+		
 	}
 	
 	//vraca sve korisnike

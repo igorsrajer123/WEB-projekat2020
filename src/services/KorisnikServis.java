@@ -1,6 +1,5 @@
 package services;
 
-import java.util.Collection;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -12,9 +11,12 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+
+import com.sun.research.ws.wadl.Request;
 
 import beans.Korisnik;
 import dao.KorisnikDAO;
@@ -100,5 +102,25 @@ public class KorisnikServis {
 			return null;
 		
 		return dao.getKorisnici();		
+	}
+	
+	@GET
+	@Path("/pretraga/{korisnicko_ime}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Korisnik pretraziKorisnike(@PathParam("korisnicko_ime") String korIme){
+		
+		KorisnikDAO dao = (KorisnikDAO) ctx.getAttribute("korisnikDAO");
+		
+		if(dao == null)
+			return null;
+		
+		Korisnik k = dao.getOneKorisnik(korIme);
+		if(k == null) {
+			System.out.println("Taj korisnik ne postoji!");
+			 return k;
+		}else {
+			System.out.println("Korisnik pronadjen!");
+			return k;
+		}
 	}
 }
