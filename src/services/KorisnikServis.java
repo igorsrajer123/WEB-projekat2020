@@ -1,5 +1,8 @@
 package services;
 
+import java.util.Collection;
+import java.util.List;
+
 import javax.annotation.PostConstruct;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -84,5 +87,18 @@ public class KorisnikServis {
 		Korisnik k = (Korisnik) req.getSession(false).getAttribute("korisnik");
 		System.out.println("Trenutni korisnik: " + k);
 		return k;
+	}
+	
+	@GET
+	@Path("/getSveKorisnike")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Korisnik> getSveKorisnike(){
+		
+		KorisnikDAO dao = (KorisnikDAO) ctx.getAttribute("korisnikDAO");
+		
+		if(dao == null)
+			return null;
+		
+		return dao.getKorisnici();		
 	}
 }

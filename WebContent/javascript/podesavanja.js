@@ -30,7 +30,11 @@ function dodatneOpcije(korisnik){
 		return;
 
 	if(korisnik.uloga == "Administrator"){
-		$("#acc_buttons").append("<button type='submit' id='nalogBtn' onclick=pregledKorisnika()>Pregled korisnika </button> <br/>")
+		$("#acc_buttons").append("<button type='submit' id='korisnici_Btn' onclick=pregledKorisnika()>Pregled korisnika </button> <br/>");
+	}else if(korisnik.uloga == "Gost"){
+		
+	}else if(korisnik.uloga == "Domacin"){
+
 	}
 }
 
@@ -43,9 +47,9 @@ function odlogujSe(){
 			type: 'POST',
 			url: 'rest/korisnik/logout',
 			complete: function(data){
-				window.location.href = "index.html";
+				window.location.href = "prijava.html";
 			}
-		})		
+		})
 	});
 	
 	$("#nalog_btn").click(function(event){
