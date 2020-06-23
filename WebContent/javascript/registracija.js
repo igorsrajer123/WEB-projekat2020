@@ -13,38 +13,26 @@ $(document).ready(function(){
 	var greskaPrz = false;
 
 	$('#korIme').focusout(function() {
-
 		proveriKorIme();
-		
 	});
 
 	$('#loz').focusout(function() {
-
-		proveriLozinku();
-		
+		proveriLozinku();		
 	});
 
 	$('#ponLoz').focusout(function() {
-
 		proveriPonLozinku();
-		
 	});
 
 	$('#imeKorisnika').focusout(function() {
-
 		proveriIme();
-		
 	});
 
-	
 	$('#przKorisnika').focusout(function() {
-
 		proveriPrezime();
-		
 	});
 
 	function proveriKorIme() {
-
 		var korImeDuz = $('#korIme').val().length;
 
 		if (korImeDuz < 5 || korImeDuz > 20) {
@@ -57,7 +45,6 @@ $(document).ready(function(){
 	}
 
 	function proveriLozinku() {
-
 		var lozinkaDuz = $('#loz').val().length;
 
 		if (lozinkaDuz < 5) {
@@ -71,7 +58,6 @@ $(document).ready(function(){
 	}
 
 	function proveriPonLozinku() {
-
 		var lozinka = $('#loz').val();
 		var ponLozinka = $('#ponLoz').val();
 
@@ -86,7 +72,6 @@ $(document).ready(function(){
 	}
 
 	function proveriIme() {
-
 		var ime = $('#imeKorisnika').val();
 		
 		if (ime == "") {
@@ -101,7 +86,6 @@ $(document).ready(function(){
 	}
 
 	function proveriPrezime() {
-
 		var prz = $('#przKorisnika').val();
 		
 		if (prz == "") {
@@ -113,8 +97,6 @@ $(document).ready(function(){
 		}
 
 	}
-
-	
 
 	$('#registruj').click(function(event) {
 		event.preventDefault();
@@ -159,8 +141,7 @@ $(document).ready(function(){
 		} else {
 			alert("Niste isparavno popunili sva polja");
 		}
-		
-		
+				
 });
 	//odustaje se od registracije i vraca se na pocetnu stranicu
 	$("#odustani").click(function(event){
