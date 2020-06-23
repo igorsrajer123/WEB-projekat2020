@@ -115,23 +115,26 @@ $(document).ready(function(){
 		alert(greskaIme);
 
 		if (greskaKorIme == false && greskaLoz == false && greskaPonLoz == false && greskaIme == false && greskaPrz == false) {
-		
+			alert("aaaaaaaaaaa");
+			
 			let podaci = JSON.stringify({
 				"korisnicko_ime": $('#korIme').val(),
 				"lzinka": $('#loz').val(),
 				"ime": $('#imeKorisnika').val(),
 				"prezime": $('#przKorisnika').val(),
-				"pol": $('#pol option:selected').text(),
+				"pol": $('#pol option:selected').text()
 			});
 
+			alert($('#pol option:selected').text());
+
 			$.ajax ({
-				url: "rest/korisnik/registruj",
-				type: "POST",
+				url: 'rest/korisnik/registruj',
+				type: 'POST',
 				data: podaci,
-				contenType = "application/jason",
-				dataType: "json",
+				contentType: 'application/json',
+				dataType: 'json',
 				complete: function(data) {
-					if (data["status"] == 400) {
+					if (data["status"] == 500) {
 						alert("postojij korisnik sa istim korisnickim imenom");
 					} else {
 						alert("bravo majstore uspesno si se registrovao");

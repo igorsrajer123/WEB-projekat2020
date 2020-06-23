@@ -42,7 +42,6 @@ public class KorisnikDAO {
 	//dodaj korisnika
 	public void dodajKorisnik(Korisnik korisnik) {
 		korisnici.put(korisnik.getKorisnicko_ime(), korisnik);
-		System.out.println(korisnik.toString() + " " + "dodat u listu korisnika!");
 	}
 	
 	//da li korisnicko ime postoji?
@@ -50,9 +49,27 @@ public class KorisnikDAO {
 		return korisnici.containsKey(korisnickoIme);
 	}
 	
+	//da li postoji korisnik?
+	public boolean postojiKorisnik(String korisnickoIme, String lozinka) {
+		for(Korisnik korisnik : korisnici.values()) {
+			if(korisnik.getKorisnicko_ime().equals(korisnickoIme) && korisnik.getLozinka().equals(lozinka)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	//vraca korisnika sa zadatim korisnickim imenom
 	public Korisnik getOneKorisnik(String ki) {
-		return korisnici.get(ki);
+		
+		Korisnik value = korisnici.get(ki);
+		
+		if(value != null) {
+			return value;
+		}else {
+			return null;
+		}
+		
 	}
 	
 	//vraca sve korisnike

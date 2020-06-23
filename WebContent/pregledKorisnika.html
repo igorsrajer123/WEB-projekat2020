@@ -1,9 +1,47 @@
 <html>
 <head>
+	<meta charset="UTF-8">
+	<title> Pregled korisnika</title>
+	<script src="javascript/jquery-3.3.1.min.js"></script>
+	<script src="javascript/pregledKorisnika.js"></script>	
 </head>
-
 <body>
+	<h2> Pregled svih korisnika </h2>
+	
+	<form>
+		<table border="1" id="korisniciTabela">
+			<thead>
+				<td> Korisničko ime </td>
+				<td> Lozinka </td>
+				<td> Ime korisnika </td>
+				<td> Prezime korisnika </td>
+				<td> Pol korisnika </td>
+				<td> Uloga korisnika </td>
+				<td> </td>
+			</thead>
+			<tbody>
 
-EVO GA!
+			</tbody>
+		</table>
+	</form> <br/>
+
+	<button type="submit" id="prikazPretrage"> Pretraga </button>
+
+
+
+	<div id="pretraga">
+		<h3> Pretraga </h3>
+			<table>
+				<tr> 
+					<td> Korisničko ime: </td>
+					<td id="k"> <input type="text" id="korImePretraga"/> </td>
+				</tr>
+				<tr>
+					<td> </td>
+					<td> <button type="submit" id="pretrazi"> Pretraži </button></td>
+				</tr>
+			</table>
+	</div>
+	
 </body>
 </html>

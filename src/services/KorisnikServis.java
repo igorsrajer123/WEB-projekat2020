@@ -88,19 +88,23 @@ public class KorisnikServis {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response registruj(Korisnik k) {
 		KorisnikDAO korisnici = (KorisnikDAO) ctx.getAttribute("korisnikDAO");
+		System.out.println("KURCINAAA");
 		
 		if (korisnici == null) {
+			System.out.println("KEPASAAAAAAAAAAAAAAa");
 			return Response.status(500).build();
 		}
 		
 		if (korisnici.postojiKorisnickoIme(k.getKorisnicko_ime())) {
-			return Response.status(400).entity("Korisnicko ime").build();
+			System.out.println("USAO SAM OVDEEEE");
+			return Response.status(500).entity("Korisnicko ime").build();
 		}
 		
 		Gost noviGost = new Gost(k);
 		
 		korisnici.dodajKorisnik(noviGost);
-		System.out.println(korisnici.getKorisnici());
+		
+		System.out.println(noviGost.toString() + "DUPEEEEEEEEEEEE");
 		
 		return Response.ok().build();
 		
