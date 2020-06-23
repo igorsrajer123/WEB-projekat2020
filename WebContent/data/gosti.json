@@ -1,0 +1,27 @@
+[ {
+    "korisnicko_ime": "pera",
+    "lozinka": "pera",
+    "ime": "Pera",
+    "prezime": "Peric",
+    "uloga": "Gost",
+    "iznajmljeniAp": [],
+    "rezervacije": []
+},{
+    "korisnicko_ime": "mika",
+    "lozinka": "mika",
+    "ime": "Mika",
+    "prezime": "Mikic",
+    "pol": "muski",
+    "uloga": "Gost",
+    "iznajmljeniAp": [],
+    "rezervacije": []
+},{
+    "korisnicko_ime": "djoka",
+    "lozinka": "djoka",
+    "ime": "Djoka",
+    "prezime": "Djokic",
+    "pol": "muski",
+    "uloga": "Gost",
+    "iznajmljeniAp": [],
+    "rezervacije": []
+} ]
