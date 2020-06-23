@@ -4,44 +4,55 @@
 	<title> Registracija novog korisnika</title>
 	<script src="javascript/jquery-3.3.1.min.js"></script>
 	<script src="javascript/registracija.js"></script>
-	<link rel="stylesheet" href="css/registracija.css"></link>
+	
 </head>
 <body>
 
 <h2> Registracija korisnika</h2>
 
 <form id="registracija_korisnika">
-	<div>
-		<label> Korisničko ime: </label>
-		<input type="text" name="korisnickoIme" id="korIme" placeholder="Korisničko ime">
-	</div>
+<table>
+	<tr>
+		<td>Korisnicko ime:</td>
+		<td><input type="text" name="korisnickoIme" id="korIme"></td>
+		<td><span id="greskaKorImePor"></span></td>
+	</tr>
 	
-	<div>
-		<label> Lozinka: </label>
-		<input type="password" name="lozinka" id="loz">
-		<label> Ponovi lozinku: </label>
-		<input type="password" name="ponoviLozinku" id="ponLoz">
-	</div>
+	<tr>
+		<td><label> Lozinka: </label></td>
+		<td><input type="password" name="lozinka" id="loz"></td>
+		<td><span id="greskaLozPor"></span></td>
+	</tr>
+	<tr>
+		<td><label> Ponovi lozinku: </label></td>
+		<td><input type="password" name="ponoviLozinku" id="ponLoz"></td>
+		<td><span id="greskaPonLozPor"></span></td>
+	</tr>
 	
-	<div>
-		<label> Ime: </label>
-		<input type="text" name="imeKorisnika" id="imeKorisnika" placeholder="Ime">
-		<label> Prezime: </label>
-		<input type="text" name="przKorisnika" id="przKorisnika" placeholder="Prezime">		
-	</div>
+	<tr>
+		<td><label> Ime: </label></td>
+		<td><input type="text" name="imeKorisnika" id="imeKorisnika"></td>
+		<td><span id="greskaImePor"></span></td>
+	</tr>
+	<tr>	
+		<td><label> Prezime: </label></td>
+		<td><input type="text" name="przKorisnika" id="przKorisnika"></td>		
+		<td><span id="greskaPrzPor"></span></td>
+	</tr>
 	
-	<div>
-		<label> Pol: </label>
-		<select name="pol" id="pol">
+	<tr>
+		<td><label> Pol: </label></td>
+		<td><select name="pol" id="pol">
 				  <option value="muski">Muški</option>
 				  <option value="zenski">Ženski</option>				 
-		</select>
-	</div> 
+		</select></td>
+	</tr>
 	
-	<div>
-		<button class="btn1" type="submit" id="registruj"> Potvrdi </button>
-		<button class="btn2" type="submit" id="odustani"> Odustani </button>
-	</div>
+	<tr>
+		<td><button class="btn1" type="submit" id="registruj"> Potvrdi </button></td>
+		<td><button class="btn2" type="submit" id="odustani"> Odustani </button></td>
+	</tr>
+</table>
 </form>
 
 
