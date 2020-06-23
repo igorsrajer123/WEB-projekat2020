@@ -13,6 +13,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import beans.Gost;
 import beans.Korisnik;
 import dao.KorisnikDAO;
 
@@ -79,5 +80,31 @@ public class KorisnikServis {
 		Korisnik k = (Korisnik) req.getSession(false).getAttribute("korisnik");
 		System.out.println("Trenutni korisnik: " + k);
 		return k;
+	}
+	
+	@POST
+	@Path("/registruj")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response registruj(Korisnik k) {
+		KorisnikDAO korisnici = (KorisnikDAO) ctx.getAttribute("korisnikDAO");
+		
+		if (korisnici == null) {
+			return Response.status(500).build();
+		}
+		
+		if (korisnici.postojiKorisnickoIme(k.getKorisnicko_ime())) {
+			return Response.status(400).entity("Korisnicko ime").build();
+		}
+		
+		Gost noviGost = new Gost(k);
+		
+		korisnici.dodajKorisnik(noviGost);
+		System.out.println(korisnici.getKorisnici());
+		
+		return Response.ok().build();
+		
+		
+		
 	}
 }
