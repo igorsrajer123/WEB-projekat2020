@@ -101,30 +101,7 @@ function pozdravPoruka(korisnik) {
 }
 
 function prikazApartmana(korisnik) {
-	if (korisnik.uloga == 'Administrator') {
-		$.ajax({
-			type: 'GET',
-			url: 'rest/apartman/getSveApartmane',
-			complete: function(data) {
-				let apartmani = data.responseJSON;
-
-				let lista = $("#apartmaniTabela tbody");
-				lista.empty();
-
-				console.log(apartmani.length);
-				
-           		for(var i = 0; i < apartmani.length;i++){
-					lista.append("<tr><td>" + i + "</td>"
-					+ "<td>" + apartmani[i].brSoba + "</td> " + "<td>" 
-					+ apartmani[i].brGostiju + "</td>" + "<td>" + apartmani[i].lokacija + "</td>"
-					+ "<td>" + apartmani[i].domacin + "</td>" + "<td>" + apartmani[i].cenaPoNoci
-					+ "</td>");
-					$("#korisniciTabela").append(lista);
-						
-				}
-			}
-		});
-	} else if (korisnik.uloga == 'Gost') {
+	if (korisnik == undefined) {
 		$.ajax({
 			type: 'GET',
 			url: 'rest/apartman/getAktivneApartmane',
@@ -148,7 +125,54 @@ function prikazApartmana(korisnik) {
 				}
 			}
 		});
-	} 
+	}	else if (korisnik.uloga == 'Gost') {
+		$.ajax({
+			type: 'GET',
+			url: 'rest/apartman/getAktivneApartmane',
+			complete: function(data) {
+				let apartmani = data.responseJSON;
+
+				let lista = $("#apartmaniTabela tbody");
+				lista.empty();
+				
+
+				console.log(apartmani.length);
+			
+           		for(var i = 0; i < apartmani.length;i++){
+					lista.append("<tr><td>" + i + "</td>"
+					+ "<td>" + apartmani[i].brSoba + "</td> " + "<td>" 
+					+ apartmani[i].brGostiju + "</td>" + "<td>" + apartmani[i].lokacija + "</td>"
+					+ "<td>" + apartmani[i].domacin + "</td>" + "<td>" + apartmani[i].cenaPoNoci
+					+ "</td>");
+					$("#korisniciTabela").append(lista);
+						
+				}
+			}
+		});
+	} else if (korisnik.uloga == 'Administrator') {
+		$.ajax({
+			type: 'GET',
+			url: 'rest/apartman/getSveApartmane',
+			complete: function(data) {
+				let apartmani = data.responseJSON;
+
+				let lista = $("#apartmaniTabela tbody");
+				lista.empty();
+
+				console.log(apartmani.length);
+				
+           		for(var i = 0; i < apartmani.length;i++){
+					lista.append("<tr><td>" + i + "</td>"
+					+ "<td>" + apartmani[i].brSoba + "</td> " + "<td>" 
+					+ apartmani[i].brGostiju + "</td>" + "<td>" + apartmani[i].lokacija + "</td>"
+					+ "<td>" + apartmani[i].domacin + "</td>" + "<td>" + apartmani[i].cenaPoNoci
+					+ "</td>");
+					$("#korisniciTabela").append(lista);
+						
+				}
+			}
+		});
+	}
 
 }
 
