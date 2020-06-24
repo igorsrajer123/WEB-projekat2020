@@ -12,6 +12,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import beans.Apartman;
+import beans.Apartman.Status;
 
 public class ApartmanDAO {
 	private ArrayList<Apartman> listaApartmana= new ArrayList<Apartman>();
@@ -22,7 +23,6 @@ public class ApartmanDAO {
 		ctxPath = ctx;
 		try {
 			ucitajApartmane();
-			System.out.println(listaApartmana);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -36,6 +36,18 @@ public class ApartmanDAO {
 	
 	public ArrayList<Apartman> getSveApartmane() {
 		return listaApartmana;
+	}
+	
+	public ArrayList<Apartman> getAktivne() {
+		ArrayList<Apartman> app = new ArrayList<Apartman>();
+		
+		for(Apartman apartman : listaApartmana) {
+			if(apartman.getStatus() == Status.Aktivno) {
+				app.add(apartman);
+			}
+		}
+		
+		return app;
 	}
 	
 	public void ucitajApartmane() throws FileNotFoundException, IOException {
@@ -54,7 +66,6 @@ public class ApartmanDAO {
 		
 		this.listaApartmana.clear();
 		for(Apartman ap: list) {
-			System.out.println(ap.toString());
 			this.listaApartmana.add(ap);
 		}
 	}

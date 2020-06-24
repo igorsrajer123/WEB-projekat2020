@@ -37,9 +37,19 @@ public class ApartmanServis {
 		
 		ApartmanDAO dao = (ApartmanDAO) ctx.getAttribute("apartmanDAO");
 		
-		System.out.println(dao.getSveApartmane());
+		System.out.println(dao.getSveApartmane() + "SVISSSSSSSSSSSSSSSSSSSSSS");
 		return dao.getSveApartmane();
 		
+	}
+	
+	@GET
+	@Path("/getAktivneApartmane")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ArrayList<Apartman> getAktivneApartmane() {
+		ApartmanDAO dao = (ApartmanDAO) ctx.getAttribute("apartmanDAO");
+		
+		System.out.println(dao.getAktivne() + "AKTIVNIIIIIIIIIIIAAAAAAAAAAAAAAAAAA");
+		return dao.getAktivne();
 	}
 
 }

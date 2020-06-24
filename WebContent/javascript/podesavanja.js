@@ -3,14 +3,40 @@ $(document).ready(function(){
 
 	$.ajax({
 		type: 'GET',
+		url: 'rest/apartman/getAktivneApartmane',
+		complete: function(data) {
+			let apartmani = data.responseJSON;
+
+			let lista = $("#apartmaniTabela tbody");
+			lista.empty();
+			
+			console.log(apartmani.length);
+		
+			   for(var i = 0; i < apartmani.length;i++){
+				lista.append("<tr><td>" + i + "</td>"
+				+ "<td>" + apartmani[i].brSoba + "</td> " + "<td>" 
+				+ apartmani[i].brGostiju + "</td>" + "<td>" + apartmani[i].lokacija + "</td>"
+				+ "<td>" + apartmani[i].domacin + "</td>" + "<td>" + apartmani[i].cenaPoNoci
+				+ "</td>");
+				$("#korisniciTabela").append(lista);
+					
+			}
+		}
+	});
+
+	$.ajax({
+		type: 'GET',
 		url: 'rest/korisnik/getKorisnik',
 		complete: function(data){
 			odlogujSe();
 			pozdravPoruka(data.responseJSON);
 			sakrijDugmad(data.responseJSON);
 			dodatneOpcije(data.responseJSON);
+			prikazApartmana(data.responseJSON);
 		}		
 	})
+
+	
 	
 });
 
@@ -69,7 +95,61 @@ function pozdravPoruka(korisnik) {
 	if (korisnik == undefined) {
 		$('#pozdravPor').hide();
 	} else {
-		$('#pozdravPor').text("Pozdrav " + korisnik.korisnicko_ime);
+		$('#pozdravPor').text("Pozdrav " + korisnik.korisnicko_ime + " " + korisnik.uloga);
 		$('#pozdravPor').show();
 	}
 }
+
+function prikazApartmana(korisnik) {
+	if (korisnik.uloga == 'Administrator') {
+		$.ajax({
+			type: 'GET',
+			url: 'rest/apartman/getSveApartmane',
+			complete: function(data) {
+				let apartmani = data.responseJSON;
+
+				let lista = $("#apartmaniTabela tbody");
+				lista.empty();
+
+				console.log(apartmani.length);
+				
+           		for(var i = 0; i < apartmani.length;i++){
+					lista.append("<tr><td>" + i + "</td>"
+					+ "<td>" + apartmani[i].brSoba + "</td> " + "<td>" 
+					+ apartmani[i].brGostiju + "</td>" + "<td>" + apartmani[i].lokacija + "</td>"
+					+ "<td>" + apartmani[i].domacin + "</td>" + "<td>" + apartmani[i].cenaPoNoci
+					+ "</td>");
+					$("#korisniciTabela").append(lista);
+						
+				}
+			}
+		});
+	} else if (korisnik.uloga == 'Gost' || korisnik == undefined) {
+		$.ajax({
+			type: 'GET',
+			url: 'rest/apartman/getAktivneApartmane',
+			complete: function(data) {
+				let apartmani = data.responseJSON;
+
+				let lista = $("#apartmaniTabela tbody");
+				lista.empty();
+				
+
+				console.log(apartmani.length);
+			
+           		for(var i = 0; i < apartmani.length;i++){
+					lista.append("<tr><td>" + i + "</td>"
+					+ "<td>" + apartmani[i].brSoba + "</td> " + "<td>" 
+					+ apartmani[i].brGostiju + "</td>" + "<td>" + apartmani[i].lokacija + "</td>"
+					+ "<td>" + apartmani[i].domacin + "</td>" + "<td>" + apartmani[i].cenaPoNoci
+					+ "</td>");
+					$("#korisniciTabela").append(lista);
+						
+				}
+			}
+		});
+	} 
+
+}
+
+
