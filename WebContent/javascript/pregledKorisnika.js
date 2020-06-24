@@ -15,12 +15,21 @@ $(document).ready(function(){
             console.log(korisnici.length);
 
             for(var i = 0; i < korisnici.length;i++){
-               lista.append("<tr><td>" + korisnici[i].korisnicko_ime + "</td>"
+				if(korisnici[i].uloga == "Administrator"){
+					 lista.append("<tr><td>" + korisnici[i].korisnicko_ime + "</td>"
                    + "<td>" + korisnici[i].lozinka + "</td> " + "<td>" 
                    + korisnici[i].ime + "</td>" + "<td>" + korisnici[i].prezime + "</td>"
                    + "<td>" + korisnici[i].pol + "</td>" + "<td>" + korisnici[i].uloga 
-                   + "</td>" + "<td><a id='" + korisnici[i].korisnicko_ime + "'> Ukloni korisnika </a></td>" );
+                   + "</td>" + "<td></td>" );
                 $("#korisniciTabela").append(lista);
+				}else {
+				 	lista.append("<tr><td>" + korisnici[i].korisnicko_ime + "</td>"
+                   + "<td>" + korisnici[i].lozinka + "</td> " + "<td>" 
+                   + korisnici[i].ime + "</td>" + "<td>" + korisnici[i].prezime + "</td>"
+                   + "<td>" + korisnici[i].pol + "</td>" + "<td>" + korisnici[i].uloga 
+                   + "</td>" + "<td><a id='" + korisnici[i].korisnicko_ime + "' href='pregledKorisnika.html'> Ažuriraj ulogu</a></td>" );
+                $("#korisniciTabela").append(lista);
+				}
             }
         }
 
@@ -36,7 +45,7 @@ $(document).ready(function(){
 
     })
 
-    //pomocni tekst za validaciju
+    //ukoliko je prazno polje
     let tag = document.createElement("p");
     tag.setAttribute("id", "prvi");
     let text = document.createTextNode("Prazno polje!");
@@ -46,40 +55,66 @@ $(document).ready(function(){
     document.getElementById("k").after(obojeniTekst);
     document.getElementById("prvi").hidden = true;
 
+    //ukoliko ne postoji korisnik
+    let tag2 = document.createElement("p");
+    tag2.setAttribute("id", "drugi");
+    let text2 = document.createTextNode("Korisnik ne postoji!");
+    tag2.append(text2);	
+    tag2.style.color = 'red';
+    let obojeniTekst2 = tag2;
+    document.getElementById("k").after(obojeniTekst2);
+    document.getElementById("drugi").hidden = true;
+
     $("#pretrazi").click(function(event){
         event.preventDefault();
 
         let korIme = $("#korImePretraga").val();
-    
+        /*
         if(korIme == ""){
             document.getElementById("prvi").hidden = false;
         }else {
             document.getElementById("prvi").hidden = true;
-        }
+        }*/
 
         $.ajax({
             type: 'GET',
             url: 'rest/korisnik/pretraga/'+korIme,
             complete: function(data){
 
-                if(data == null){
-                    document.getElementById("prvi").hidden = false;
-                }else {
                 let korisnik = data.responseJSON;
 
-                let lista = $("#korisniciTabela tbody");
-                lista.empty();
+                if(korisnik == null){
+                    if(korIme == ""){
+                        document.getElementById("prvi").hidden = false;
+                        document.getElementById("drugi").hidden = true;
+                    }else {
+                        document.getElementById("drugi").hidden = false;
+                        document.getElementById("prvi").hidden = true;
+                    }
+                }else {
+                    document.getElementById("drugi").hidden = true;
+                    document.getElementById("prvi").hidden = true;
 
-                lista.append("<tr><td>" + korisnik.korisnicko_ime + "</td>"
-                   + "<td>" + korisnik.lozinka + "</td> " + "<td>" 
-                   + korisnik.ime + "</td>" + "<td>" + korisnik.prezime + "</td>"
-                   + "<td>" + korisnik.pol + "</td>" + "<td>" + korisnik.uloga 
-                   + "</td>" + "<td><a id='" + korisnik.korisnicko_ime + "'> Ukloni korisnika </a></td>" );
-                $("#korisniciTabela").append(lista);
+                    let lista = $("#korisniciTabela tbody");
+                    lista.empty();
+
+                    if(korisnik.uloga == "Administrator"){
+                        lista.append("<tr><td>" + korisnik.korisnicko_ime + "</td>"
+                        + "<td>" + korisnik.lozinka + "</td> " + "<td>" 
+                        + korisnik.ime + "</td>" + "<td>" + korisnik.prezime + "</td>"
+                        + "<td>" + korisnik.pol + "</td>" + "<td>" + korisnik.uloga 
+                        + "</td>" + "<td></td>" );
+                        $("#korisniciTabela").append(lista);
+                    }else {
+                        lista.append("<tr><td>" + korisnik.korisnicko_ime + "</td>"
+                        + "<td>" + korisnik.lozinka + "</td> " + "<td>" 
+                        + korisnik.ime + "</td>" + "<td>" + korisnik.prezime + "</td>"
+                        + "<td>" + korisnik.pol + "</td>" + "<td>" + korisnik.uloga 
+                        + "</td>" + "<td><a id='" + korisnik.korisnicko_ime + "'href='pregledKorisnika.html'> Ažuriraj ulogu </a></td>" );
+                        $("#korisniciTabela").append(lista);
+                    }
                 }
-
             }
         })        
     })
-
 });
