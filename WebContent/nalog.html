@@ -10,13 +10,51 @@
 
     <form>
         <table id="nalogTabela">
-
+            <tr id='u'>
+                <td><label id='uloga'> Uloga korisnika: </label></td>
+            </tr>
+            <tr> 
+                <td> <label id='lab'> Korisničko ime: </label></td>
+                <td><input id='korIme' type='text' disabled='disabled'> </td>
+            </tr>
+            <tr> 
+                <td><label id='lab2'> Lozinka: </label></td>
+                <td><input id='staraLoz' type='password' disabled='disabled'/></td>
+                <td><button id='izmeni'> Izmeni </button></td>
+            </tr>
+            <tr>
+                <td><label id='lab3'> Nova lozinka: </label></td>
+                <td><input id='novaLoz' type='password'/></td>
+                <td><p id='novaP' style='color:red'> Lozinka mora imati najmanje 5 karaktera! </p> </td>
+            </tr>
+            <tr>
+                <td><label id='lab4'>Ponovite lozinku: </label></td>
+                <td><input id='novaLoz2' type='password'/></td>
+                <td><p id='ponoviP' style='color:red'> Lozinke se ne poklapaju! </p> </td>
+            </tr>
+            <tr>
+                <td><label id='lab5'> Ime: </label></td>
+                <td><input id='ime' type='text'/></td>
+                <td><p id='imeP' style='color:red'> Polje prazno! </p> </td>
+            </tr>
+            <tr>
+                <td><label id='lab6'> Prezime: </label></td>
+                <td><input id='prz' type='text'/> </td>  
+                <td><p id='przP' style='color:red'> Polje prazno! </p></td>
+            </tr>
+            <tr>
+                <td><label id='lab7'> Pol: </label></td>
+                <td><select name='pol' id='pol'>
+                        <option value='muski'> Muški</option> 
+                        <option value='zenski'>Ženski</option>
+                    </select></td>
+            </tr>
         </table>
 
         <br/>
         <div>
-            <button> Sačuvaj izmene </button>
-            <button> Odustani </button>
+            <button id='sacuvaj'> Sačuvaj izmene </button>
+            <button id='odustani'> Odustani </button>
         </div>
     </form>
 </body>

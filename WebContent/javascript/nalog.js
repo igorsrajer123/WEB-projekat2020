@@ -1,38 +1,38 @@
 $(document).ready(function(){
 
+    //nova sifra skriveno
+    document.getElementById("lab3").hidden = true;
+    document.getElementById("novaLoz").hidden = true;
+    document.getElementById("lab4").hidden = true;
+    document.getElementById("novaLoz2").hidden = true;
+
+    document.getElementById("imeP").hidden = true;
+    document.getElementById("przP").hidden = true;
+    document.getElementById("novaP").hidden = true;
+    document.getElementById("ponoviP").hidden = true;
+
+    let imeIspravno = false;
+    let przIspravno = false;
+    let prvaLozIspravna = false;
+    let drugaLozIspravna = false;
+
     $.ajax({
         type: 'GET',
         url: 'rest/korisnik/getKorisnik',
         complete: function(data){
 
             let korisnik = data.responseJSON;
+
+            let uloga = "<td><label><b><i>" + korisnik.uloga + "</i></b></label></td>";
+            $("#u").append(uloga);
             
             let tabela = $("#nalogTabela");
 
-            if(korisnik.uloga == "Administrator"){
-                let korIme = "<tr> <td> <label id='lab'> Korisničko ime: </label></td><td><input id='korIme' type='text'"+
-                " disabled='disabled' value=' " + korisnik.korisnicko_ime + "'/> </td>";     
-                let lozinka = "<tr> <td> <label id='lab2'> Lozinka: </label></td><td><input id='staraLoz' type='password'"+
-                "disabled='disabled' value=' " + korisnik.lozinka + "'/> </td><td><button id='izmeni'> Izmeni </button></td>";    
-                let novaLoz = "<tr> <td> <label id='lab3'> Nova lozinka: </label></td><td><input id='novaLoz' type='password'/></td>";   
-                let novaLoz2 = "<tr> <td> <label id='lab4'>Ponovi lozinku: </label></td><td><input id='novaLoz2' type='password'/></td>";   
-                let ime = "<tr> <td> <label id='lab5'> Ime: </label></td><td><input id='ime' type='text'"+
-                "value=' " + korisnik.ime + "'/> </td>";  
-                let prezime = "<tr> <td> <label id='lab6'> Prezime: </label></td><td><input id='prz' type='text'"+
-                "value=' " + korisnik.prezime + "'/> </td>";   
-                let pol = "<tr> <td> <label id='lab7'> Pol: </label></td><td><select name='pol' id='pol'>"+
-                "<option value='muski'> Muški</option> <option value='zenski'>Ženski</option></select></td>";				       
-                $("#nalogTabela").append(korIme).append(lozinka).append(novaLoz).append(novaLoz2).append(ime).append(prezime).append(pol);
-                document.getElementById("lab3").hidden = true;
-                document.getElementById("novaLoz").hidden = true;
-                document.getElementById("lab4").hidden = true;
-                document.getElementById("novaLoz2").hidden = true;
-            }else if(korisnik.uloga == "Domacin"){
-
-            }else if(korisnik.uloga == "Gost"){
-
-            }
-
+            $("#korIme:text").val(korisnik.korisnicko_ime);
+            $("#staraLoz").val(korisnik.lozinka);
+            $("#ime").val(korisnik.ime);
+            $("#prz").val(korisnik.prezime);
+            
             $("#izmeni").click(function(event){
                 event.preventDefault();
             
@@ -48,6 +48,66 @@ $(document).ready(function(){
                     document.getElementById("novaLoz2").hidden = false;
                 }
             })
-        }
+
+            $("#odustani").click(function(event){
+                event.preventDefault();
+
+                window.location.href = "index.html";
+            })
+
+            $("#sacuvaj").click(function(event){
+                event.preventDefault();
+
+                if($("#ime").val() == "" || $("#ime").val() == " "){
+                    document.getElementById("imeP").hidden = false;
+                }else {
+                    document.getElementById("imeP").hidden = true;
+                    imeIspravno = true;
+                }
+
+                if($("#prz").val() == "" || $("#prz").val() == " "){
+                    document.getElementById("przP").hidden = false;
+                }else {
+                    document.getElementById("przP").hidden = true;
+                    przIspravno = true; 
+                }
+
+                let duzinaLozinke = $("#novaLoz").val().length;
+                let vrPrva = $("#novaLoz").val();
+                let vrDruga = $("#novaLoz2").val();
+
+                if($("#novaLoz").is(":visible")){
+
+                    if(duzinaLozinke < 5){
+                        document.getElementById("novaP").hidden = false;
+                        prvaLozIspravna = false;
+                    }else{
+                        document.getElementById("novaP").hidden = true;
+                        prvaLozIspravna = true;
+                    }
+                    if(vrPrva !== vrDruga){
+                        document.getElementById("ponoviP").hidden = false;
+                        drugaLozIspravna = false;
+                    }else{
+                        document.getElementById("ponoviP").hidden = true;
+                        drugaLozIspravna = true;
+                    }
+
+                    if(imeIspravno == true && przIspravno == true && prvaLozIspravna == true && drugaLozIspravna == true){
+
+                    }
+
+                }else {
+                    document.getElementById("novaP").hidden = true;
+                    document.getElementById("ponoviP").hidden = true;
+                    prvaLozIspravna = true;
+                    drugaLozIspravna = true;
+
+                    if(imeIspravno == true && przIspravno == true){
+
+                    }
+                }
+            })
+        }     
     })
 });
