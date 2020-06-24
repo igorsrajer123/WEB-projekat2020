@@ -115,7 +115,7 @@ public class KorisnikServis {
 		Korisnik k = dao.getOneKorisnik(korIme);
 		if(k == null) {
 			System.out.println("Taj korisnik ne postoji!");
-			 return k;
+			 return null;
 		}else {
 			System.out.println("Korisnik pronadjen!");
 			return k;
