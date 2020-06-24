@@ -1,10 +1,12 @@
 $(document).ready(function(){
-	
+	$('#pozdravPor').hide();
+
 	$.ajax({
 		type: 'GET',
 		url: 'rest/korisnik/getKorisnik',
 		complete: function(data){
 			odlogujSe();
+			pozdravPoruka(data.responseJSON);
 			sakrijDugmad(data.responseJSON);
 			dodatneOpcije(data.responseJSON);
 		}		
@@ -61,4 +63,13 @@ function odlogujSe(){
 
 function pregledKorisnika(){
 	window.location.href = "pregledKorisnika.html";
+}
+
+function pozdravPoruka(korisnik) {
+	if (korisnik == undefined) {
+		$('#pozdravPor').hide();
+	} else {
+		$('#pozdravPor').text("Pozdrav " + korisnik.korisnicko_ime);
+		$('#pozdravPor').show();
+	}
 }

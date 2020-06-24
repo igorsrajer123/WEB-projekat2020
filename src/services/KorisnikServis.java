@@ -98,6 +98,7 @@ public class KorisnikServis {
 		
 		if(dao == null)
 			return null;
+		System.out.println(dao.getKorisnici());
 		
 		return dao.getKorisnici();		
 	}

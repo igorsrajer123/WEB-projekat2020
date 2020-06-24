@@ -61,6 +61,15 @@ public class Apartman {
 		return brSoba;
 	}
 
+	@Override
+	public String toString() {
+		return "Apartman [tip=" + tip + ", brSoba=" + brSoba + ", brGostiju=" + brGostiju + ", lokacija=" + lokacija
+				+ ", datumZaIzdavanje=" + datumZaIzdavanje + ", dostupnostPoDatumima=" + dostupnostPoDatumima
+				+ ", domacin=" + domacin + ", komentar=" + komentar + ", slika=" + slika + ", cenaPoNoci=" + cenaPoNoci
+				+ ", vrZaPrijavu=" + vrZaPrijavu + ", vrZaOdjavu=" + vrZaOdjavu + ", status=" + status + ", sadrzajAp="
+				+ sadrzajAp + ", rezervacije=" + rezervacije + "]";
+	}
+
 	public void setBrSoba(int brSoba) {
 		this.brSoba = brSoba;
 	}
