@@ -124,7 +124,7 @@ function prikazApartmana(korisnik) {
 				}
 			}
 		});
-	} else if (korisnik.uloga == 'Gost' || korisnik == undefined) {
+	} else if (korisnik.uloga == 'Gost') {
 		$.ajax({
 			type: 'GET',
 			url: 'rest/apartman/getAktivneApartmane',
