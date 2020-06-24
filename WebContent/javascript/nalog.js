@@ -94,7 +94,27 @@ $(document).ready(function(){
                     }
 
                     if(imeIspravno == true && przIspravno == true && prvaLozIspravna == true && drugaLozIspravna == true){
+                        let korImeStaro = $("#korIme").val();
+                        let novaLoz = $("#novaLoz").val();
+                        let novoIme = $("#ime").val();
+                        let novoPrz = $("#prz").val();
+                        let novPol = $("#pol option:selected").val();
 
+                        $.ajax({
+                            type: 'PUT',
+                            url: 'rest/korisnik/izmeni/'+ korImeStaro + '/' + novaLoz + '/'+ novoIme + '/'+ novoPrz + '/'+ novPol,
+                            complete: function(data){
+
+                                let korisnik = data.responseJSON;
+
+                                if(korisnik != null){
+                                    alert("Korisnik uspesno sacuvan!");
+                                    window.location.href = "index.html";
+                                }else {
+                                    alert("Greska prilikom izmene korisnika!");
+                                }
+                            }
+                        })
                     }
 
                 }else {
@@ -103,8 +123,28 @@ $(document).ready(function(){
                     prvaLozIspravna = true;
                     drugaLozIspravna = true;
 
-                    if(imeIspravno == true && przIspravno == true){
+                    let korImeStaro = $("#korIme").val();
+                    let staraSifra = $("#staraLoz").val();
+                    let novoIme = $("#ime").val();
+                    let novoPrz = $("#prz").val();
+                    let novPol = $("#pol option:selected").val();
 
+                    if(imeIspravno == true && przIspravno == true){
+                        $.ajax({
+                            type: 'PUT',
+                            url: 'rest/korisnik/izmeni/'+ korImeStaro + '/'+ staraSifra + '/'+ novoIme + '/'+ novoPrz+ '/'+ novPol,
+                            complete: function(data){
+
+                                let korisnik = data.responseJSON;
+
+                                if(korisnik != null){
+                                    alert("Korisnik uspesno sacuvan!");
+                                    window.location.href = "index.html";
+                                }else {
+                                    alert("Greska prilikom izmene korisnika!");
+                                }
+                            }
+                        })
                     }
                 }
             })
