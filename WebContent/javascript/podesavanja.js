@@ -18,7 +18,7 @@ $(document).ready(function(){
 				+ apartmani[i].brGostiju + "</td>" + "<td>" + apartmani[i].lokacija + "</td>"
 				+ "<td>" + apartmani[i].domacin + "</td>" + "<td>" + apartmani[i].cenaPoNoci
 				+ "</td>");
-				$("#korisniciTabela").append(lista);
+				$("#apartmaniTabela").append(lista);
 					
 			}
 		}
@@ -60,7 +60,7 @@ function dodatneOpcije(korisnik){
 	if(korisnik.uloga == "Administrator"){
 		$("#acc_buttons").append("<button type='submit' id='korisnici_Btn' onclick=pregledKorisnika()>Pregled korisnika </button> <br/>");
 	}else if(korisnik.uloga == "Gost"){
-		
+		$("#acc_buttons").append("<button type='submit' id='dodajApp_Btn' onclick=dodajApartman()>Dodaj Apartman </button> <br/>");
 	}else if(korisnik.uloga == "Domacin"){
 
 	}
@@ -89,6 +89,10 @@ function odlogujSe(){
 
 function pregledKorisnika(){
 	window.location.href = "pregledKorisnika.html";
+}
+
+function dodajApartman() {
+	window.location.href = "dodajApartman.html";
 }
 
 function pozdravPoruka(korisnik) {
@@ -120,7 +124,7 @@ function prikazApartmana(korisnik) {
 					+ apartmani[i].brGostiju + "</td>" + "<td>" + apartmani[i].lokacija + "</td>"
 					+ "<td>" + apartmani[i].domacin + "</td>" + "<td>" + apartmani[i].cenaPoNoci
 					+ "</td>");
-					$("#korisniciTabela").append(lista);
+					$("#apartmaniTabela").append(lista);
 						
 				}
 			}
@@ -144,7 +148,7 @@ function prikazApartmana(korisnik) {
 					+ apartmani[i].brGostiju + "</td>" + "<td>" + apartmani[i].lokacija + "</td>"
 					+ "<td>" + apartmani[i].domacin + "</td>" + "<td>" + apartmani[i].cenaPoNoci
 					+ "</td>");
-					$("#korisniciTabela").append(lista);
+					$("#apartmaniTabela").append(lista);
 						
 				}
 			}
@@ -172,9 +176,14 @@ function prikazApartmana(korisnik) {
 					+ "<td>" + apartmani[i].brSoba + "</td> " + "<td>" 
 					+ apartmani[i].brGostiju + "</td>" + "<td>" + apartmani[i].lokacija + "</td>"
 					+ "<td>" + apartmani[i].domacin + "</td>" + "<td>" + apartmani[i].cenaPoNoci
+<<<<<<< Updated upstream
 					+ "</td>" + "<td>" + apartmani[i].tip + "</td>" + "<td><a id='izmeni' href='podaciApartman.html'> Izmeni</a> </td>" +
 					"<td><a id='obrisi' href='index.html'> Obriši </a> </td>");
 					$("#korisniciTabela").append(lista);
+=======
+					+ "</td>");
+					$("#apartmaniTabela").append(lista);
+>>>>>>> Stashed changes
 						
 				}
 			}

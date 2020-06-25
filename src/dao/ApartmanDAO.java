@@ -12,7 +12,10 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import beans.Apartman;
+import beans.Gost;
+import beans.Korisnik;
 import beans.Apartman.Status;
+import beans.Korisnik.Uloga;
 
 public class ApartmanDAO {
 	private ArrayList<Apartman> listaApartmana= new ArrayList<Apartman>();
@@ -174,6 +177,17 @@ public class ApartmanDAO {
 		this.listaApartmana.clear();
 		for(Apartman ap: list) {
 			this.listaApartmana.add(ap);
+		}
+	}
+	
+	public void sacuvajApartmane()
+	{
+		ObjectMapper mapper = new ObjectMapper();
+		File file = new File(this.ctxPath + "data"+ java.io.File.separator +"oglasi.json");
+		try {
+			mapper.writerWithDefaultPrettyPrinter().writeValue(file, this.listaApartmana);
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 

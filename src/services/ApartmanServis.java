@@ -2,18 +2,24 @@ package services;
 
 import java.util.ArrayList;
 
-
 import javax.annotation.PostConstruct;
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import beans.Apartman;
+import beans.Domacin;
+import beans.Korisnik;
 import dao.ApartmanDAO;
+import dao.KorisnikDAO;
 
 @Path("apartman")
 public class ApartmanServis {
@@ -53,6 +59,7 @@ public class ApartmanServis {
 		return dao.getAktivne();
 	}
 	
+<<<<<<< Updated upstream
 	//vraca aktivne apartmane
 	@GET
 	@Path("/pretragaTip/{tip}")
@@ -170,4 +177,36 @@ public class ApartmanServis {
 			return listaApartmana;
 		}
 	}
+=======
+	@POST
+	@Path("/dodajApartman/{korIme}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response dodajApartman(@PathParam("korIme") String korisnickoIme, Apartman a, @Context HttpServletRequest rq) {
+		ApartmanDAO apartmani = (ApartmanDAO) ctx.getAttribute("apartmanDAO");
+		KorisnikDAO korisnici = (KorisnikDAO) ctx.getAttribute("korisnikDAO");
+		
+
+		for(Korisnik k : korisnici.getKorisnici()) {
+			if (k.getKorisnicko_ime().equals(korisnickoIme)) {
+		//		Domacin domacin = new Domacin(k);
+			}
+		}
+		
+		//System.out.println(domacin);
+		
+		System.out.println("DODAJ APARTMAN");
+		
+		//a.setDomacin(domacin);
+		//domacin.dodajApartman(a);
+		
+		apartmani.dodajApartman(a);
+		
+		apartmani.sacuvajApartmane();
+		korisnici.sacuvajKorisnika();
+		
+		return Response.ok().build();
+		
+	}
+
+>>>>>>> Stashed changes
 }
