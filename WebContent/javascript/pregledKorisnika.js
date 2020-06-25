@@ -29,12 +29,30 @@ $(document).ready(function(){
                     + "<td>" + korisnici[i].pol + "</td>" + "<td>" + korisnici[i].uloga 
                     + "</td>" + "<td></td>" );
                  $("#korisniciTabela").append(lista);
-                }else {
+                }else { 
 				 	lista.append("<tr><td>" + korisnici[i].korisnicko_ime + "</td>"
                     + "<td>" + korisnici[i].lozinka + "</td> " + "<td>" 
                     + korisnici[i].ime + "</td>" + "<td>" + korisnici[i].prezime + "</td>"
                     + "<td>" + korisnici[i].pol + "</td>" + "<td>" + korisnici[i].uloga 
-                    + "</td>" + "<td><button id='red"+ i + "'> Ažuriraj ulogu</button></td>" );
+                    + "</td>" + "<td><button id='"+ korisnici[i].korisnicko_ime + "' onclick='azuriraj(){"+ 
+                    
+                            $.ajax({
+                                type: 'PUT',
+                                url: 'rest/korisnik/azurirajUlogu/'+ korisnici[i].korisnicko_ime,
+                                complete: function(data){
+
+                                    if(data["status"] == 200){
+                                        window.location.href = "pregledKorisnika.html";
+                                    }else if(data["status"] == 500){
+                                        alert("Nece da moze!");
+                                    }
+                                }
+                            })
+
+
+                        + "}'> Ažuriraj ulogu</button></td>");
+
+                
                     $("#korisniciTabela").append(lista);
 
                     let korisnicko = korisnici[i].korisnicko_ime;
@@ -128,4 +146,3 @@ $(document).ready(function(){
         })        
     })
 });
-

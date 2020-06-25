@@ -29,15 +29,14 @@ public class Domacin extends Korisnik {
 		this.apartmani = apartmani;
 	}
 	
-<<<<<<< Updated upstream
 	public static Domacin Parse(Korisnik k) {
 		
 		Domacin d = new Domacin(k.getKorisnicko_ime(), k.getLozinka(), k.getIme(), k.getPrezime(), k.getPol());
 		
 		return d;
-=======
+	}
+	
 	public void dodajApartman(Apartman a) {
 		apartmani.add(a);
->>>>>>> Stashed changes
 	}
 }

@@ -176,15 +176,9 @@ function prikazApartmana(korisnik) {
 					+ "<td>" + apartmani[i].brSoba + "</td> " + "<td>" 
 					+ apartmani[i].brGostiju + "</td>" + "<td>" + apartmani[i].lokacija + "</td>"
 					+ "<td>" + apartmani[i].domacin + "</td>" + "<td>" + apartmani[i].cenaPoNoci
-<<<<<<< Updated upstream
 					+ "</td>" + "<td>" + apartmani[i].tip + "</td>" + "<td><a id='izmeni' href='podaciApartman.html'> Izmeni</a> </td>" +
 					"<td><a id='obrisi' href='index.html'> Obriši </a> </td>");
-					$("#korisniciTabela").append(lista);
-=======
-					+ "</td>");
-					$("#apartmaniTabela").append(lista);
->>>>>>> Stashed changes
-						
+					$("#apartmaniTabela").append(lista);	
 				}
 			}
 		});

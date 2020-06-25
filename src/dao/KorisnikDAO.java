@@ -165,25 +165,6 @@ public class KorisnikDAO {
 			}
 				
 		}
-		
-		file = new File(this.contextPath + "data"+ java.io.File.separator +"domacini.json");
-		json = "";
-		
-		if(file.exists()) {
-			try(BufferedReader br = new BufferedReader(new FileReader(file))) { 
-				while ((temp = br.readLine()) != null) {
-					json += temp;
-				}
-			}
-			
-			ArrayList<Domacin> list3 = mapper.readValue(json, 
-					new TypeReference<ArrayList<Domacin>>() {});
-			
-			for(Domacin domacin: list3) {
-				this.korisnici.put(domacin.getKorisnicko_ime(), domacin);
-				System.out.println(domacin.toString());
-			}
-		}
 	}
 	
 	public void sacuvajKorisnika() {
