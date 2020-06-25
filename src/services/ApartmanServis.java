@@ -102,10 +102,6 @@ public class ApartmanServis {
 		return dao.getAktivne();
 	}
 	
-<<<<<<< HEAD
-
-=======
->>>>>>> dd22ea77e069a01d55498f57bd71604569854193
 	//vraca aktivne apartmane
 	@GET
 	@Path("/pretragaTip/{tip}")
@@ -250,10 +246,7 @@ public class ApartmanServis {
 		return Response.ok().build();
 		
 	}
-<<<<<<< HEAD
-
-
-=======
+	
 	
 	@PUT
 	@Path("/ukloniApartman/{id}")
@@ -273,5 +266,5 @@ public class ApartmanServis {
 	
 		return Response.ok().build();
 	}
->>>>>>> dd22ea77e069a01d55498f57bd71604569854193
+
 }
