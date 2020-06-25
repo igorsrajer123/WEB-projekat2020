@@ -160,13 +160,20 @@ function prikazApartmana(korisnik) {
 				lista.empty();
 
 				console.log(apartmani.length);
-				
+
+				//============================================================
+				let tip = "<td> Tip </td>";
+				let izmena = "<td></td>";
+				let brisanje = "<td></td>";
+				$("#apartmaniTabela thead tr").append(tip).append(izmena).append(brisanje);
+				//==============================================================
            		for(var i = 0; i < apartmani.length;i++){
 					lista.append("<tr><td>" + i + "</td>"
 					+ "<td>" + apartmani[i].brSoba + "</td> " + "<td>" 
 					+ apartmani[i].brGostiju + "</td>" + "<td>" + apartmani[i].lokacija + "</td>"
 					+ "<td>" + apartmani[i].domacin + "</td>" + "<td>" + apartmani[i].cenaPoNoci
-					+ "</td>");
+					+ "</td>" + "<td>" + apartmani[i].tip + "</td>" + "<td> Izmeni </td>" +
+					"<td> Obriši </td>");
 					$("#korisniciTabela").append(lista);
 						
 				}

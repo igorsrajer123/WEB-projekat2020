@@ -5,6 +5,7 @@
 	<script src="javascript/jquery-3.3.1.min.js"></script>
 	<script src="javascript/index.js"></script>
 	<script src="javascript/podesavanja.js"></script>
+	<script src="javascript/apartmaniPretraga.js"></script>
 	
 	<style type="text/css">
  		.topcorner{
@@ -32,16 +33,51 @@
 <span id="pozdravPor"></span>
 <table border="1" id="apartmaniTabela">
 	<thead>
-		<td> # </td>
-		<td> Broj soba </td>
-		<td> Broj Gostiju </td>
-		<td> Lokacija </td>
-		<td> Domacin </td>
-		<td> Cena Po Noci </td>
+		<tr>
+			<td> # </td>
+			<td> Broj soba </td>
+			<td> Broj Gostiju </td>
+			<td> Lokacija </td>
+			<td> Domacin </td>
+			<td id="cena"> Cena Po Noci </td>
+		</tr>
 	</thead>
 	<tbody>
 
 	</tbody>
 </table>
+
+<br/>
+<button id="pretragaBtn"> Pretraga </button>
+
+<div id="pretraga">
+	<h3> Pretraga apartmana </h3>
+	<form>
+		<table>
+			<tr>
+				<td><label> Tip apartmana: </label></td>
+				<td><select id="tip">
+						<option value="nista"> </option>
+						<option value="Soba">Soba</option>
+						<option value="Ceo_apartman">Ceo apartman</option>				 
+					</select></td>
+				<td><label id="tipNijeOdabran" style="color:red"> Izaberite tip apartmana! </label></td>
+			</tr>
+			<tr>
+				<td><label> Broj soba: </label></td>
+				<td><input type="text" id="brSoba"/></td>
+				<td><label id="brSobaPrazan" style="color:red"> Unesite odgovarajuću vrednost! </label></td>
+			</tr>
+			<tr>
+				<td><label> Broj osoba: </label></td>
+				<td><input type="text" id="brOsoba"/></td>	
+				<td><label id="brOsobaPrazan" style="color:red"> Unesite odgovarajuću vrednost! </label></td>
+			</tr>
+				<td></td>
+				<td><button id="pretrazi"> Pretraži </button></td>
+		</table>
+	</form>
+
+</div>
 </body>
 </html>

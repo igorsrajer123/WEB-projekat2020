@@ -50,6 +50,61 @@ public class ApartmanDAO {
 		return app;
 	}
 	
+	//vraca aktivne apartmane po tipu
+	public ArrayList<Apartman> getPoTipuApartmana(String tip){
+		String soba = Apartman.Tip.Soba.name();
+		String ceoAp = Apartman.Tip.Ceo_apartman.name();
+		
+		ArrayList<Apartman> listaSobe = new ArrayList<Apartman>();
+		ArrayList<Apartman> listaCelihAp = new ArrayList<Apartman>();
+		ArrayList<Apartman> aktivni = getAktivne();
+		
+		for(Apartman a : aktivni) {
+			if(a.getTip().name().equals(soba)) {
+				listaSobe.add(a);
+			}else if(a.getTip().name().equals(ceoAp)) {
+				listaCelihAp.add(a);
+			}
+		}
+		
+		if(tip.equals(soba)) {
+			return listaSobe;
+		}else if(tip.equals(ceoAp)) {
+			return listaCelihAp;
+		}else {
+			return null;
+		}
+	}
+	
+	//vraca aktivne apartmane po broju soba
+	public ArrayList<Apartman> getPoBrojuSoba(int brSoba){
+		
+		ArrayList<Apartman> lista = new ArrayList<Apartman>();
+		ArrayList<Apartman> aktivni = getAktivne();
+		
+		for(Apartman a : aktivni) {
+			if(a.getBrSoba() == brSoba) {
+				lista.add(a);
+			}
+		}
+		
+		return lista;
+	}
+	
+	//vraca aktivne apartmane po broju gostiju
+	public ArrayList<Apartman> getPoBrojuGostiju(int brGostiju){
+		
+		ArrayList<Apartman> lista = new ArrayList<Apartman>();
+		ArrayList<Apartman> aktivni = getAktivne();
+		
+		for(Apartman a : aktivni) {
+			if(a.getBrGostiju() == brGostiju) {
+				lista.add(a);
+			}
+		}
+		return lista;
+	}
+	
 	public void ucitajApartmane() throws FileNotFoundException, IOException {
 		ObjectMapper mapper = new ObjectMapper();
 

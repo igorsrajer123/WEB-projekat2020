@@ -14,6 +14,22 @@
     "status": "Aktivno",
     "sadrzajAp": null,
     "rezervacije": []
+},{
+    "tip": "Soba",
+    "brSoba": "2",
+    "brGostiju": "7",
+    "lokacija": null,
+    "datumZaIzdavanje": "",
+    "dostupnostPoDatumima": [],
+    "domacin": null,
+    "komentar": null,
+    "slika": "",
+    "cenaPoNoci": "200",
+    "vrZaPrijavu": "",
+    "vrZaOdjavu": "",
+    "status": "Aktivno",
+    "sadrzajAp": null,
+    "rezervacije": []
 }, {
     "tip": "Ceo_apartman",
     "brSoba": "10",
