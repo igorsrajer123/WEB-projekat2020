@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -205,5 +206,24 @@ public class ApartmanServis {
 		
 		return Response.ok().build();
 		
+	}
+	
+	@PUT
+	@Path("/ukloniApartman/{id}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response ukloniApartman(@PathParam("id") String id) {
+		
+		ApartmanDAO dao = (ApartmanDAO) ctx.getAttribute("apartmanDAO");
+		
+		if(dao == null)
+			return Response.status(500).build();
+		
+		
+		dao.ukloniPoIdApartmana(id);
+		System.out.println("Apartman uspesno uklonjen!");
+		
+	
+		return Response.ok().build();
 	}
 }

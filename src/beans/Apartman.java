@@ -2,6 +2,7 @@ package beans;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class Apartman {
 
@@ -24,6 +25,7 @@ public class Apartman {
 	private SadrzajApartmana sadrzajAp;
 	private List<Rezervacija> rezervacije;
 	private Boolean uklonjen = false;
+	private String idApartmana = UUID.randomUUID().toString();
 	
 	public Apartman() {
 		super();
@@ -31,7 +33,7 @@ public class Apartman {
 	}
 	
 	public Apartman(Tip tip, int brSoba, int brGostiju, Lokacija lokacija, String datum, Domacin d,
-						String slika, SadrzajApartmana sadrzaj, double cena, Boolean uklonjen) {							
+						String slika, SadrzajApartmana sadrzaj, double cena, Boolean uklonjen, String id) {							
 		super();
 		this.tip = tip;
 		this.brSoba = brSoba;
@@ -49,6 +51,7 @@ public class Apartman {
 		this.sadrzajAp = sadrzaj;
 		this.rezervacije = new ArrayList<Rezervacija>();	
 		this.uklonjen = uklonjen;
+		this.idApartmana = id;
 	}
 
 	public Tip getTip() {
@@ -69,7 +72,7 @@ public class Apartman {
 				+ ", datumZaIzdavanje=" + datumZaIzdavanje + ", dostupnostPoDatumima=" + dostupnostPoDatumima
 				+ ", domacin=" + domacin + ", komentar=" + komentar + ", slika=" + slika + ", cenaPoNoci=" + cenaPoNoci
 				+ ", vrZaPrijavu=" + vrZaPrijavu + ", vrZaOdjavu=" + vrZaOdjavu + ", status=" + status + ", sadrzajAp="
-				+ sadrzajAp + ", rezervacije=" + rezervacije + ", uklonjen=" + uklonjen + "]";
+				+ sadrzajAp + ", rezervacije=" + rezervacije + ", uklonjen=" + uklonjen + ", idApartmana=" + idApartmana + "]";
 	}
 
 	public void setBrSoba(int brSoba) {
@@ -186,5 +189,13 @@ public class Apartman {
 
 	public void setUklonjen(Boolean uklonjen) {
 		this.uklonjen = uklonjen;
+	}
+
+	public String getIdApartmana() {
+		return idApartmana;
+	}
+
+	public void setIdApartmana(String idApartmana) {
+		this.idApartmana = idApartmana;
 	}
 }

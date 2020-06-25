@@ -41,6 +41,16 @@ public class ApartmanDAO {
 		return listaApartmana;
 	}
 	
+	public void ukloniPoIdApartmana(String s) {
+		for(Apartman a : listaApartmana) {
+			if(a.getIdApartmana().equals(s)) {
+				a.setUklonjen(true);
+				a.setStatus(Status.Neaktivno);
+				break;
+			}
+		}
+	}
+	
 	public ArrayList<Apartman> getAktivne() {
 		ArrayList<Apartman> app = new ArrayList<Apartman>();
 		

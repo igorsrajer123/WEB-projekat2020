@@ -34,28 +34,26 @@ $(document).ready(function(){
                     + "<td>" + korisnici[i].lozinka + "</td> " + "<td>" 
                     + korisnici[i].ime + "</td>" + "<td>" + korisnici[i].prezime + "</td>"
                     + "<td>" + korisnici[i].pol + "</td>" + "<td>" + korisnici[i].uloga 
-                    + "</td>" + "<td><button id='"+ korisnici[i].korisnicko_ime + "' onclick='azuriraj(){"+ 
+                    + "</td>" + "<td><button id='"+ korisnici[i].korisnicko_ime + "'> Ažuriraj ulogu</button></td>");
                     
-                            $.ajax({
-                                type: 'PUT',
-                                url: 'rest/korisnik/azurirajUlogu/'+ korisnici[i].korisnicko_ime,
-                                complete: function(data){
-
-                                    if(data["status"] == 200){
-                                        window.location.href = "pregledKorisnika.html";
-                                    }else if(data["status"] == 500){
-                                        alert("Nece da moze!");
-                                    }
-                                }
-                            })
-
-
-                        + "}'> Ažuriraj ulogu</button></td>");
-
-                
-                    $("#korisniciTabela").append(lista);
-
                     let korisnicko = korisnici[i].korisnicko_ime;
+
+                    document.getElementById(korisnici[i].korisnicko_ime).onclick = function fun(){
+                        $.ajax({
+                            type: 'PUT',
+                            url: 'rest/korisnik/azurirajUlogu/'+ korisnicko,
+                            complete: function(data){
+
+                                if(data["status"] == 200){
+                                    window.location.href = "pregledKorisnika.html";
+                                }else if(data["status"] == 500){
+                                    alert("Nece da moze!");
+                                }
+                            }
+                        })
+                    }
+
+                    $("#korisniciTabela").append(lista);
 				}
             }
         }
@@ -139,6 +137,23 @@ $(document).ready(function(){
                         + korisnik.ime + "</td>" + "<td>" + korisnik.prezime + "</td>"
                         + "<td>" + korisnik.pol + "</td>" + "<td>" + korisnik.uloga 
                         + "</td>" + "<td><button id='" + korisnik.korisnicko_ime + "'> Ažuriraj ulogu </button></td>" );
+                        
+                        let korisnicko = korisnik.korisnicko_ime;
+
+                        document.getElementById(korisnik.korisnicko_ime).onclick = function fun(){
+                            $.ajax({
+                                type: 'PUT',
+                                url: 'rest/korisnik/azurirajUlogu/'+ korisnicko,
+                                complete: function(data){
+
+                                    if(data["status"] == 200){
+                                        window.location.href = "pregledKorisnika.html";
+                                    }else if(data["status"] == 500){
+                                        alert("Nece da moze!");
+                                    }
+                                }
+                            })
+                        }
                         $("#korisniciTabela").append(lista); 
                     }
                 }
