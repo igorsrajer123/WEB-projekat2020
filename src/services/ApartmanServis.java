@@ -53,6 +53,7 @@ public class ApartmanServis {
 		return dao.getAktivne();
 	}
 	
+	//vraca aktivne apartmane
 	@GET
 	@Path("/pretragaTip/{tip}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -74,6 +75,7 @@ public class ApartmanServis {
 		}
 	}
 	
+	//vraca aktivne apartmane
 	@GET
 	@Path("/pretragaSobe/{brSoba}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -95,6 +97,7 @@ public class ApartmanServis {
 		}
 	}
 	
+	//vraca aktivne apartmane
 	@GET
 	@Path("/pretragaGosti/{brGostiju}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -116,6 +119,7 @@ public class ApartmanServis {
 		}
 	}
 	
+	//vraca aktivne apartmane
 	@GET
 	@Path("/pretraga/{tip}/{brSoba}/{brGostiju}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -140,5 +144,30 @@ public class ApartmanServis {
 			return listaApartmana;
 		}
 	}
-
+	
+	//vraca aktivne i NEAKTIVNE apartmane
+	@GET
+	@Path("/pretragaSvih/{tip}/{brSoba}/{brGostiju}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ArrayList<Apartman> getSvePoParametrima(@PathParam("tip") String tip, @PathParam("brSoba") int brSoba, @PathParam("brGostiju") int brGostiju){
+		
+		ApartmanDAO dao = (ApartmanDAO) ctx.getAttribute("apartmanDAO");
+		
+		ArrayList<Apartman> listaApartmana = dao.getPoTipuSveApartmane(tip);
+		
+		ArrayList<Apartman> listaApartmana2 = dao.getPoBrojuSobaSve(brSoba);
+		
+		ArrayList<Apartman> listaApartmana3 = dao.getPoBrojuGostijuSve(brGostiju);
+		
+		listaApartmana.retainAll(listaApartmana2);
+		listaApartmana.retainAll(listaApartmana3);
+		
+		if(listaApartmana.isEmpty()) {
+			System.out.println("Lista apartmana prazna!");
+			return null;
+		}else {
+			System.out.println("Apartmani pronadjeni!");
+			return listaApartmana;
+		}
+	}
 }

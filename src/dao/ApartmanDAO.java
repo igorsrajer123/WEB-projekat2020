@@ -105,6 +105,58 @@ public class ApartmanDAO {
 		return lista;
 	}
 	
+	//vraca SVE apartmane po tipu
+	public ArrayList<Apartman> getPoTipuSveApartmane(String tip){
+		String soba = Apartman.Tip.Soba.name();
+		String ceoAp = Apartman.Tip.Ceo_apartman.name();
+		
+		ArrayList<Apartman> listaSobe = new ArrayList<Apartman>();
+		ArrayList<Apartman> listaCelihAp = new ArrayList<Apartman>();
+		
+		for(Apartman a : listaApartmana) {
+			if(a.getTip().name().equals(soba)) {
+				listaSobe.add(a);
+			}else if(a.getTip().name().equals(ceoAp)) {
+				listaCelihAp.add(a);
+			}
+		}
+		
+		if(tip.equals(soba)) {
+			return listaSobe;
+		}else if(tip.equals(ceoAp)) {
+			return listaCelihAp;
+		}else {
+			return null;
+		}
+	}
+	
+	//vraca SVE apartmane po br soba
+	public ArrayList<Apartman> getPoBrojuSobaSve(int brSoba){
+		
+		ArrayList<Apartman> lista = new ArrayList<Apartman>();
+		
+		for(Apartman a : listaApartmana) {
+			if(a.getBrSoba() == brSoba) {
+				lista.add(a);
+			}
+		}
+		
+		return lista;
+	}
+	
+	//vraca SVE apartmane po br gostiju
+	public ArrayList<Apartman> getPoBrojuGostijuSve(int brGostiju){
+		
+		ArrayList<Apartman> lista = new ArrayList<Apartman>();
+		
+		for(Apartman a : listaApartmana) {
+			if(a.getBrGostiju() == brGostiju) {
+				lista.add(a);
+			}
+		}
+		return lista;
+	}
+	
 	public void ucitajApartmane() throws FileNotFoundException, IOException {
 		ObjectMapper mapper = new ObjectMapper();
 

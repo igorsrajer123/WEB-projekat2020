@@ -52,23 +52,82 @@ $(document).ready(function(){
         }
 
         if(tipValidan && sobeValidne && osobeValidne){
+            
             $.ajax({
                 type: 'GET',
-                url: 'rest/apartman/pretraga/'+tip + '/'+ sobe + '/'+ osobe,
+                url: 'rest/korisnik/getKorisnik',
                 complete: function(data){
 
-                    let apartmani = data.responseJSON;
+                    let korisnik = data.responseJSON;
 
-                    let lista = $("#apartmaniTabela tbody");
-                    lista.empty();
+                    if(korisnik == undefined){
+                        $.ajax({
+                            type: 'GET',
+                            url: 'rest/apartman/pretraga/'+tip + '/'+ sobe + '/'+ osobe,
+                            complete: function(data){
+            
+                                let apartmani = data.responseJSON;
+            
+                                let lista = $("#apartmaniTabela tbody");
+                                lista.empty();
+            
+                                for(var i = 0; i < apartmani.length;i++){
+                                    lista.append("<tr><td>" + i + "</td>"
+                                    + "<td>" + apartmani[i].brSoba + "</td> " + "<td>" 
+                                    + apartmani[i].brGostiju + "</td>" + "<td>" + apartmani[i].lokacija + "</td>"
+                                    + "<td>" + apartmani[i].domacin + "</td>" + "<td>" + apartmani[i].cenaPoNoci
+                                    + "</td>");
+                                    $("#apartmaniTabela").append(lista);        
+                                }
+                            }
+                        })
+                    }else if(korisnik.uloga == "Administrator"){
+                        $.ajax({
+                            type: 'GET',
+                            url: 'rest/apartman/pretragaSvih/'+tip+'/'+sobe+'/'+osobe,
+                            complete: function(data){   
 
-                    for(var i = 0; i < apartmani.length;i++){
-                        lista.append("<tr><td>" + i + "</td>"
-                        + "<td>" + apartmani[i].brSoba + "</td> " + "<td>" 
-                        + apartmani[i].brGostiju + "</td>" + "<td>" + apartmani[i].lokacija + "</td>"
-                        + "<td>" + apartmani[i].domacin + "</td>" + "<td>" + apartmani[i].cenaPoNoci
-                        + "</td>");
-                        $("#apartmaniTabela").append(lista);        
+                                let apartmani = data.responseJSON;
+
+                                let lista = $("#apartmaniTabela tbody");
+                                lista.empty();
+
+                                console.log(apartmani.length);
+
+                                for(var i = 0; i < apartmani.length;i++){
+                                    lista.append("<tr><td>" + i + "</td>"
+                                    + "<td>" + apartmani[i].brSoba + "</td> " + "<td>" 
+                                    + apartmani[i].brGostiju + "</td>" + "<td>" + apartmani[i].lokacija + "</td>"
+                                    + "<td>" + apartmani[i].domacin + "</td>" + "<td>" + apartmani[i].cenaPoNoci
+                                    + "</td>" + "<td>" + apartmani[i].tip + "</td>" + "<td> <a id='izmeni' href='index.html'> Izmeni </a> </td>" +
+                                    "<td> <a id='obrisi' href='index.html'> Obriši </a> </td>");
+                                    $("#korisniciTabela").append(lista);
+                                }
+                            }
+                        })
+                    }else if(korisnik.uloga == "Gost"){
+                        $.ajax({
+                            type: 'GET',
+                            url: 'rest/apartman/pretraga/'+tip + '/'+ sobe + '/'+ osobe,
+                            complete: function(data){
+            
+                                let apartmani = data.responseJSON;
+            
+                                let lista = $("#apartmaniTabela tbody");
+                                lista.empty();
+            
+                                for(var i = 0; i < apartmani.length;i++){
+                                    lista.append("<tr><td>" + i + "</td>"
+                                    + "<td>" + apartmani[i].brSoba + "</td> " + "<td>" 
+                                    + apartmani[i].brGostiju + "</td>" + "<td>" + apartmani[i].lokacija + "</td>"
+                                    + "<td>" + apartmani[i].domacin + "</td>" + "<td>" + apartmani[i].cenaPoNoci
+                                    + "</td>");
+                                    $("#apartmaniTabela").append(lista);        
+                                }
+                            }
+                        })
+                    }else if(korisnik.uloga == "Domacin"){
+
                     }
                 }
             })
