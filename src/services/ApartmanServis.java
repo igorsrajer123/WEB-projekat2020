@@ -50,6 +50,48 @@ public class ApartmanServis {
 		
 	}
 	
+	//vraca aktivan apartman po idju
+	@GET
+	@Path("/getApartman/{idApartmana}")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Apartman getApartman(@PathParam("idApartmana") String id) {
+		
+		ApartmanDAO dao = (ApartmanDAO) ctx.getAttribute("apartmanDAO");
+	
+		if(dao == null) 
+			return null;
+		
+		Apartman a = dao.getPoIdApartmana(id);
+		
+		if(a != null) {
+			return a;
+		}else {
+			return null;
+		}
+	}
+	
+	//vraca bilo aktivan ili neaktivan apartman po idju
+	@GET
+	@Path("/getBiloKojiApartman/{idApartmana}")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Apartman getPoIdApartman(@PathParam("idApartmana") String id) {
+		
+		ApartmanDAO dao = (ApartmanDAO) ctx.getAttribute("apartmanDAO");
+	
+		if(dao == null) 
+			return null;
+		
+		Apartman a = dao.getPoIdSve(id);
+		
+		if(a != null) {
+			return a;
+		}else {
+			return null;
+		}
+	}
+	
 	@GET
 	@Path("/getAktivneApartmane")
 	@Produces(MediaType.APPLICATION_JSON)
