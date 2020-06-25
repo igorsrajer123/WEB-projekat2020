@@ -59,7 +59,7 @@ public class ApartmanServis {
 		return dao.getAktivne();
 	}
 	
-<<<<<<< Updated upstream
+
 	//vraca aktivne apartmane
 	@GET
 	@Path("/pretragaTip/{tip}")
@@ -177,7 +177,7 @@ public class ApartmanServis {
 			return listaApartmana;
 		}
 	}
-=======
+
 	@POST
 	@Path("/dodajApartman/{korIme}")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -208,5 +208,5 @@ public class ApartmanServis {
 		
 	}
 
->>>>>>> Stashed changes
+
 }
