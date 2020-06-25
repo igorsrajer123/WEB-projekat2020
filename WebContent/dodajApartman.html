@@ -9,5 +9,42 @@
     <h2>Dodavanje Apartmana</h2>
     <span id ="pozPorApp"></span>
     
+    <form id="dodajApartmanForma">
+        <table>
+            <tr>
+                <td>Broj soba:</td>
+                <td><input type="text" name="brojSoba" id="brSoba"></td>
+                <td><span id="greskaBrSobaPor"></span></td>
+            </tr>
+            
+            <tr>
+                <td><label> Broj gostiju: </label></td>
+                <td><input type="text" name="brojGostiju" id="brGostiju"></td>
+                <td><span id="greskaBrGostijuPor"></span></td>
+            </tr>
+            <tr>
+                <td><label> Lokacija: </label></td>
+                <td><input type="text" name="lokacija" id="lokacija"></td>
+                <td><span id="greskaLokacijaPor"></span></td>
+            </tr>
+            <tr>
+                <td><label> Tip: </label></td>
+                <td><select name="tip" id="tip">
+                          <option value="Ceo_apartman">Ceo_apartman</option>
+                          <option value="Soba">Soba</option>				 
+                </select></td>
+            </tr>
+            <tr>
+                <td><label> Cena po noci: </label></td>
+                <td><input type="text" name="cena" id="cena"></td>
+                <td><span id="greskaCenaPor"></span></td>
+            </tr>
+            <tr>
+                <td><button class="btn1" type="submit" id="dodajApp"> Dodaj </button></td>
+                <td><button class="btn2" type="submit" id="odustani"> Odustani </button></td>
+            </tr>
+        </table>
+    </form>
+
 </body>
 </html>

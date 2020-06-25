@@ -179,27 +179,24 @@ public class ApartmanServis {
 	}
 
 	@POST
-	@Path("/dodajApartman/{korIme}")
+	@Path("/dodajApartman")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response dodajApartman(@PathParam("korIme") String korisnickoIme, Apartman a, @Context HttpServletRequest rq) {
+	public Response dodajApartman(Apartman a, @Context HttpServletRequest rq) {
+		System.out.println("DA LI SE OVO DESIII");
+		System.out.println(a);
+		//System.out.println(korisnicko_ime);
 		ApartmanDAO apartmani = (ApartmanDAO) ctx.getAttribute("apartmanDAO");
 		KorisnikDAO korisnici = (KorisnikDAO) ctx.getAttribute("korisnikDAO");
 		
-
-		for(Korisnik k : korisnici.getKorisnici()) {
-			if (k.getKorisnicko_ime().equals(korisnickoIme)) {
-		//		Domacin domacin = new Domacin(k);
-			}
-		}
+		Korisnik korisnik = (Korisnik) rq.getSession().getAttribute("korisnik");
+		System.out.println(korisnik);
 		
-		//System.out.println(domacin);
-		
-		System.out.println("DODAJ APARTMAN");
-		
-		//a.setDomacin(domacin);
-		//domacin.dodajApartman(a);
+		System.out.println(korisnik.getKorisnicko_ime() + "OVAJ sALJE APARTMAN");
 		
 		apartmani.dodajApartman(a);
+		//domacin.dodajApartman(a);
+		
+		//a.setDomacin(domacin);
 		
 		apartmani.sacuvajApartmane();
 		korisnici.sacuvajKorisnika();
