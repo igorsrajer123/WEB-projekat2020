@@ -13,7 +13,8 @@
     "vrZaOdjavu": "",
     "status": "Aktivno",
     "sadrzajAp": null,
-    "rezervacije": []
+    "rezervacije": [],
+    "uklonjen": "false"
 },{
     "tip": "Soba",
     "brSoba": "2",
@@ -29,7 +30,8 @@
     "vrZaOdjavu": "",
     "status": "Neaktivno",
     "sadrzajAp": null,
-    "rezervacije": []
+    "rezervacije": [],
+    "uklonjen": "false"
 }, {
     "tip": "Ceo_apartman",
     "brSoba": "10",
@@ -45,7 +47,8 @@
     "vrZaOdjavu": "",
     "status": "Aktivno",
     "sadrzajAp": null,
-    "rezervacije": []
+    "rezervacije": [],
+    "uklonjen": "false"
 }, {
     "tip": "Soba",
     "brSoba": "5",
@@ -61,5 +64,6 @@
     "vrZaOdjavu": "",
     "status": "Neaktivno",
     "sadrzajAp": null,
-    "rezervacije": []
+    "rezervacije": [],
+    "uklonjen": "false"
 }]

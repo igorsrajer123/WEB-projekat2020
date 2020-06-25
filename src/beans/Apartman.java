@@ -23,6 +23,7 @@ public class Apartman {
 	private Status status;
 	private SadrzajApartmana sadrzajAp;
 	private List<Rezervacija> rezervacije;
+	private Boolean uklonjen = false;
 	
 	public Apartman() {
 		super();
@@ -30,7 +31,7 @@ public class Apartman {
 	}
 	
 	public Apartman(Tip tip, int brSoba, int brGostiju, Lokacija lokacija, String datum, Domacin d,
-						String slika, SadrzajApartmana sadrzaj, double cena) {							
+						String slika, SadrzajApartmana sadrzaj, double cena, Boolean uklonjen) {							
 		super();
 		this.tip = tip;
 		this.brSoba = brSoba;
@@ -46,7 +47,8 @@ public class Apartman {
 		this.vrZaPrijavu = "";
 		this.status = Status.Aktivno;	
 		this.sadrzajAp = sadrzaj;
-		this.rezervacije = new ArrayList<Rezervacija>();				
+		this.rezervacije = new ArrayList<Rezervacija>();	
+		this.uklonjen = uklonjen;
 	}
 
 	public Tip getTip() {
@@ -67,7 +69,7 @@ public class Apartman {
 				+ ", datumZaIzdavanje=" + datumZaIzdavanje + ", dostupnostPoDatumima=" + dostupnostPoDatumima
 				+ ", domacin=" + domacin + ", komentar=" + komentar + ", slika=" + slika + ", cenaPoNoci=" + cenaPoNoci
 				+ ", vrZaPrijavu=" + vrZaPrijavu + ", vrZaOdjavu=" + vrZaOdjavu + ", status=" + status + ", sadrzajAp="
-				+ sadrzajAp + ", rezervacije=" + rezervacije + "]";
+				+ sadrzajAp + ", rezervacije=" + rezervacije + ", uklonjen=" + uklonjen + "]";
 	}
 
 	public void setBrSoba(int brSoba) {
@@ -176,5 +178,13 @@ public class Apartman {
 
 	public void setRezervacije(List<Rezervacija> rezervacije) {
 		this.rezervacije = rezervacije;
+	}
+
+	public Boolean getUklonjen() {
+		return uklonjen;
+	}
+
+	public void setUklonjen(Boolean uklonjen) {
+		this.uklonjen = uklonjen;
 	}
 }
