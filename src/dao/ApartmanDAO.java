@@ -218,7 +218,7 @@ public class ApartmanDAO {
 	public void sacuvajApartmane()
 	{
 		ObjectMapper mapper = new ObjectMapper();
-		File file = new File(this.ctxPath + "data"+ java.io.File.separator +"oglasi.json");
+		File file = new File(this.ctxPath + "data"+ java.io.File.separator +"apartmani.json");
 		try {
 			mapper.writerWithDefaultPrettyPrinter().writeValue(file, this.listaApartmana);
 		} catch (IOException e) {

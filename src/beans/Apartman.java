@@ -24,6 +24,7 @@ public class Apartman {
 	private Status status;
 	private SadrzajApartmana sadrzajAp;
 	private List<Rezervacija> rezervacije;
+	
 	private Boolean uklonjen = false;
 	private String idApartmana = UUID.randomUUID().toString();
 	

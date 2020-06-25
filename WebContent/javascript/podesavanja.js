@@ -183,14 +183,6 @@ function prikazApartmana(korisnik) {
 				$("#apartmaniTabela thead tr").append(tip).append(izmena).append(brisanje);
 				//==============================================================
            		for(var i = 0; i < apartmani.length;i++){
-					lista.append("<tr><td>" + i + "</td>"
-					+ "<td>" + apartmani[i].brSoba + "</td> " + "<td>" 
-					+ apartmani[i].brGostiju + "</td>" + "<td>" + apartmani[i].lokacija + "</td>"
-					+ "<td>" + apartmani[i].domacin + "</td>" + "<td>" + apartmani[i].cenaPoNoci
-					+ "</td>" + "<td>" + apartmani[i].tip + "</td>" + "<td><a id='izmeni' href='podaciApartman.html'> Izmeni</a> </td>" +
-					"<td><a id='obrisi' href='index.html'> Obriši </a> </td>");
-					$("#apartmaniTabela").append(lista);					
-
 					   if(apartmani[i].uklonjen == false){
 							lista.append("<tr><td>" + i + "</td>"
 							+ "<td>" + apartmani[i].brSoba + "</td> " + "<td>" 

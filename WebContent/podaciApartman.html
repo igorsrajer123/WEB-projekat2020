@@ -16,58 +16,43 @@
             <tr>
                 <td><label> Broj soba: </label>
                 <td><input type='text' id='brSoba'></td>
+                <td><span id="greskaBrSobaPor"></span></td>
             </tr>
             <tr>
                 <td><label> Broj gostiju: </label>
                 <td><input type='text' id='brGostiju'></td>
+                <td><span id="greskaBrGostijuPor"></span></td>
             </tr>
             <tr>
                 <td><label> Lokacija: </label>
                 <td><input type='text' id='lokacija'></td>
-            </tr>
-            <tr>
-                <td><label> Datum za izdavanje: </label>
-                <td><input type='text' id='datZaIzd'></td>
-            </tr>
-            <tr>
-                <td><label> Dostupnost po datumima: </label>
-                <td><input type='text' id='dostPoDat'></td>
-            </tr>
-            <tr>
-                <td><label> Domacin: </label>
-                <td><input type='text' id='domacin'></td>
-            </tr>
-            <tr>
-                <td><label> Komentar: </label>
-                <td><input type='text' id='komentar'></td>
-            </tr>
-            <tr>
-                <td><label> Slika: </label>
-                <td> <input type="file" id='myFile' value='Izaberi sliku'></td>
+                <td><span id="greskaLokacijaPor"></span></td>
             </tr>
             <tr>
                 <td><label> Cena po noći: </label>
                 <td><input type='text' id='cena'></td>
+                <td><span id="greskaCenaPor"></span></td>
             </tr>
             <tr>
-                <td><label> Vreme za prijavu </label>
-                <td><input type='text' id='vrZaPrijavu'></td>
-            </tr>
-            <tr>
-                <td><label> Vreme za odjavu: </label>
-                <td><input type='text' id='vrZaOdjavu'></td>
+                <td><label> Komentar: </label>
+                <td width="150%" height="150%"><input type="text" name="komentar" id="komentar"style="height: 80px; width: 300px;"></td>
+                <td><span id="greskaPorukaPor"></span></td>
             </tr>
             <tr>
                 <td><label> Status: </label>
-                <td><input type='text' id='status'></td>
+                <td><label id="statusLabela"><b><i></i></b></label></td>
             </tr>
             <tr>
-                <td><label> Sadržaj apartmana: </label>
-                <td><input type='text' id='sadrzaj'></td>
+                <td><label> Slika: </label>
+                <td><input id="slika" type="file" onchange="readURL(this);"></td>
             </tr>
             <tr>
-                <td><label> Rezervacije: </label>
-                <td><input type='text' id='rezervacije'></td>
+                <td></td>
+                <td><img  id="blah" src="#" alt="your image" style="height: 100px; width: 100px;" /> </td>
+            </tr>
+            <tr>
+                <td><button class="btn1" type="submit" id="dodajApp"> Dodaj </button></td>
+                <td><button class="btn2" type="submit" id="odustani"> Odustani </button></td>
             </tr>
         </table>
     </form>
