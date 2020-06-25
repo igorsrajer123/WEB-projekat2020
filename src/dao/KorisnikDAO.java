@@ -12,6 +12,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import beans.Administrator;
+import beans.Domacin;
 import beans.Gost;
 import beans.Korisnik;
 import beans.Korisnik.Uloga;
@@ -75,15 +76,21 @@ public class KorisnikDAO {
 	}
 	
 	//vraca sve korisnike
-	public List<Korisnik> getKorisnici(){
+	public ArrayList<Korisnik> getKorisnici(){
 		
-		List<Korisnik> lista = new ArrayList<Korisnik>();
+		ArrayList<Korisnik> lista = new ArrayList<Korisnik>();
 		
 		for(Korisnik k : korisnici.values()) {
 			lista.add(k);
 		}
 		
 		return lista;
+	}
+	
+	//kod zamene uloge
+	public void zameniKorisnika(String korisnickoIme, Korisnik k)
+	{
+		korisnici.put(korisnickoIme, k);
 	}
 	
 	//ucitavanje korisnika iz .json datoteka
@@ -137,6 +144,25 @@ public class KorisnikDAO {
 			}
 				
 		}
+		
+		file = new File(this.contextPath + "data"+ java.io.File.separator +"domacini.json");
+		json = "";
+		
+		if(file.exists()) {
+			try(BufferedReader br = new BufferedReader(new FileReader(file))) { 
+				while ((temp = br.readLine()) != null) {
+					json += temp;
+				}
+			}
+			
+			ArrayList<Domacin> list3 = mapper.readValue(json, 
+					new TypeReference<ArrayList<Domacin>>() {});
+			
+			for(Domacin domacin: list3) {
+				this.korisnici.put(domacin.getKorisnicko_ime(), domacin);
+				System.out.println(domacin.toString());
+			}
+		}
 	}
 	
 	public void sacuvajKorisnika() {
@@ -154,7 +180,19 @@ public class KorisnikDAO {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
+		
+		ArrayList<Domacin> list2 = new ArrayList<Domacin>();		
+		for (Korisnik korisnik: this.korisnici.values()) {
+			if (korisnik.getUloga().equals(Uloga.Domacin)) {
+				list2.add((Domacin)korisnik );
+			}
+		}
+		File file2 = new File(this.contextPath + "data"+ java.io.File.separator +"domacini.json");
+		try {
+			mapper.writerWithDefaultPrettyPrinter().writeValue(file2, list2);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}		
 	}
-	
-	
 }

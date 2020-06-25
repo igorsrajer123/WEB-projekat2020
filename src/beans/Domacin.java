@@ -28,4 +28,11 @@ public class Domacin extends Korisnik {
 	public void setApartmani(List<Apartman> apartmani) {
 		this.apartmani = apartmani;
 	}
+	
+	public static Domacin Parse(Korisnik k) {
+		
+		Domacin d = new Domacin(k.getKorisnicko_ime(), k.getLozinka(), k.getIme(), k.getPrezime(), k.getPol());
+		
+		return d;
+	}
 }

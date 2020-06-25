@@ -1,5 +1,6 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -16,6 +17,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import beans.Domacin;
 import beans.Gost;
 import beans.Korisnik;
 import dao.KorisnikDAO;
@@ -147,6 +149,25 @@ public class KorisnikServis {
 	
 		System.out.println("Korisnik uspesno izmenjen!");
 		return k;
+	}
+	
+	@PUT
+	@Path("/azurirajUlogu/{korisnicko_ime}")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public ArrayList<Korisnik> azurirajUlogu(@PathParam("korisnicko_ime") String korIme) {
+		
+		KorisnikDAO dao = (KorisnikDAO) ctx.getAttribute("korisnikDAO");
+		
+		if(dao == null)
+			return null;
+		
+		Domacin d = Domacin.Parse(dao.getOneKorisnik(korIme));
+		dao.zameniKorisnika(d.getKorisnicko_ime(), d);
+		
+		dao.sacuvajKorisnika();
+		
+		return dao.getKorisnici();
 	}
 	
 	@POST
