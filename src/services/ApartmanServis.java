@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -49,6 +50,48 @@ public class ApartmanServis {
 		
 	}
 	
+	//vraca aktivan apartman po idju
+	@GET
+	@Path("/getApartman/{idApartmana}")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Apartman getApartman(@PathParam("idApartmana") String id) {
+		
+		ApartmanDAO dao = (ApartmanDAO) ctx.getAttribute("apartmanDAO");
+	
+		if(dao == null) 
+			return null;
+		
+		Apartman a = dao.getPoIdApartmana(id);
+		
+		if(a != null) {
+			return a;
+		}else {
+			return null;
+		}
+	}
+	
+	//vraca bilo aktivan ili neaktivan apartman po idju
+	@GET
+	@Path("/getBiloKojiApartman/{idApartmana}")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Apartman getPoIdApartman(@PathParam("idApartmana") String id) {
+		
+		ApartmanDAO dao = (ApartmanDAO) ctx.getAttribute("apartmanDAO");
+	
+		if(dao == null) 
+			return null;
+		
+		Apartman a = dao.getPoIdSve(id);
+		
+		if(a != null) {
+			return a;
+		}else {
+			return null;
+		}
+	}
+	
 	@GET
 	@Path("/getAktivneApartmane")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -59,7 +102,10 @@ public class ApartmanServis {
 		return dao.getAktivne();
 	}
 	
+<<<<<<< HEAD
 
+=======
+>>>>>>> dd22ea77e069a01d55498f57bd71604569854193
 	//vraca aktivne apartmane
 	@GET
 	@Path("/pretragaTip/{tip}")
@@ -204,6 +250,28 @@ public class ApartmanServis {
 		return Response.ok().build();
 		
 	}
+<<<<<<< HEAD
 
 
+=======
+	
+	@PUT
+	@Path("/ukloniApartman/{id}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response ukloniApartman(@PathParam("id") String id) {
+		
+		ApartmanDAO dao = (ApartmanDAO) ctx.getAttribute("apartmanDAO");
+		
+		if(dao == null)
+			return Response.status(500).build();
+		
+		
+		dao.ukloniPoIdApartmana(id);
+		System.out.println("Apartman uspesno uklonjen!");
+		
+	
+		return Response.ok().build();
+	}
+>>>>>>> dd22ea77e069a01d55498f57bd71604569854193
 }

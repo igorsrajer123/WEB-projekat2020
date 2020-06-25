@@ -95,13 +95,41 @@ $(document).ready(function(){
                                 console.log(apartmani.length);
 
                                 for(var i = 0; i < apartmani.length;i++){
-                                    lista.append("<tr><td>" + i + "</td>"
-                                    + "<td>" + apartmani[i].brSoba + "</td> " + "<td>" 
-                                    + apartmani[i].brGostiju + "</td>" + "<td>" + apartmani[i].lokacija + "</td>"
-                                    + "<td>" + apartmani[i].domacin + "</td>" + "<td>" + apartmani[i].cenaPoNoci
-                                    + "</td>" + "<td>" + apartmani[i].tip + "</td>" + "<td> <a id='izmeni' href='index.html'> Izmeni </a> </td>" +
-                                    "<td> <a id='obrisi' href='index.html'> Obriši </a> </td>");
-                                    $("#korisniciTabela").append(lista);
+                                    if(apartmani[i].uklonjen == false){
+                                        lista.append("<tr><td>" + i + "</td>"
+                                        + "<td>" + apartmani[i].brSoba + "</td> " + "<td>" 
+                                        + apartmani[i].brGostiju + "</td>" + "<td>" + apartmani[i].lokacija + "</td>"
+                                        + "<td>" + apartmani[i].domacin + "</td>" + "<td>" + apartmani[i].cenaPoNoci
+                                        + "</td>" + "<td>" + apartmani[i].tip + "</td>" + "<td><a id='izmeni' href='podaciApartman.html'> Izmeni</a> </td>" +
+                                        "<td> <button id='" + apartmani[i].idApartmana + "'> Obriši </button> </td> </tr>");
+            
+                                        let id = apartmani[i].idApartmana;
+            
+                                        document.getElementById(apartmani[i].idApartmana).onclick =function fun(){
+                                            $.ajax({
+                                                type: 'PUT',
+                                                url: 'rest/apartman/ukloniApartman/'+ id,
+                                                complete: function(data){
+            
+                                                    if(data["status"] == 200){
+                                                        window.location.href = "index.html";
+                                                    }else if(data["status"] == 500){
+                                                        alert("Nece da moze!");
+                                                    }
+                                                }		
+                                            })
+                                        }
+                                        $("#apartmaniTabela").append(lista);	
+                                   }else {
+                                        lista.append("<tr style='background-color:red'><td>" + i + "</td>"
+                                        + "<td>" + apartmani[i].brSoba + "</td> " + "<td>" 
+                                        + apartmani[i].brGostiju + "</td>" + "<td>" + apartmani[i].lokacija + "</td>"
+                                        + "<td>" + apartmani[i].domacin + "</td>" + "<td>" + apartmani[i].cenaPoNoci
+                                        + "</td>" + "<td>" + apartmani[i].tip + "</td>" + "<td> ------ </td>" +
+                                        "<td> UKLONJEN </td> </tr>");
+            
+                                        $("#apartmaniTabela").append(lista);	
+                                   }
                                 }
                             }
                         })

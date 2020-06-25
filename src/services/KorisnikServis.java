@@ -155,19 +155,19 @@ public class KorisnikServis {
 	@Path("/azurirajUlogu/{korisnicko_ime}")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public ArrayList<Korisnik> azurirajUlogu(@PathParam("korisnicko_ime") String korIme) {
+	public Response azurirajUlogu(@PathParam("korisnicko_ime") String korIme) {
 		
 		KorisnikDAO dao = (KorisnikDAO) ctx.getAttribute("korisnikDAO");
 		
 		if(dao == null)
-			return null;
+			return Response.status(500).build();
 		
 		Domacin d = Domacin.Parse(dao.getOneKorisnik(korIme));
 		dao.zameniKorisnika(d.getKorisnicko_ime(), d);
 		
 		dao.sacuvajKorisnika();
 		
-		return dao.getKorisnici();
+		return Response.ok().build();
 	}
 	
 	@POST

@@ -59,6 +59,12 @@ function dodatneOpcije(korisnik){
 
 	if(korisnik.uloga == "Administrator"){
 		$("#acc_buttons").append("<button type='submit' id='korisnici_Btn' onclick=pregledKorisnika()>Pregled korisnika </button> <br/>");
+<<<<<<< HEAD
+=======
+	}else if(korisnik.uloga == "Gost"){
+		$("#acc_buttons").append("<button type='submit' id='dodajApp_Btn' onclick=dodajApartman()>Dodaj Apartman </button> <br/>");
+		$("#acc_buttons").append("<button type='submit' id='rezervacije' onclick=pregledRezervacija()> Moje rezervacije </button> <br/>");
+>>>>>>> dd22ea77e069a01d55498f57bd71604569854193
 	}else if(korisnik.uloga == "Domacin"){
 		$("#acc_buttons").append("<button type='submit' id='dodajApp_Btn' onclick=dodajApartman()>Dodaj Apartman </button> <br/>");
 	}
@@ -85,6 +91,10 @@ function odlogujSe(){
 	
 		window.location.href = "nalog.html";
 	});
+}
+
+function pregledRezervacija(){
+	window.location.href = "pregledRezervacija.html";
 }
 
 function pregledKorisnika(){
@@ -139,17 +149,19 @@ function prikazApartmana(korisnik) {
 				let lista = $("#apartmaniTabela tbody");
 				lista.empty();
 				
-
 				console.log(apartmani.length);
+
+				let red = "<td> </td>";
+				$("#apartmaniTabela thead tr").append(red);
 			
            		for(var i = 0; i < apartmani.length;i++){
 					lista.append("<tr><td>" + i + "</td>"
 					+ "<td>" + apartmani[i].brSoba + "</td> " + "<td>" 
 					+ apartmani[i].brGostiju + "</td>" + "<td>" + apartmani[i].lokacija + "</td>"
 					+ "<td>" + apartmani[i].domacin + "</td>" + "<td>" + apartmani[i].cenaPoNoci
-					+ "</td>");
+					+ "</td>" + "<td> <button id='" + apartmani[i].idApartmana + "'> Rezerviši </button></td> </tr>");
 					$("#apartmaniTabela").append(lista);
-						
+					
 				}
 			}
 		});
@@ -172,6 +184,7 @@ function prikazApartmana(korisnik) {
 				$("#apartmaniTabela thead tr").append(tip).append(izmena).append(brisanje);
 				//==============================================================
            		for(var i = 0; i < apartmani.length;i++){
+<<<<<<< HEAD
 					lista.append("<tr><td>" + i + "</td>"
 					+ "<td>" + apartmani[i].brSoba + "</td> " + "<td>" 
 					+ apartmani[i].brGostiju + "</td>" + "<td>" + apartmani[i].lokacija + "</td>"
@@ -179,6 +192,44 @@ function prikazApartmana(korisnik) {
 					+ "</td>" + "<td>" + apartmani[i].tip + "</td>" + "<td><a id='izmeni' href='podaciApartman.html'> Izmeni</a> </td>" +
 					"<td><a id='obrisi' href='index.html'> Obriši </a> </td>");
 					$("#apartmaniTabela").append(lista);					
+=======
+					   if(apartmani[i].uklonjen == false){
+							lista.append("<tr><td>" + i + "</td>"
+							+ "<td>" + apartmani[i].brSoba + "</td> " + "<td>" 
+							+ apartmani[i].brGostiju + "</td>" + "<td>" + apartmani[i].lokacija + "</td>"
+							+ "<td>" + apartmani[i].domacin + "</td>" + "<td>" + apartmani[i].cenaPoNoci
+							+ "</td>" + "<td>" + apartmani[i].tip + "</td>" + "<td> <button onClick=window.location.href='podaciApartman.html?idApartmana="+ apartmani[i].idApartmana+ "'> Izmeni </button></td>" +
+							"<td> <button id='" + apartmani[i].idApartmana + "'> Obriši </button> </td> </tr>");
+
+							let id = apartmani[i].idApartmana;
+
+							document.getElementById(apartmani[i].idApartmana).onclick =function fun(){
+								$.ajax({
+									type: 'PUT',
+									url: 'rest/apartman/ukloniApartman/'+ id,
+									complete: function(data){
+
+										if(data["status"] == 200){
+											window.location.href = "index.html";
+										}else if(data["status"] == 500){
+											alert("Nece da moze!");
+										}
+									}		
+								})
+							}
+
+							$("#apartmaniTabela").append(lista);	
+					   }else {
+							lista.append("<tr style='background-color:red'><td>" + i + "</td>"
+							+ "<td>" + apartmani[i].brSoba + "</td> " + "<td>" 
+							+ apartmani[i].brGostiju + "</td>" + "<td>" + apartmani[i].lokacija + "</td>"
+							+ "<td>" + apartmani[i].domacin + "</td>" + "<td>" + apartmani[i].cenaPoNoci
+							+ "</td>" + "<td>" + apartmani[i].tip + "</td>" + "<td> ------ </td>" +
+							"<td> UKLONJEN </td> </tr>");
+
+							$("#apartmaniTabela").append(lista);	
+					   }
+>>>>>>> dd22ea77e069a01d55498f57bd71604569854193
 				}
 			}
 		});

@@ -41,6 +41,41 @@ public class ApartmanDAO {
 		return listaApartmana;
 	}
 	
+	public void ukloniPoIdApartmana(String s) {
+		for(Apartman a : listaApartmana) {
+			if(a.getIdApartmana().equals(s)) {
+				a.setUklonjen(true);
+				a.setStatus(Status.Neaktivno);
+				break;
+			}
+		}
+	}
+	
+	//vraca Aktivni apartman po idju
+	public Apartman getPoIdApartmana(String s) {
+		
+		ArrayList<Apartman> aktivni = getAktivne();
+		
+		for(Apartman a : aktivni) {
+			if(a.getIdApartmana().contentEquals(s)) {
+				return a;
+			}
+		}
+		
+		return null;
+	}
+	
+	//vraca bilo aktivni ili neaktivni apartman po idju
+	public Apartman getPoIdSve(String s) {
+		for(Apartman a : listaApartmana) {
+			if(a.getIdApartmana().contentEquals(s)) {
+				return a;
+			}
+		}
+		
+		return null;
+	}
+	
 	public ArrayList<Apartman> getAktivne() {
 		ArrayList<Apartman> app = new ArrayList<Apartman>();
 		
