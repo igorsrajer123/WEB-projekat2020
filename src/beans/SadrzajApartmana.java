@@ -1,22 +1,19 @@
 package beans;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class SadrzajApartmana {
 
 	private int id;
-	private List<String> sadrzaj = new ArrayList<String>();
+	private String item;
 	
 	public SadrzajApartmana() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	
-	public SadrzajApartmana(int id, List<String> sadrzaj) {
+	public SadrzajApartmana(int id, String item) {
 		super();
 		this.id = id;
-		this.sadrzaj = sadrzaj;
+		this.item = item;
 	}
 
 	public int getId() {
@@ -27,16 +24,16 @@ public class SadrzajApartmana {
 		this.id = id;
 	}
 
-	public List<String> getSadrzaj() {
-		return sadrzaj;
+	public String getItem() {
+		return item;
 	}
 
-	public void setSadrzaj(List<String> sadrzaj) {
-		this.sadrzaj = sadrzaj;
+	public void setItem(String nazivItema) {
+		this.item = nazivItema;
 	}
 
 	@Override
 	public String toString() {
-		return "SadrzajApartmana [id=" + id + ", sadrzaj=" + sadrzaj + "]";
+		return "SadrzajApartmana [id=" + id + ", nazivItema=" + item + "]";
 	}
 }
