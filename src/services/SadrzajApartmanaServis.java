@@ -55,6 +55,14 @@ public class SadrzajApartmanaServis {
 		if(dao == null)
 			return Response.status(500).build();
 		
+		//zabranjuje ponavljanje ID-ja
+		ArrayList<SadrzajApartmana> lista = dao.getCeoSadrzaj();
+		for(SadrzajApartmana s1 : lista) {
+			if(s1.getId() == s.getId()) {
+				return Response.status(500).build();
+			}
+		}
+		
 		dao.dodajSadrzaj(s);
 		dao.sacuvajSadrzajApartmana();
 		System.out.println("Item dodat!");
