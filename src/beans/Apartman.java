@@ -22,7 +22,7 @@ public class Apartman {
 	private String vrZaPrijavu;
 	private String vrZaOdjavu;
 	private Status status;
-	private SadrzajApartmana sadrzajAp;
+	private List<SadrzajApartmana> sadrzajAp;
 	private List<Rezervacija> rezervacije;
 	
 	private Boolean uklonjen = false;
@@ -49,7 +49,7 @@ public class Apartman {
 		this.vrZaOdjavu = "";
 		this.vrZaPrijavu = "";
 		this.status = Status.Aktivno;	
-		this.sadrzajAp = sadrzaj;
+		this.sadrzajAp = new ArrayList<SadrzajApartmana>();
 		this.rezervacije = new ArrayList<Rezervacija>();	
 		this.uklonjen = uklonjen;
 		this.idApartmana = id;
@@ -168,11 +168,11 @@ public class Apartman {
 		this.status = status;
 	}
 
-	public SadrzajApartmana getSadrzajAp() {
+	public List<SadrzajApartmana> getSadrzajAp() {
 		return sadrzajAp;
 	}
 
-	public void setSadrzajAp(SadrzajApartmana sadrzajAp) {
+	public void setSadrzajAp(List<SadrzajApartmana> sadrzajAp) {
 		this.sadrzajAp = sadrzajAp;
 	}
 
