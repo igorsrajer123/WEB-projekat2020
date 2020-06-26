@@ -1,6 +1,8 @@
 $(document).ready(function() {
     $('#PozPorApp').hide();
 
+    ucitajSadrzajApartmana();
+
     $.ajax({
 		type: 'GET',
 		url: 'rest/korisnik/getKorisnik',
@@ -59,6 +61,27 @@ function dodajApartman(korisnik) {
         }
     });
 } 
+
+function ucitajSadrzajApartmana(){
+
+    $.ajax({
+        type: 'GET',
+        url: 'rest/sadrzajApartmana/getSavSadrzaj',
+        complete: function(data){
+
+            let savSadrzaj = data.responseJSON;
+
+            let lista = $("#tabelaSadrzaj tbody");
+            lista.empty();
+
+            for(var i = 0; i < savSadrzaj.length; i++){
+                lista.append("<tr><td><input type='checkbox' id='" + savSadrzaj[i].id +"'>" + 
+                                     "<label for='"+ savSadrzaj[i].id + "'>"+ savSadrzaj[i].item + "</label></td></tr>");
+                $("#tabelaSadrzaj").append(lista);
+            }
+        }
+    })
+}
 
 function readURL(input){
     if (input.files && input.files[0]) {
