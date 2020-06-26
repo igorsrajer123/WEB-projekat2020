@@ -37,6 +37,25 @@ public class SadrzajApartmanaDAO {
 		return listaSadrzaja;
 	}
 	
+	public void ukloniStavku(int id) {
+		for(SadrzajApartmana s : listaSadrzaja) {
+			if(s.getId() == id) {
+				s.setUklonjen(true);
+				break;
+			}
+		}
+	}
+	
+	//dobija stavku po njenom id-ju
+	public SadrzajApartmana getStavku(int id) {
+		for(SadrzajApartmana s : listaSadrzaja) {
+			if(s.getId() == id) {
+				return s;
+			}
+		}
+		return null;
+	}
+	
 	public void ucitajSadrzajApartmana() throws FileNotFoundException, IOException{
 		ObjectMapper mapper = new ObjectMapper();
 

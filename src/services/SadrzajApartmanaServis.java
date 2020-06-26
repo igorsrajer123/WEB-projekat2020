@@ -8,7 +8,9 @@ import javax.servlet.ServletContext;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
@@ -69,5 +71,69 @@ public class SadrzajApartmanaServis {
 		
 		
 		return Response.ok().build();
+	}
+	
+	@PUT
+	@Path("/ukloniSadrzaj/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response ukloniItem(@PathParam("id") int id) {
+		
+		SadrzajApartmanaDAO dao = (SadrzajApartmanaDAO) ctx.getAttribute("sadrzajApartmanaDAO");
+		
+		if(dao == null) {
+			return Response.status(500).build();
+		}
+		
+		dao.ukloniStavku(id);	
+		dao.sacuvajSadrzajApartmana();
+		
+		return Response.ok().build();
+	}
+	
+	@PUT
+	@Path("/izmeniSadrzaj/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response izmeniItem(SadrzajApartmana s, @PathParam("id") int id) {
+		
+		SadrzajApartmanaDAO dao = (SadrzajApartmanaDAO) ctx.getAttribute("sadrzajApartmanaDAO");
+		
+		if(dao == null) {
+			return Response.status(500).build();
+		}
+		
+		ArrayList<SadrzajApartmana> lista = dao.getCeoSadrzaj();
+		
+		for(SadrzajApartmana s1 : lista) {
+			if(id == s1.getId()) {
+				System.out.println(s1.toString());
+				s1.setItem(s.getItem());
+				System.out.println(s1.toString());
+				break;
+			}
+		}
+		
+		dao.sacuvajSadrzajApartmana();
+		return Response.ok().build();
+	}
+	
+	@GET
+	@Path("/getStavku/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public SadrzajApartmana getStavku(@PathParam("id") int id) {
+		
+		SadrzajApartmanaDAO dao = (SadrzajApartmanaDAO)ctx.getAttribute("sadrzajApartmanaDAO");
+		
+		if(dao == null)
+			return null;
+		
+		SadrzajApartmana s = dao.getStavku(id);
+		
+		if(s != null) {
+			return s;
+		}else {
+			return s;
+		}
 	}
 }

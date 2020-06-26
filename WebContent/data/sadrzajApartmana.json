@@ -1,10 +1,13 @@
 [{
 	"id": 111,
-	"item": "Ves masina"
+	"item": "Ves masina",
+	"uklonjen": "false"
 },{
 	"id": 222,
-	"item": "Klima uredjaj"
+	"item": "Klima uredjaj",
+	"uklonjen": "false"
 },{
 	"id": 333,
-	"item": "Garaza"
+	"item": "Garaza",
+	"uklonjen": "false"
 }]

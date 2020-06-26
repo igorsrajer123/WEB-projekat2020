@@ -18,11 +18,36 @@ $(document).ready(function(){
 
             let lista = $("#sadrzajApartmana tbody");
             lista.empty();
-
             for(var i = 0; i < savSadrzaj.length; i++){
-                lista.append("<tr><td>"+ savSadrzaj[i].id + "</td><td>"+ savSadrzaj[i].item + "</td><td>"+
-                    "<button> Izmeni </button></td><td><button> Obriši </button></td></tr>");
-                $("#sadrzajApartmana").append(lista);
+                if(savSadrzaj[i].uklonjen == false){
+
+                    lista.append("<tr><td>"+ savSadrzaj[i].id + "</td><td>"+ savSadrzaj[i].item + "</td><td>"+
+                    "<button onclick='funkcija("+ savSadrzaj[i].id + "); return false;'> Izmeni </button></td><td><button id='" + savSadrzaj[i].id + "'> Obriši </button></td></tr>");
+
+                    let id = savSadrzaj[i].id;
+
+                    document.getElementById(savSadrzaj[i].id).onclick = function fun(){
+                        $.ajax({
+                            type: 'PUT',
+                            url: 'rest/sadrzajApartmana/ukloniSadrzaj/'+ id,
+                            complete: function(data){
+
+                                if(data["status"] == 200){
+                                    alert("Uspesno uklonjeno!");
+                                    window.location.href = "dodajNoviSadrzaj.html";
+                                }else{
+                                    alert("Doslo je do greske!")
+                                }
+                            }
+                        })
+                    }
+
+                    $("#sadrzajApartmana").append(lista);
+                }else if(savSadrzaj[i].uklonjen == true){
+                    lista.append("<tr style='background-color:red'><td>"+ savSadrzaj[i].id + "</td><td>"+ savSadrzaj[i].item + "</td>"+
+                    "<td>------</td><td> UKLONJENO </td></tr>");
+                    $("#sadrzajApartmana").append(lista);
+                }
             }
         }
     })
@@ -53,7 +78,6 @@ $(document).ready(function(){
         }
 
         if(nazivDobar == true && idDobar == true){
-            alert("Sve je dobro!!!!");
 
             let podaci = { 
                 "id": $("#IdStavke").val(),
@@ -61,7 +85,6 @@ $(document).ready(function(){
             }
 
             let s = JSON.stringify(podaci);
-            alert(s);
 
             $.ajax({
                 type: 'POST',
@@ -82,3 +105,7 @@ $(document).ready(function(){
         }
     })
 });
+
+function funkcija(id){
+    window.location.href = "izmenaStavkeSadrzaja.html?id="+ id;
+}
