@@ -59,7 +59,7 @@ function dodatneOpcije(korisnik){
 
 	if(korisnik.uloga == "Administrator"){
 		$("#acc_buttons").append("<button type='submit' id='korisnici_Btn' onclick=pregledKorisnika()>Pregled korisnika </button> <br/>");
-
+		$("#acc_buttons").append("<button type='submit' id='sadrzaj_Btn' onclick=pregledSadrzajaApartmana()> Pregled sadržaja apartmana </button><br/>");
 	}else if(korisnik.uloga == "Gost"){
 		$("#acc_buttons").append("<button type='submit' id='dodajApp_Btn' onclick=dodajApartman()>Dodaj Apartman </button> <br/>");
 		$("#acc_buttons").append("<button type='submit' id='rezervacije' onclick=pregledRezervacija()> Moje rezervacije </button> <br/>");
@@ -102,6 +102,11 @@ function pregledKorisnika(){
 
 function dodajApartman() {
 	window.location.href = "dodajApartman.html";
+}
+
+
+function pregledSadrzajaApartmana(){
+	window.location.href = "dodajNoviSadrzaj.html";
 }
 
 function pozdravPoruka(korisnik) {
@@ -226,5 +231,4 @@ function prikazApartmana(korisnik) {
 	}
 
 }
-
 

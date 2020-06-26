@@ -1,0 +1,48 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title> Pregled dostupnih sadrzaja</title>
+    <script src="javascript/jquery-3.3.1.min.js"></script>
+    <script src="javascript/dodajNoviSadrzaj.js"></script>
+</head>
+<body>
+    <h2> Pregled mogućeg sadržaja apartmana </h2>
+
+    <form>
+        <table id="sadrzajApartmana">
+            <thead>
+                <tr>
+                    <td><b> ID </b></td>
+                    <td><b> Naziv </b></td>
+                    <td> </td>
+                    <td> </td>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </form>
+
+    <h3> Dodaj novu stavku </h3>
+
+    <form>
+        <table>
+            <tr>
+                <td> <label> Id stavke: </label></td>
+                <td> <input type="text" id="IdStavke" /></td>
+                <td> <label id="idPoruka" style="color:red"> Polje prazno! </label></td>
+            </tr>
+            <tr>
+                <td> <label> Naziv stavke: </label></td>
+                <td> <input type="text" id="nazivStavke" /></td>
+                <td> <label id="nazivPoruka" style="color:red"> Polje prazno! </label></td>
+            </tr>
+            <tr>
+                <td> <button id="dodajStavku"> Dodaj </button></td>
+                <td> <button id="odustani"> Odustani </button></td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>

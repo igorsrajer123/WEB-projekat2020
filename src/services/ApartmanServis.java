@@ -296,6 +296,7 @@ public class ApartmanServis {
 			}
 		}
 		
+		dao.sacuvajApartmane();
 		return Response.ok().build();
 	}
 

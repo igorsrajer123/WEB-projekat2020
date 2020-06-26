@@ -22,7 +22,7 @@ public class Apartman {
 	private String vrZaPrijavu;
 	private String vrZaOdjavu;
 	private Status status;
-	private List<SadrzajApartmana> sadrzajAp;
+	private ArrayList<SadrzajApartmana> sadrzajAp;
 	private List<Rezervacija> rezervacije;
 	
 	private Boolean uklonjen = false;
@@ -34,7 +34,7 @@ public class Apartman {
 	}
 	
 	public Apartman(Tip tip, int brSoba, int brGostiju, Lokacija lokacija, String datum, Domacin d,
-						String slika, SadrzajApartmana sadrzaj, double cena, Boolean uklonjen, String id) {							
+						String slika, ArrayList<SadrzajApartmana> sadrzaj, double cena, Boolean uklonjen, String id) {							
 		super();
 		this.tip = tip;
 		this.brSoba = brSoba;
@@ -168,11 +168,11 @@ public class Apartman {
 		this.status = status;
 	}
 
-	public List<SadrzajApartmana> getSadrzajAp() {
+	public ArrayList<SadrzajApartmana> getSadrzajAp() {
 		return sadrzajAp;
 	}
 
-	public void setSadrzajAp(List<SadrzajApartmana> sadrzajAp) {
+	public void setSadrzajAp(ArrayList<SadrzajApartmana> sadrzajAp) {
 		this.sadrzajAp = sadrzajAp;
 	}
 
