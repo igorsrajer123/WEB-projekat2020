@@ -71,10 +71,6 @@ public class ApartmanServis {
 		}
 	}
 	
-	/*public ArrayList<Apartman> getApartmaneDomacina() {
-		ApartmanDAO apartmani = (ApartmanDAO) ctx.getAttribute("apartmanDAO");
-		
-	}*/
 	
 	//vraca bilo aktivan ili neaktivan apartman po idju
 	@GET
@@ -249,8 +245,10 @@ public class ApartmanServis {
 	
 		System.out.println(d.getApartmani());
 		d.dodajApartman(a);
+	
 		System.out.println(d.getApartmani());
 		apartmani.dodajApartman(a);
+		System.out.println(apartmani.getSveApartmane() + "JEL  IMA SAVARINOG OVDEEE?");
 		
 		apartmani.sacuvajApartmane();
 		korisnici.sacuvajKorisnika();
