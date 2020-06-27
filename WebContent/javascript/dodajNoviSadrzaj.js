@@ -24,14 +24,13 @@ $(document).ready(function(){
                     lista.append("<tr><td>"+ savSadrzaj[i].id + "</td><td>"+ savSadrzaj[i].item + "</td><td>"+
                     "<button onclick='funkcija("+ savSadrzaj[i].id + "); return false;'> Izmeni </button></td><td><button id='" + savSadrzaj[i].id + "'> Obriši </button></td></tr>");
 
-                    let id = savSadrzaj[i].id;
-
+                    let id1 = savSadrzaj[i].id;
                     document.getElementById(savSadrzaj[i].id).onclick = function fun(){
                         $.ajax({
                             type: 'PUT',
-                            url: 'rest/sadrzajApartmana/ukloniSadrzaj/'+ id,
+                            url: 'rest/sadrzajApartmana/ukloniSadrzaj/'+ id1,
                             complete: function(data){
-
+                                
                                 if(data["status"] == 200){
                                     alert("Uspesno uklonjeno!");
                                     window.location.href = "dodajNoviSadrzaj.html";

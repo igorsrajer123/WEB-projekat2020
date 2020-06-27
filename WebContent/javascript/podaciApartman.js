@@ -134,11 +134,22 @@ function ucitajSadrzajApartmana(){
             lista.empty();
 
             for(var i = 0; i < savSadrzaj.length; i++){
-                lista.append("<tr><td><input type='checkbox' id='" + savSadrzaj[i].id +"'>" + 
-                                     "<label for='"+ savSadrzaj[i].id + "'>"+ savSadrzaj[i].item + "</label></td></tr>");
-                $("#tabelaSadrzaj").append(lista);
+                if(savSadrzaj[i].uklonjen == false){
+                    lista.append("<tr><td><input type='checkbox' onclick=ucitajCekiranSadrzaj('"+ savSadrzaj[i].id + "') id='" + savSadrzaj[i].id +"'>" + 
+                                        "<label for='"+ savSadrzaj[i].id + "'>"+ savSadrzaj[i].item + "</label></td></tr>");
+                    $("#tabelaSadrzaj").append(lista);
+                }
             }
         }
     })
+}
+
+var cekiraniSadrzaj = new Array();
+
+function ucitajCekiranSadrzaj(id){
+
+    if(document.getElementById(id).checked){
+        cekiraniSadrzaj.push(id);
+    }
 }
 

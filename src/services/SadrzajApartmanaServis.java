@@ -82,6 +82,7 @@ public class SadrzajApartmanaServis {
 		SadrzajApartmanaDAO dao = (SadrzajApartmanaDAO) ctx.getAttribute("sadrzajApartmanaDAO");
 		
 		if(dao == null) {
+			System.out.println("neradi!");
 			return Response.status(500).build();
 		}
 		

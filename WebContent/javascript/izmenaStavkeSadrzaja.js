@@ -40,7 +40,7 @@ $(document).ready(function(){
             complete: function(data){
                 if (data["status"] == 200) {
                     alert("Izmene uspesne!");
-                    window.location.href = "dodajNoviSadrzaj";
+                    window.location.href = "dodajNoviSadrzaj.html";
                 } else {
                     alert("Doslo je do greske!");
                 }
