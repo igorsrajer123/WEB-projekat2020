@@ -1,4 +1,5 @@
 $(document).ready(function() {
+
     $('#PozPorApp').hide();
 
     ucitajSadrzajApartmana();
@@ -30,13 +31,22 @@ function pozdravPorukaApp(korisnik) {
 }
 
 function dodajApartman(korisnik) {
+    alert($('#datumZaIzdOD').val());
+    alert($('#datumZaIzdDO').val());
+    var datumOD = new Date($('#datumZaIzdOD').val());
+    var datumDO = new Date($('#datumZaIzdDO').val());
+    
+    var datumiZaIzdavanjeList = getDates(datumOD, datumDO);
+    alert(datumiZaIzdavanjeList);
     let podaci  = {
         "brSoba": $('#brSoba').val(),
         "brGostiju": $('#brGostiju').val(),
         "tip": $('#tip option:selected').text(),
         "cenaPoNoci": $('#cena').val(),
         "slika": $('#blah').val(),
-        "domacin": korisnik.korisnicko_ime
+        "domacin": korisnik.korisnicko_ime,
+        "datumiZaIzdavanje": datumiZaIzdavanjeList,
+        "dostupnostPoDatumima": datumiZaIzdavanjeList
     }
     alert("Lokacija: " + lokacija);
 
@@ -97,4 +107,20 @@ function readURL(input){
 
         reader.readAsDataURL(input.files[0]);
     }
+}
+
+Date.prototype.addDays = function(days) {
+    var date = new Date(this.valueOf());
+    date.setDate(date.getDate() + days);
+    return date;
+}
+
+function getDates(startDate, stopDate) {
+    var dateArray = new Array();
+    var currentDate = startDate;
+    while (currentDate <= stopDate) {
+        dateArray.push(new Date (currentDate));
+        currentDate = currentDate.addDays(1);
+    }
+    return dateArray;
 }

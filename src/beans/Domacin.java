@@ -27,8 +27,13 @@ public class Domacin extends Korisnik {
 	}
 
 	public ArrayList<Apartman> getApartmani() {
-		return apartmani;
+		
+		return apartmani; 
+			
+		
 	}
+	
+	
 
 	public void setApartmani(ArrayList<Apartman> apartmani) {
 		this.apartmani = apartmani;
