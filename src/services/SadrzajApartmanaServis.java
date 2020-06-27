@@ -16,7 +16,9 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import beans.Apartman;
 import beans.SadrzajApartmana;
+import dao.ApartmanDAO;
 import dao.SadrzajApartmanaDAO;
 
 @Path("sadrzajApartmana")
@@ -92,6 +94,7 @@ public class SadrzajApartmanaServis {
 		return Response.ok().build();
 	}
 	
+	//menja sadrzaj 1 apartmana(salje se id apartmana)
 	@PUT
 	@Path("/izmeniSadrzaj/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -136,5 +139,23 @@ public class SadrzajApartmanaServis {
 		}else {
 			return s;
 		}
+	}
+	
+	//prosledjujemo id apartmana od kog trazimo sadrzaj
+	@GET
+	@Path("/getSadrzajJednog/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ArrayList<SadrzajApartmana> getSadrzajJednog(@PathParam("id") String id){
+
+		ApartmanDAO dao = (ApartmanDAO) ctx.getAttribute("apartmanDAO");
+		
+		if(dao == null) 
+			return null;
+		
+		Apartman a = dao.getPoIdApartmana(id);
+		System.out.println("ID TRAZENOG APARTMANA: " + a.getIdApartmana());
+		
+		
+		return a.getSadrzajAp();
 	}
 }

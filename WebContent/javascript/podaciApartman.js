@@ -1,6 +1,17 @@
+var cekiraniSadrzaj = new Array();
+var podaciSadrzaj = [];
+
 $(document).ready(function(){
 
     var number = getUrlVars()["idApartmana"];
+
+    $.ajax({
+		type: 'GET',
+		url: 'rest/korisnik/getKorisnik',
+		complete: function(data){
+			pomocnaFunkcija(data.responseJSON);
+		}		
+	})
 
     ucitajSadrzajApartmana();
 
@@ -76,12 +87,27 @@ $(document).ready(function(){
             cenaIspravna = true;
         }
 
+        postavljanjeSadrzaja();
+        alert(podaciSadrzaj);
+
         if(brGostijuIspravan == true && brSobaIspravan == true && cenaIspravna == true){
-            alert("Sve isprano!");
+
+            podaciZaSlanje = { 
+                "brSoba": brSobaApartmana,
+                "brGostiju": brGostijuApartmana,
+                "cenaPoNoci": cenaApartmana,
+                "sadrzajAp": podaciSadrzaj
+            }
+
+            var d = JSON.stringify(podaciZaSlanje);
+            alert(d);
 
             $.ajax({
                 type: 'PUT',
-                url: 'rest/apartman/izmeniApartman/'+number+'/'+statusApartmana+'/'+brSobaApartmana+'/'+brGostijuApartmana+'/'+cenaApartmana,
+                url: 'rest/apartman/izmeniApartman/'+number,
+                data: d,
+                contentType: 'application/json',
+                dataType: 'json',
                 complete: function(data){
 
                     if(data["status"] == 200){
@@ -144,12 +170,57 @@ function ucitajSadrzajApartmana(){
     })
 }
 
-var cekiraniSadrzaj = new Array();
-
 function ucitajCekiranSadrzaj(id){
 
     if(document.getElementById(id).checked){
         cekiraniSadrzaj.push(id);
+    }if(!document.getElementById(id).checked){
+        var index = $.inArray(id,cekiraniSadrzaj);
+        if(index != -1){
+            cekiraniSadrzaj.splice(index, 1);
+            alert(cekiraniSadrzaj);
+        }
+    }
+}
+
+function postavljanjeSadrzaja(){
+
+    $.ajax({
+        type: 'GET',
+        url: 'rest/sadrzajApartmana/getSavSadrzaj',
+        complete: function(data){
+
+            let savSadrzaj = data.responseJSON;
+
+            for(var i = 0; i < savSadrzaj.length; i++){
+                for(var j = 0; j < cekiraniSadrzaj.length; j++){
+                    if(cekiraniSadrzaj[j] == savSadrzaj[i].id){
+                        alert(cekiraniSadrzaj[j] + "PRONADJEN!");
+                        jednaStavka  = { 
+                                        "id": savSadrzaj[i].id,
+                                        "item": savSadrzaj[i].item,
+                                         "uklonjen": false
+                                        }
+                        podaciSadrzaj.push(jednaStavka);
+                    }
+                }
+            }
+        }
+    })
+}
+
+function pomocnaFunkcija(korisnik){
+    if(korisnik == undefined){
+        alert("Nedostupan sadrzaj!");
+        window.location.href = "index.html";
+
+    }else if(korisnik.uloga == 'Gost'){
+        alert("Nedostupan sadrzaj!");
+        window.location.href = "index.html";
+
+    }else if(korisnik.uloga == 'Domacin'){
+        alert("Nedostupan sadrzaj!");
+        window.location.href = "index.html";
     }
 }
 

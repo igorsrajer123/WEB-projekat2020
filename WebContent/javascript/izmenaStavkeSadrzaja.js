@@ -9,7 +9,7 @@ $(document).ready(function(){
 
         window.location.href = "dodajNoviSadrzaj.html";
     })
-    
+
     $.ajax({
         type: 'GET',
         url: 'rest/sadrzajApartmana/getStavku/'+ idStavke,
@@ -47,6 +47,14 @@ $(document).ready(function(){
             }
         })
     })
+
+    $.ajax({
+		type: 'GET',
+		url: 'rest/korisnik/getKorisnik',
+		complete: function(data){
+			pomocnaFunkcija(data.responseJSON);
+		}		
+	})
 });
 
 //fja za uzimanje parametra iz url-a koji smo prethodno poslali
@@ -56,4 +64,19 @@ function getUrlVars() {
         vars[key] = value;
     });
     return vars;
+}
+
+function pomocnaFunkcija(korisnik){
+    if(korisnik == undefined){
+        alert("Nedostupan sadrzaj!");
+        window.location.href = "index.html";
+
+    }else if(korisnik.uloga == 'Gost'){
+        alert("Nedostupan sadrzaj!");
+        window.location.href = "index.html";
+       
+    }else if(korisnik.uloga == 'Domacin'){
+        alert("Nedostupan sadrzaj!");
+        window.location.href = "index.html";
+    }
 }

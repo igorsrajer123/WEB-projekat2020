@@ -280,30 +280,27 @@ public class ApartmanServis {
 	}
 	
 	@PUT
-	@Path("/izmeniApartman/{id}/{status}/{brSoba}/{brGostiju}/{cenaPoNoci}")
+	@Path("/izmeniApartman/{id}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response izmeniApartman(@PathParam("id") String id, @PathParam("status") String status,
-									@PathParam("brSoba") int brSoba, @PathParam("brGostiju") int brGostiju,
-								    @PathParam("cenaPoNoci") double cenaPoNoci){//, @MatrixParam("sadrzajAp") ArrayList<SadrzajApartmana> sadrzajAp) {
+	public Response izmeniApartman(Apartman a, @PathParam("id") String id) {
 		
 		ApartmanDAO dao = (ApartmanDAO) ctx.getAttribute("apartmanDAO");
 		
 		if(dao == null)
-			return null;
+			return Response.status(500).build();
 		
-		//sadrzajAp = new ArrayList<SadrzajApartmana>(null);
 		ArrayList<Apartman> lista = dao.getSveApartmane();
 		
-		Apartman.Status statusEnum = Apartman.Status.valueOf(status);
-		
-		for(Apartman a : lista) {
-			if(a.getIdApartmana().equals(id)) {
-				a.setStatus(statusEnum);
-				a.setBrSoba(brSoba);
-				a.setBrGostiju(brGostiju);
-				a.setCenaPoNoci(cenaPoNoci);
-				//a.setSadrzajAp(sadrzajAp);
+		for(Apartman app : lista) {
+			if(app.getIdApartmana().equals(id)) {
+				app.setStatus(a.getStatus());
+				app.setBrSoba(a.getBrSoba());
+				app.setBrGostiju(a.getBrGostiju());
+				app.setCenaPoNoci(a.getCenaPoNoci());
+				app.setSadrzajAp(a.getSadrzajAp());
+				System.out.println("Izmenjen apartman: " + app.toString());
+				break;
 			}
 		}
 		

@@ -3,63 +3,13 @@ $(document).ready(function(){
     document.getElementById("pretraga").hidden = true;
 
     $.ajax({
-        type: 'GET',
-        url: 'rest/korisnik/getSveKorisnike',
-        complete: function(data){
-
-            let korisnici = data.responseJSON;
-
-            let lista = $("#korisniciTabela tbody");
-            lista.empty();
-
-            console.log(korisnici.length);
-
-            for(var i = 0; i < korisnici.length;i++){
-				if(korisnici[i].uloga == "Administrator"){
-					 lista.append("<tr><td>" + korisnici[i].korisnicko_ime + "</td>"
-                   + "<td>" + korisnici[i].lozinka + "</td> " + "<td>" 
-                   + korisnici[i].ime + "</td>" + "<td>" + korisnici[i].prezime + "</td>"
-                   + "<td>" + korisnici[i].pol + "</td>" + "<td>" + korisnici[i].uloga 
-                   + "</td>" + "<td></td>" );
-                $("#korisniciTabela").append(lista);
-                }else if(korisnici[i].uloga == "Domacin"){
-                    lista.append("<tr><td>" + korisnici[i].korisnicko_ime + "</td>"
-                    + "<td>" + korisnici[i].lozinka + "</td> " + "<td>" 
-                    + korisnici[i].ime + "</td>" + "<td>" + korisnici[i].prezime + "</td>"
-                    + "<td>" + korisnici[i].pol + "</td>" + "<td>" + korisnici[i].uloga 
-                    + "</td>" + "<td></td>" );
-                 $("#korisniciTabela").append(lista);
-                }else { 
-				 	lista.append("<tr><td>" + korisnici[i].korisnicko_ime + "</td>"
-                    + "<td>" + korisnici[i].lozinka + "</td> " + "<td>" 
-                    + korisnici[i].ime + "</td>" + "<td>" + korisnici[i].prezime + "</td>"
-                    + "<td>" + korisnici[i].pol + "</td>" + "<td>" + korisnici[i].uloga 
-                    + "</td>" + "<td><button id='"+ korisnici[i].korisnicko_ime + "'> Ažuriraj ulogu</button></td>");
-                    
-                    let korisnicko = korisnici[i].korisnicko_ime;
-
-                    document.getElementById(korisnici[i].korisnicko_ime).onclick = function fun(){
-                        $.ajax({
-                            type: 'PUT',
-                            url: 'rest/korisnik/azurirajUlogu/'+ korisnicko,
-                            complete: function(data){
-
-                                if(data["status"] == 200){
-                                    window.location.href = "pregledKorisnika.html";
-                                }else if(data["status"] == 500){
-                                    alert("Nece da moze!");
-                                }
-                            }
-                        })
-                    }
-
-                    $("#korisniciTabela").append(lista);
-				}
-            }
-        }
-
+		type: 'GET',
+		url: 'rest/korisnik/getKorisnik',
+		complete: function(data){
+			odrediKorisnika(data.responseJSON);
+		}		
     })
-
+    
     $("#prikazPretrage").click(function(event){
         event.preventDefault();
 
@@ -160,4 +110,81 @@ $(document).ready(function(){
             }
         })        
     })
+
+
+
 });
+
+function odrediKorisnika(korisnik){
+
+    if(korisnik == undefined){
+        alert("Nedostupan sadrzaj!");
+        window.location.href = "index.html";
+
+    }else if(korisnik.uloga == 'Gost'){
+        alert("Nedostupan sadrzaj!");
+        window.location.href = "index.html";
+
+    }else if(korisnik.uloga == 'Administrator'){
+        $.ajax({
+            type: 'GET',
+            url: 'rest/korisnik/getSveKorisnike',
+            complete: function(data){
+    
+                let korisnici = data.responseJSON;
+    
+                let lista = $("#korisniciTabela tbody");
+                lista.empty();
+    
+                console.log(korisnici.length);
+    
+                for(var i = 0; i < korisnici.length;i++){
+                    if(korisnici[i].uloga == "Administrator"){
+                         lista.append("<tr><td>" + korisnici[i].korisnicko_ime + "</td>"
+                       + "<td>" + korisnici[i].lozinka + "</td> " + "<td>" 
+                       + korisnici[i].ime + "</td>" + "<td>" + korisnici[i].prezime + "</td>"
+                       + "<td>" + korisnici[i].pol + "</td>" + "<td>" + korisnici[i].uloga 
+                       + "</td>" + "<td></td>" );
+                    $("#korisniciTabela").append(lista);
+                    }else if(korisnici[i].uloga == "Domacin"){
+                        lista.append("<tr><td>" + korisnici[i].korisnicko_ime + "</td>"
+                        + "<td>" + korisnici[i].lozinka + "</td> " + "<td>" 
+                        + korisnici[i].ime + "</td>" + "<td>" + korisnici[i].prezime + "</td>"
+                        + "<td>" + korisnici[i].pol + "</td>" + "<td>" + korisnici[i].uloga 
+                        + "</td>" + "<td></td>" );
+                     $("#korisniciTabela").append(lista);
+                    }else { 
+                         lista.append("<tr><td>" + korisnici[i].korisnicko_ime + "</td>"
+                        + "<td>" + korisnici[i].lozinka + "</td> " + "<td>" 
+                        + korisnici[i].ime + "</td>" + "<td>" + korisnici[i].prezime + "</td>"
+                        + "<td>" + korisnici[i].pol + "</td>" + "<td>" + korisnici[i].uloga 
+                        + "</td>" + "<td><button id='"+ korisnici[i].korisnicko_ime + "'> Ažuriraj ulogu</button></td>");
+                        
+                        let korisnicko = korisnici[i].korisnicko_ime;
+    
+                        document.getElementById(korisnici[i].korisnicko_ime).onclick = function fun(){
+                            $.ajax({
+                                type: 'PUT',
+                                url: 'rest/korisnik/azurirajUlogu/'+ korisnicko,
+                                complete: function(data){
+    
+                                    if(data["status"] == 200){
+                                        window.location.href = "pregledKorisnika.html";
+                                    }else if(data["status"] == 500){
+                                        alert("Nece da moze!");
+                                    }
+                                }
+                            })
+                        }
+    
+                        $("#korisniciTabela").append(lista);
+                    }
+                }
+            }
+        })
+
+    }else if(korisnik.uloga == 'Domacin'){
+        alert("Nedostupan sadrzaj!");
+        window.location.href = "index.html";
+    }
+}

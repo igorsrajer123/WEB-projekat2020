@@ -12,7 +12,7 @@
     "vrZaPrijavu": "",
     "vrZaOdjavu": "",
     "status": "Aktivno",
-    "sadrzajAp": null,
+    "sadrzajAp": [],
     "rezervacije": [],
     "uklonjen": "false"
 },{
@@ -29,7 +29,7 @@
     "vrZaPrijavu": "",
     "vrZaOdjavu": "",
     "status": "Neaktivno",
-    "sadrzajAp": null,
+    "sadrzajAp": [],
     "rezervacije": [],
     "uklonjen": "false"
 }, {
@@ -46,7 +46,7 @@
     "vrZaPrijavu": "",
     "vrZaOdjavu": "",
     "status": "Aktivno",
-    "sadrzajAp": null,
+    "sadrzajAp": [],
     "rezervacije": [],
     "uklonjen": "false"
 }, {
@@ -63,7 +63,7 @@
     "vrZaPrijavu": "",
     "vrZaOdjavu": "",
     "status": "Neaktivno",
-    "sadrzajAp": null,
+    "sadrzajAp": [],
     "rezervacije": [],
     "uklonjen": "false"
 }]

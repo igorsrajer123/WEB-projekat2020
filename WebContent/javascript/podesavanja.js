@@ -114,9 +114,8 @@ function prikazApartmana(korisnik) {
 					+ "<td>" + apartmani[i].brSoba + "</td> " + "<td>" 
 					+ apartmani[i].brGostiju + "</td>" + "<td>" + apartmani[i].lokacija + "</td>"
 					+ "<td>" + apartmani[i].domacin + "</td>" + "<td>" + apartmani[i].cenaPoNoci
-					+ "</td>");// + "<td>" + apartmani[i].domacin + "<td>");
-					$("#apartmaniTabela").append(lista);
-						
+					+ "</td></tr>");
+					$("#apartmaniTabela").append(lista);		
 				}
 			}
 		});
@@ -136,7 +135,7 @@ function prikazApartmana(korisnik) {
 				$("#apartmaniTabela thead tr").append(red);
 			
            		for(var i = 0; i < apartmani.length;i++){
-					lista.append("<tr><td>" + i + "</td>"
+					lista.append("<tr id='" + apartmani[i].idApartmana + "' onclick=window.location.href='novaRezervacija.html?idApartmana=" +apartmani[i].idApartmana + "'><td>" + i + "</td>"
 					+ "<td>" + apartmani[i].brSoba + "</td> " + "<td>" 
 					+ apartmani[i].brGostiju + "</td>" + "<td>" + apartmani[i].lokacija + "</td>"
 					+ "<td>" + apartmani[i].domacin + "</td>" + "<td>" + apartmani[i].cenaPoNoci
