@@ -4,14 +4,14 @@ public class Adresa {
 
 	private String ulicaIBroj;
 	private String naseljenoMesto;
-	private String postanskiBrMesta;
+	private int postanskiBrMesta;
 	
 	public Adresa() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	
-	public Adresa(String ulicaIBroj, String naseljenoMesto, String postanskiBrMesta) {
+	public Adresa(String ulicaIBroj, String naseljenoMesto, int postanskiBrMesta) {
 		super();
 		this.ulicaIBroj = ulicaIBroj;
 		this.naseljenoMesto = naseljenoMesto;
@@ -34,11 +34,11 @@ public class Adresa {
 		this.naseljenoMesto = naseljenoMesto;
 	}
 
-	public String getPostanskiBrMesta() {
+	public int getPostanskiBrMesta() {
 		return postanskiBrMesta;
 	}
 
-	public void setPostanskiBrMesta(String postanskiBrMesta) {
+	public void setPostanskiBrMesta(int postanskiBrMesta) {
 		this.postanskiBrMesta = postanskiBrMesta;
 	}
 
