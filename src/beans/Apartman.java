@@ -15,7 +15,7 @@ public class Apartman {
 	private Lokacija lokacija;
 	private String datumZaIzdavanje;
 	private List<String> dostupnostPoDatumima;
-	private Domacin domacin;
+	private String domacin;
 	private Komentar komentar;
 	private String slika;//vise slika treba
 	private double cenaPoNoci;
@@ -33,7 +33,7 @@ public class Apartman {
 		this.status = Status.Aktivno;
 	}
 	
-	public Apartman(Tip tip, int brSoba, int brGostiju, Lokacija lokacija, String datum, Domacin d,
+	public Apartman(Tip tip, int brSoba, int brGostiju, Lokacija lokacija, String datum, String d,
 						String slika, ArrayList<SadrzajApartmana> sadrzaj, double cena, Boolean uklonjen, String id) {							
 		super();
 		this.tip = tip;
@@ -112,11 +112,11 @@ public class Apartman {
 		this.dostupnostPoDatumima = dostupnostPoDatumima;
 	}
 
-	public Domacin getDomacin() {
+	public String getDomacin() {
 		return domacin;
 	}
 
-	public void setDomacin(Domacin domacin) {
+	public void setDomacin(String domacin) {
 		this.domacin = domacin;
 	}
 

@@ -35,7 +35,8 @@ function dodajApartman(korisnik) {
         "brGostiju": $('#brGostiju').val(),
         "tip": $('#tip option:selected').text(),
         "cenaPoNoci": $('#cena').val(),
-        "slika": $('#blah').val()
+        "slika": $('#blah').val(),
+        "domacin": korisnik.korisnicko_ime
     }
     alert("Lokacija: " + lokacija);
 

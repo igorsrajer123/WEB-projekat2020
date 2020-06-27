@@ -5,27 +5,32 @@ import java.util.List;
 
 public class Domacin extends Korisnik {
 
-	private List<Apartman> apartmani;
+	private ArrayList<Apartman> apartmani = new ArrayList<Apartman>();
 	
 	public Domacin() {
 		super();
 	}
 	
+	public Domacin(Korisnik k) {
+		super();
+		this.apartmani = apartmani;
+	}
+	
 	public Domacin(String korisnickoIme, String lozinka) {
 		super(korisnickoIme, lozinka);
-		apartmani = new ArrayList<Apartman>();
+		//apartmani = new ArrayList<Apartman>();
 	}
 	
 	public Domacin(String ki, String loz, String ime, String prz, String pol) {
 		super(ki, loz, ime, prz, pol, Uloga.Domacin);
-		apartmani = new ArrayList<Apartman>();
+		//apartmani = new ArrayList<Apartman>();
 	}
 
-	public List<Apartman> getApartmani() {
+	public ArrayList<Apartman> getApartmani() {
 		return apartmani;
 	}
 
-	public void setApartmani(List<Apartman> apartmani) {
+	public void setApartmani(ArrayList<Apartman> apartmani) {
 		this.apartmani = apartmani;
 	}
 	

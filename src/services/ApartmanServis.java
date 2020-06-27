@@ -7,7 +7,6 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
-import javax.ws.rs.MatrixParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
@@ -18,8 +17,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import beans.Apartman;
+import beans.Domacin;
 import beans.Korisnik;
-import beans.SadrzajApartmana;
 import dao.ApartmanDAO;
 import dao.KorisnikDAO;
 
@@ -72,6 +71,11 @@ public class ApartmanServis {
 		}
 	}
 	
+	/*public ArrayList<Apartman> getApartmaneDomacina() {
+		ApartmanDAO apartmani = (ApartmanDAO) ctx.getAttribute("apartmanDAO");
+		
+	}*/
+	
 	//vraca bilo aktivan ili neaktivan apartman po idju
 	@GET
 	@Path("/getBiloKojiApartman/{idApartmana}")
@@ -101,6 +105,14 @@ public class ApartmanServis {
 		
 		System.out.println(dao.getAktivne() + "AKTIVNIIIIIIIIIIIAAAAAAAAAAAAAAAAAA");
 		return dao.getAktivne();
+	}
+	@GET
+	@Path("/getApartmaneDomacina")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ArrayList<Apartman> getApartmaneDomacina(@Context HttpServletRequest rq) {
+		Domacin d = (Domacin) rq.getSession().getAttribute("korisnik");
+		return d.getApartmani();
+		
 	}
 	
 	//vraca aktivne apartmane
@@ -231,15 +243,14 @@ public class ApartmanServis {
 		ApartmanDAO apartmani = (ApartmanDAO) ctx.getAttribute("apartmanDAO");
 		KorisnikDAO korisnici = (KorisnikDAO) ctx.getAttribute("korisnikDAO");
 		
-		Korisnik korisnik = (Korisnik) rq.getSession().getAttribute("korisnik");
-		System.out.println(korisnik);
-		
-		System.out.println(korisnik.getKorisnicko_ime() + "OVAJ sALJE APARTMAN");
-		
+		Domacin d = (Domacin) rq.getSession().getAttribute("korisnik");
+		System.out.println(d.getKorisnicko_ime());
+		a.setDomacin(d.getKorisnicko_ime());
+	
+		System.out.println(d.getApartmani());
+		d.dodajApartman(a);
+		System.out.println(d.getApartmani());
 		apartmani.dodajApartman(a);
-		//domacin.dodajApartman(a);
-		
-		//a.setDomacin(domacin);
 		
 		apartmani.sacuvajApartmane();
 		korisnici.sacuvajKorisnika();

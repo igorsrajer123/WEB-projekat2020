@@ -19,6 +19,7 @@ import javax.ws.rs.core.Response;
 import beans.Domacin;
 import beans.Gost;
 import beans.Korisnik;
+import beans.Korisnik.Uloga;
 import dao.KorisnikDAO;
 
 @Path("korisnik")

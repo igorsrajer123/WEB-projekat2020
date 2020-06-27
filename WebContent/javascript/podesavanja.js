@@ -1,28 +1,7 @@
 $(document).ready(function(){
 	$('#pozdravPor').hide();
 
-	$.ajax({
-		type: 'GET',
-		url: 'rest/apartman/getAktivneApartmane',
-		complete: function(data) {
-			let apartmani = data.responseJSON;
 
-			let lista = $("#apartmaniTabela tbody");
-			lista.empty();
-			
-			console.log(apartmani.length);
-		
-			   for(var i = 0; i < apartmani.length;i++){
-				lista.append("<tr><td>" + i + "</td>"
-				+ "<td>" + apartmani[i].brSoba + "</td> " + "<td>" 
-				+ apartmani[i].brGostiju + "</td>" + "<td>" + apartmani[i].lokacija + "</td>"
-				+ "<td>" + apartmani[i].domacin + "</td>" + "<td>" + apartmani[i].cenaPoNoci
-				+ "</td>");
-				$("#apartmaniTabela").append(lista);
-					
-			}
-		}
-	});
 
 	$.ajax({
 		type: 'GET',
@@ -61,9 +40,7 @@ function dodatneOpcije(korisnik){
 		$("#acc_buttons").append("<button type='submit' id='korisnici_Btn' onclick=pregledKorisnika()>Pregled korisnika </button> <br/>");
 		$("#acc_buttons").append("<button type='submit' id='sadrzaj_Btn' onclick=pregledSadrzajaApartmana()> Pregled sadržaja apartmana </button><br/>");
 	}else if(korisnik.uloga == "Gost"){
-		$("#acc_buttons").append("<button type='submit' id='dodajApp_Btn' onclick=dodajApartman()>Dodaj Apartman </button> <br/>");
 		$("#acc_buttons").append("<button type='submit' id='rezervacije' onclick=pregledRezervacija()> Moje rezervacije </button> <br/>");
-
 	}else if(korisnik.uloga == "Domacin"){
 		$("#acc_buttons").append("<button type='submit' id='dodajApp_Btn' onclick=dodajApartman()>Dodaj Apartman </button> <br/>");
 	}
@@ -137,7 +114,7 @@ function prikazApartmana(korisnik) {
 					+ "<td>" + apartmani[i].brSoba + "</td> " + "<td>" 
 					+ apartmani[i].brGostiju + "</td>" + "<td>" + apartmani[i].lokacija + "</td>"
 					+ "<td>" + apartmani[i].domacin + "</td>" + "<td>" + apartmani[i].cenaPoNoci
-					+ "</td>");
+					+ "</td>" + "<td>" + apartmani[i].domacin + "<td>");
 					$("#apartmaniTabela").append(lista);
 						
 				}
@@ -225,6 +202,32 @@ function prikazApartmana(korisnik) {
 							$("#apartmaniTabela").append(lista);	
 					   }
 
+				}
+			}
+		});
+	} else if (korisnik.uloga == 'Domacin') {
+		$.ajax({
+			type: 'GET',
+			url: 'rest/apartman/getApartmaneDomacina',
+			complete: function(data) {
+				let apartmani = data.responseJSON;
+
+				let lista = $("#apartmaniTabela tbody");
+				lista.empty();
+				
+				console.log(apartmani.length);
+
+				let red = "<td> </td>";
+				$("#apartmaniTabela thead tr").append(red);
+			
+           		for(var i = 0; i < apartmani.length;i++){
+					lista.append("<tr><td>" + i + "</td>"
+					+ "<td>" + apartmani[i].brSoba + "</td> " + "<td>" 
+					+ apartmani[i].brGostiju + "</td>" + "<td>" + apartmani[i].lokacija + "</td>"
+					+ "<td>" + apartmani[i].domacin + "</td>" + "<td>" + apartmani[i].cenaPoNoci
+					+ "</td>" + "<td>" + apartmani[i].domacin + "</td>" + "<td> <button id='" + apartmani[i].idApartmana + "'> Rezerviši </button></td> </tr>");
+					$("#apartmaniTabela").append(lista);
+					
 				}
 			}
 		});
