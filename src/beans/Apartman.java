@@ -36,7 +36,7 @@ public class Apartman {
 
 	public Apartman() {
 		super();
-		this.status = Status.Aktivno;
+		this.status = Status.Neaktivno;
 	}
 
 	public Apartman(Tip tip, int brSoba, int brGostiju, Lokacija lokacija, ArrayList<Date> datum, String d,
