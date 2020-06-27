@@ -93,6 +93,7 @@ $(document).ready(function(){
         if(brGostijuIspravan == true && brSobaIspravan == true && cenaIspravna == true){
 
             podaciZaSlanje = { 
+				"status": statusApartmana,
                 "brSoba": brSobaApartmana,
                 "brGostiju": brGostijuApartmana,
                 "cenaPoNoci": cenaApartmana,
@@ -218,9 +219,6 @@ function pomocnaFunkcija(korisnik){
         alert("Nedostupan sadrzaj!");
         window.location.href = "index.html";
 
-    }else if(korisnik.uloga == 'Domacin'){
-        alert("Nedostupan sadrzaj!");
-        window.location.href = "index.html";
     }
 }
 

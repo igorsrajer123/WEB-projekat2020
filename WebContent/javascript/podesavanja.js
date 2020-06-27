@@ -221,13 +221,20 @@ function prikazApartmana(korisnik) {
 			
            		for(var i = 0; i < apartmani.length;i++){
 					let x = apartmani[i].uklonjen;   
-					alert(x);
 					if(!x){
 							lista.append("<tr><td>" + i + "</td>"
 							+ "<td>" + apartmani[i].brSoba + "</td> " + "<td>" 
 							+ apartmani[i].brGostiju + "</td>" + "<td>" + apartmani[i].lokacija + "</td>"
 							+ "<td>" + apartmani[i].domacin + "</td>" + "<td>" + apartmani[i].cenaPoNoci
 							+ "</td>"  + "<td> <button id='" + apartmani[i].idApartmana + "'> Izmeni </button></td> </tr>");
+							
+							let id = apartmani[i].idApartmana;
+
+							document.getElementById(apartmani[i].idApartmana).onclick =function fun(){
+								alert(id);
+								window.location.href = "podaciApartman.html?idApartmana="+ id;
+							}
+
 							$("#apartmaniTabela").append(lista);
 					}
 					   
