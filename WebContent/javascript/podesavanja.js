@@ -220,13 +220,17 @@ function prikazApartmana(korisnik) {
 				$("#apartmaniTabela thead tr").append(red);
 			
            		for(var i = 0; i < apartmani.length;i++){
-					lista.append("<tr><td>" + i + "</td>"
-					+ "<td>" + apartmani[i].brSoba + "</td> " + "<td>" 
-					+ apartmani[i].brGostiju + "</td>" + "<td>" + apartmani[i].lokacija + "</td>"
-					+ "<td>" + apartmani[i].domacin + "</td>" + "<td>" + apartmani[i].cenaPoNoci
-					+ "</td>"  + "<td> <button id='" + apartmani[i].idApartmana + "'> Rezerviši </button></td> </tr>");
-					$("#apartmaniTabela").append(lista);
-					
+					let x = apartmani[i].uklonjen;   
+					alert(x);
+					if(!x){
+							lista.append("<tr><td>" + i + "</td>"
+							+ "<td>" + apartmani[i].brSoba + "</td> " + "<td>" 
+							+ apartmani[i].brGostiju + "</td>" + "<td>" + apartmani[i].lokacija + "</td>"
+							+ "<td>" + apartmani[i].domacin + "</td>" + "<td>" + apartmani[i].cenaPoNoci
+							+ "</td>"  + "<td> <button id='" + apartmani[i].idApartmana + "'> Izmeni </button></td> </tr>");
+							$("#apartmaniTabela").append(lista);
+					}
+					   
 				}
 			}
 		});

@@ -106,9 +106,21 @@ public class ApartmanServis {
 	@Path("/getApartmaneDomacina")
 	@Produces(MediaType.APPLICATION_JSON)
 	public ArrayList<Apartman> getApartmaneDomacina(@Context HttpServletRequest rq) {
-		Domacin d = (Domacin) rq.getSession().getAttribute("korisnik");
-		return d.getApartmani();
 		
+		Domacin d = (Domacin) rq.getSession().getAttribute("korisnik");
+		
+		ApartmanDAO dao = (ApartmanDAO) ctx.getAttribute("apartmanDAO");
+		
+		ArrayList<Apartman> lista = dao.getSveApartmane();
+		ArrayList<Apartman> listaPunilacka = new ArrayList<Apartman>();
+		
+		for(Apartman a : lista) {
+			if(a.getDomacin().equals(d.getKorisnicko_ime())) {
+				listaPunilacka.add(a);
+			}
+		}
+		
+		return listaPunilacka;
 	}
 	
 	//vraca aktivne apartmane
@@ -274,6 +286,7 @@ public class ApartmanServis {
 		System.out.println("Apartman uspesno uklonjen!");
 		
 	
+		dao.sacuvajApartmane();
 		return Response.ok().build();
 	}
 	
@@ -304,6 +317,30 @@ public class ApartmanServis {
 		
 		dao.sacuvajApartmane();
 		return Response.ok().build();
+	}
+	
+	@GET
+	@Path("/getNeobrisaneApartmane")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ArrayList<Apartman> getNeobrisaneApartmane(){
+		
+		ApartmanDAO dao = (ApartmanDAO) ctx.getAttribute("apartmanDAO");
+		
+		if(dao == null ){
+			return null;
+		}
+		
+		ArrayList<Apartman> lista = dao.getSveApartmane();
+		
+		ArrayList<Apartman> nasaLista = new ArrayList<Apartman>();
+		
+		for(Apartman a : lista) {
+			if(!a.getUklonjen()) {
+				nasaLista.add(a);
+			}
+		}
+		
+		return nasaLista;
 	}
 
 }

@@ -27,7 +27,16 @@ public class Domacin extends Korisnik {
 	}
 
 	public ArrayList<Apartman> getApartmani() {
-		return apartmani;
+		
+		ArrayList<Apartman> lista = new ArrayList<Apartman>();
+		
+		for(Apartman a : apartmani) {
+			if(a.getUklonjen() == false) {
+				lista.add(a);
+			}
+		}
+		
+		return lista;
 	}
 
 	public void setApartmani(ArrayList<Apartman> apartmani) {
