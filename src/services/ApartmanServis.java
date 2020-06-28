@@ -310,6 +310,7 @@ public class ApartmanServis {
 				app.setBrGostiju(a.getBrGostiju());
 				app.setCenaPoNoci(a.getCenaPoNoci());
 				app.setSadrzajAp(a.getSadrzajAp());
+				app.setLokacija(a.getLokacija());
 				System.out.println("Izmenjen apartman: " + app.toString());
 				break;
 			}
@@ -318,29 +319,4 @@ public class ApartmanServis {
 		dao.sacuvajApartmane();
 		return Response.ok().build();
 	}
-	
-	@GET
-	@Path("/getNeobrisaneApartmane")
-	@Produces(MediaType.APPLICATION_JSON)
-	public ArrayList<Apartman> getNeobrisaneApartmane(){
-		
-		ApartmanDAO dao = (ApartmanDAO) ctx.getAttribute("apartmanDAO");
-		
-		if(dao == null ){
-			return null;
-		}
-		
-		ArrayList<Apartman> lista = dao.getSveApartmane();
-		
-		ArrayList<Apartman> nasaLista = new ArrayList<Apartman>();
-		
-		for(Apartman a : lista) {
-			if(!a.getUklonjen()) {
-				nasaLista.add(a);
-			}
-		}
-		
-		return nasaLista;
-	}
-
 }

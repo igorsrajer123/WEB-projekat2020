@@ -5,8 +5,6 @@ $(document).ready(function() {
 
     $('#PozPorApp').hide();
 
-    ucitajSadrzajApartmana();
-
     $.ajax({
 		type: 'GET',
 		url: 'rest/korisnik/getKorisnik',
@@ -21,7 +19,9 @@ $(document).ready(function() {
                 let cena =  $('#cena').val();
             });
         }	
-	});
+    });
+    
+    ucitajSadrzajApartmana();
 });
 
 function pozdravPorukaApp(korisnik) {
@@ -134,9 +134,11 @@ function ucitajSadrzajApartmana(){
             lista.empty();
 
             for(var i = 0; i < savSadrzaj.length; i++){
-                lista.append("<tr><td><input type='checkbox' onclick=ucitajCekiranSadrzaj('"+ savSadrzaj[i].id + "') id='" + savSadrzaj[i].id +"'>" + 
-                                     "<label for='"+ savSadrzaj[i].id + "'>"+ savSadrzaj[i].item + "</label></td></tr>");
-                $("#tabelaSadrzaj").append(lista);
+                if(savSadrzaj[i].uklonjen == false){
+                    lista.append("<tr><td><input type='checkbox' onclick=ucitajCekiranSadrzaj('"+ savSadrzaj[i].id + "') id='" + savSadrzaj[i].id +"'>" + 
+                    "<label for='"+ savSadrzaj[i].id + "'>"+ savSadrzaj[i].item + "</label></td></tr>");
+                    $("#tabelaSadrzaj").append(lista);
+                }
             }
         }
     })

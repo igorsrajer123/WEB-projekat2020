@@ -1,6 +1,9 @@
 var cekiraniSadrzaj = new Array();
 var podaciSadrzaj = [];
 
+var podaciAdresa = {};
+var podaciLokacija = {};
+
 $(document).ready(function(){
 
     var number = getUrlVars()["idApartmana"];
@@ -57,6 +60,8 @@ $(document).ready(function(){
 
     $("#izmeniApp").click(function(event){
         event.preventDefault();
+
+        formirajAdresu();
 
         let statusApartmana = document.getElementById("statusLabela").textContent;
         let brSobaApartmana = document.getElementById("brSoba").value;
@@ -175,6 +180,7 @@ function ucitajCekiranSadrzaj(id){
 
     if(document.getElementById(id).checked){
         cekiraniSadrzaj.push(id);
+        alert(id);
     }if(!document.getElementById(id).checked){
         var index = $.inArray(id,cekiraniSadrzaj);
         if(index != -1){
@@ -220,5 +226,30 @@ function pomocnaFunkcija(korisnik){
         window.location.href = "index.html";
 
     }
+}
+
+function formirajAdresu(){
+
+    let ulicaBroj = $("#ulica").val();
+    let mesto = $("#mesto").val();
+    let postanskiBroj = $("#postanskiBroj").val();
+
+    podaciAdresa = {
+            "ulicaIBroj": ulicaBroj,
+            "naseljenoMesto": mesto,
+            "postanskiBrMesta": postanskiBroj
+        }
+}
+
+function sirinaDuzinaFunkcija(){
+
+    var precision1 = 100; // 2 decimals
+    var randomnum1 = Math.floor(Math.random() * (10 * precision1 - 1 * precision1) + 1 * precision1) / (1*precision1);
+
+    var precision2 = 100; // 2 decimals
+    var randomnum2 = Math.floor(Math.random() * (10 * precision2 - 1 * precision2) + 1 * precision2) / (1*precision2);
+
+    document.getElementById('geoSirina').innerHTML =  "<b>"+ randomnum1 + "</b>";
+    document.getElementById('geoDuzina').innerHTML = "<b>"+ randomnum2 + "</b>";
 }
 
