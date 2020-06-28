@@ -253,7 +253,7 @@ public class ApartmanServis {
 		
 		Domacin d = (Domacin) rq.getSession().getAttribute("korisnik");
 		System.out.println(d.getKorisnicko_ime());
-		a.setDomacin(d.getKorisnicko_ime());
+		
 	
 		System.out.println(d.getApartmani());
 		d.dodajApartman(a);
@@ -295,8 +295,8 @@ public class ApartmanServis {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response izmeniApartman(Apartman a, @PathParam("id") String id) {
-		
 		ApartmanDAO dao = (ApartmanDAO) ctx.getAttribute("apartmanDAO");
+		KorisnikDAO korisnici = (KorisnikDAO) ctx.getAttribute("korisnikDAO");
 		
 		if(dao == null)
 			return Response.status(500).build();

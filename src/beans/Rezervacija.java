@@ -1,11 +1,14 @@
 package beans;
 
+
+import java.util.Date;
+
 public class Rezervacija {
 	
 	public enum Status {Kreirana, Odbijena, Odustanak, Prihvacena, Zavrsena}
 	
 	private Apartman apartman;
-	private String pocetniDatum;
+	private Date pocetniDatum;
 	private int brNocenja;
 	private double ukCena;
 	private String poruka;
@@ -17,7 +20,7 @@ public class Rezervacija {
 		this.status = Status.Kreirana;
 	}	
 	
-	public Rezervacija(Apartman apartman, String pocetniDatum, int brNocenja, double ukCena, String poruka, Gost gost,
+	public Rezervacija(Apartman apartman, Date pocetniDatum, int brNocenja, double ukCena, String poruka, Gost gost,
 			Status status) {
 		super();
 		this.apartman = apartman;
@@ -37,11 +40,11 @@ public class Rezervacija {
 		this.apartman = apartman;
 	}
 
-	public String getPocetniDatum() {
+	public Date getPocetniDatum() {
 		return pocetniDatum;
 	}
 
-	public void setPocetniDatum(String pocetniDatum) {
+	public void setPocetniDatum(Date pocetniDatum) {
 		this.pocetniDatum = pocetniDatum;
 	}
 
@@ -84,6 +87,8 @@ public class Rezervacija {
 	public void setStatus(Status status) {
 		this.status = status;
 	}
+	
+	
 
 	@Override
 	public String toString() {
