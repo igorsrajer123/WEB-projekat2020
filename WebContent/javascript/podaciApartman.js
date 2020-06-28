@@ -63,6 +63,15 @@ $(document).ready(function(){
 
         formirajAdresu();
 
+        let geoSirina = document.getElementById("geoSirina").textContent;
+        let geoDuzina = document.getElementById("geoDuzina").textContent;
+
+        podaciLokacija = {
+            "geoSirina" : geoSirina,
+            "geoDuzina" : geoDuzina,
+            "adresa" : podaciAdresa
+        }
+
         let statusApartmana = document.getElementById("statusLabela").textContent;
         let brSobaApartmana = document.getElementById("brSoba").value;
         let brGostijuApartmana = document.getElementById("brGostiju").value;
@@ -102,6 +111,7 @@ $(document).ready(function(){
                 "brSoba": brSobaApartmana,
                 "brGostiju": brGostijuApartmana,
                 "cenaPoNoci": cenaApartmana,
+                "lokacija": podaciLokacija,
                 "sadrzajAp": podaciSadrzaj
             }
 
@@ -243,11 +253,11 @@ function formirajAdresu(){
 
 function sirinaDuzinaFunkcija(){
 
-    var precision1 = 100; // 2 decimals
-    var randomnum1 = Math.floor(Math.random() * (10 * precision1 - 1 * precision1) + 1 * precision1) / (1*precision1);
+    var precision1 = 1000000; // 2 decimals
+    var randomnum1 = Math.floor(Math.random() * (100 * precision1 - 1 * precision1) + 1 * precision1) / (1*precision1);
 
-    var precision2 = 100; // 2 decimals
-    var randomnum2 = Math.floor(Math.random() * (10 * precision2 - 1 * precision2) + 1 * precision2) / (1*precision2);
+    var precision2 = 1000000; // 2 decimals
+    var randomnum2 = Math.floor(Math.random() * (100 * precision2 - 1 * precision2) + 1 * precision2) / (1*precision2);
 
     document.getElementById('geoSirina').innerHTML =  "<b>"+ randomnum1 + "</b>";
     document.getElementById('geoDuzina').innerHTML = "<b>"+ randomnum2 + "</b>";

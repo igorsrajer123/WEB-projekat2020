@@ -110,12 +110,21 @@ function prikazApartmana(korisnik) {
 				console.log(apartmani.length);
 			
            		for(var i = 0; i < apartmani.length;i++){
-					lista.append("<tr><td>" + i + "</td>"
-					+ "<td>" + apartmani[i].brSoba + "</td> " + "<td>" 
-					+ apartmani[i].brGostiju + "</td>" + "<td>" + apartmani[i].lokacija + "</td>"
-					+ "<td>" + apartmani[i].domacin + "</td>" + "<td>" + apartmani[i].cenaPoNoci
-					+ "</td></tr>");
-					$("#apartmaniTabela").append(lista);		
+					if(apartmani[i].lokacija != null){
+						lista.append("<tr><td>" + i + "</td>"
+						+ "<td>" + apartmani[i].brSoba + "</td> " + "<td>" 
+						+ apartmani[i].brGostiju + "</td>" + "<td>" + apartmani[i].lokacija.adresa.naseljenoMesto + "</td>"
+						+ "<td>" + apartmani[i].domacin + "</td>" + "<td>" + apartmani[i].cenaPoNoci
+						+ "</td></tr>");
+						$("#apartmaniTabela").append(lista);	
+					}else {
+						lista.append("<tr><td>" + i + "</td>"
+						+ "<td>" + apartmani[i].brSoba + "</td> " + "<td>" 
+						+ apartmani[i].brGostiju + "</td>" + "<td>" + apartmani[i].lokacija + "</td>"
+						+ "<td>" + apartmani[i].domacin + "</td>" + "<td>" + apartmani[i].cenaPoNoci
+						+ "</td></tr>");
+						$("#apartmaniTabela").append(lista);	
+					}	
 				}
 			}
 		});
@@ -135,13 +144,21 @@ function prikazApartmana(korisnik) {
 				$("#apartmaniTabela thead tr").append(red);
 			
            		for(var i = 0; i < apartmani.length;i++){
-					lista.append("<tr id='" + apartmani[i].idApartmana + "' onclick=window.location.href='novaRezervacija.html?idApartmana=" +apartmani[i].idApartmana + "'><td>" + i + "</td>"
-					+ "<td>" + apartmani[i].brSoba + "</td> " + "<td>" 
-					+ apartmani[i].brGostiju + "</td>" + "<td>" + apartmani[i].lokacija + "</td>"
-					+ "<td>" + apartmani[i].domacin + "</td>" + "<td>" + apartmani[i].cenaPoNoci
-					+ "</td>" + "<td> <button id='" + apartmani[i].idApartmana + "'> Rezerviši </button></td> </tr>");
-					$("#apartmaniTabela").append(lista);
-					
+					if(apartmani[i].lokacija != null){
+						lista.append("<tr id='" + apartmani[i].idApartmana + "' onclick=window.location.href='novaRezervacija.html?idApartmana=" +apartmani[i].idApartmana + "'><td>" + i + "</td>"
+						+ "<td>" + apartmani[i].brSoba + "</td> " + "<td>" 
+						+ apartmani[i].brGostiju + "</td>" + "<td>" + apartmani[i].lokacija.adresa.naseljenoMesto + "</td>"
+						+ "<td>" + apartmani[i].domacin + "</td>" + "<td>" + apartmani[i].cenaPoNoci
+						+ "</td>" + "<td> <button id='" + apartmani[i].idApartmana + "'> Rezerviši </button></td> </tr>");
+						$("#apartmaniTabela").append(lista);
+					}else{
+						lista.append("<tr id='" + apartmani[i].idApartmana + "' onclick=window.location.href='novaRezervacija.html?idApartmana=" +apartmani[i].idApartmana + "'><td>" + i + "</td>"
+						+ "<td>" + apartmani[i].brSoba + "</td> " + "<td>" 
+						+ apartmani[i].brGostiju + "</td>" + "<td>" + apartmani[i].lokacija + "</td>"
+						+ "<td>" + apartmani[i].domacin + "</td>" + "<td>" + apartmani[i].cenaPoNoci
+						+ "</td>" + "<td> <button id='" + apartmani[i].idApartmana + "'> Rezerviši </button></td> </tr>");
+						$("#apartmaniTabela").append(lista);
+					}
 				}
 			}
 		});
@@ -165,31 +182,59 @@ function prikazApartmana(korisnik) {
 				//==============================================================
            		for(var i = 0; i < apartmani.length;i++){
 					   if(apartmani[i].uklonjen == false){
-							lista.append("<tr><td>" + i + "</td>"
-							+ "<td>" + apartmani[i].brSoba + "</td> " + "<td>" 
-							+ apartmani[i].brGostiju + "</td>" + "<td>" + apartmani[i].lokacija + "</td>"
-							+ "<td>" + apartmani[i].domacin + "</td>" + "<td>" + apartmani[i].cenaPoNoci
-							+ "</td>" + "<td>" + apartmani[i].tip + "</td>" + "<td> <button onClick=window.location.href='podaciApartman.html?idApartmana="+ apartmani[i].idApartmana+ "'> Izmeni </button></td>" +
-							"<td> <button id='" + apartmani[i].idApartmana + "'> Obriši </button> </td> </tr>");
+							if(apartmani[i].lokacija != null){
+								lista.append("<tr><td>" + i + "</td>"
+								+ "<td>" + apartmani[i].brSoba + "</td> " + "<td>" 
+								+ apartmani[i].brGostiju + "</td>" + "<td>" + apartmani[i].lokacija.adresa.naseljenoMesto + "</td>"
+								+ "<td>" + apartmani[i].domacin + "</td>" + "<td>" + apartmani[i].cenaPoNoci
+								+ "</td>" + "<td>" + apartmani[i].tip + "</td>" + "<td> <button onClick=window.location.href='podaciApartman.html?idApartmana="+ apartmani[i].idApartmana+ "'> Izmeni </button></td>" +
+								"<td> <button id='" + apartmani[i].idApartmana + "'> Obriši </button> </td> </tr>");
 
-							let id = apartmani[i].idApartmana;
+								let id = apartmani[i].idApartmana;
 
-							document.getElementById(apartmani[i].idApartmana).onclick =function fun(){
-								$.ajax({
-									type: 'PUT',
-									url: 'rest/apartman/ukloniApartman/'+ id,
-									complete: function(data){
+								document.getElementById(apartmani[i].idApartmana).onclick =function fun(){
+									$.ajax({
+										type: 'PUT',
+										url: 'rest/apartman/ukloniApartman/'+ id,
+										complete: function(data){
 
-										if(data["status"] == 200){
-											window.location.href = "index.html";
-										}else if(data["status"] == 500){
-											alert("Nece da moze!");
-										}
-									}		
-								})
+											if(data["status"] == 200){
+												window.location.href = "index.html";
+											}else if(data["status"] == 500){
+												alert("Nece da moze!");
+											}
+										}		
+									})
+								}
+
+							$("#apartmaniTabela").append(lista);
+							}else {
+								lista.append("<tr><td>" + i + "</td>"
+								+ "<td>" + apartmani[i].brSoba + "</td> " + "<td>" 
+								+ apartmani[i].brGostiju + "</td>" + "<td>" + apartmani[i].lokacija + "</td>"
+								+ "<td>" + apartmani[i].domacin + "</td>" + "<td>" + apartmani[i].cenaPoNoci
+								+ "</td>" + "<td>" + apartmani[i].tip + "</td>" + "<td> <button onClick=window.location.href='podaciApartman.html?idApartmana="+ apartmani[i].idApartmana+ "'> Izmeni </button></td>" +
+								"<td> <button id='" + apartmani[i].idApartmana + "'> Obriši </button> </td> </tr>");
+	
+								let id = apartmani[i].idApartmana;
+	
+								document.getElementById(apartmani[i].idApartmana).onclick =function fun(){
+									$.ajax({
+										type: 'PUT',
+										url: 'rest/apartman/ukloniApartman/'+ id,
+										complete: function(data){
+	
+											if(data["status"] == 200){
+												window.location.href = "index.html";
+											}else if(data["status"] == 500){
+												alert("Nece da moze!");
+											}
+										}		
+									})
+								}
+	
+								$("#apartmaniTabela").append(lista);
 							}
-
-							$("#apartmaniTabela").append(lista);	
 					   }else {
 							lista.append("<tr style='background-color:red'><td>" + i + "</td>"
 							+ "<td>" + apartmani[i].brSoba + "</td> " + "<td>" 
@@ -222,6 +267,22 @@ function prikazApartmana(korisnik) {
            		for(var i = 0; i < apartmani.length;i++){
 					let x = apartmani[i].uklonjen;   
 					if(!x){
+						if(apartmani[i].lokacija != null){
+							lista.append("<tr><td>" + i + "</td>"
+							+ "<td>" + apartmani[i].brSoba + "</td> " + "<td>" 
+							+ apartmani[i].brGostiju + "</td>" + "<td>" + apartmani[i].lokacija.adresa.naseljenoMesto + "</td>"
+							+ "<td>" + apartmani[i].domacin + "</td>" + "<td>" + apartmani[i].cenaPoNoci
+							+ "</td>"  + "<td> <button id='" + apartmani[i].idApartmana + "'> Izmeni </button></td> </tr>");
+							
+							let id = apartmani[i].idApartmana;
+
+							document.getElementById(apartmani[i].idApartmana).onclick =function fun(){
+								alert(id);
+								window.location.href = "podaciApartman.html?idApartmana="+ id;
+							}
+
+							$("#apartmaniTabela").append(lista);
+						}else {
 							lista.append("<tr><td>" + i + "</td>"
 							+ "<td>" + apartmani[i].brSoba + "</td> " + "<td>" 
 							+ apartmani[i].brGostiju + "</td>" + "<td>" + apartmani[i].lokacija + "</td>"
@@ -236,6 +297,7 @@ function prikazApartmana(korisnik) {
 							}
 
 							$("#apartmaniTabela").append(lista);
+						}
 					}
 					   
 				}
