@@ -4,6 +4,8 @@ var podaciSadrzaj = [];
 var podaciAdresa = {};
 var podaciLokacija = {};
 
+var pomocna = [];
+
 $(document).ready(function(){
 
     var number = getUrlVars()["idApartmana"];
