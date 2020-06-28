@@ -4,15 +4,30 @@
         <title> Registracija novog korisnika</title>
         <script src="javascript/jquery-3.3.1.min.js"></script>
         <script src="javascript/dodajApartman.js"></script>   
+
+        <style type="text/css">
+            .tabelica {
+                            table-layout: fixed;
+                      }
+            
+            .blank_row
+                    {
+                        height: 10px !important; /* overwrites any other rules */
+                        background-color: white;
+                    }
+        </style>
     </head>
 <body>
     <h2>Dodavanje Apartmana</h2>
     <span id ="pozPorApp"></span>
     
     <form id="dodajApartmanForma">
-        <table> 
+        <table class='tabelica'> 
+            <tr class='blank_row'>
+            	<td></td>
+            </tr>
             <tr>
-                <td><label> Tip: </label></td>
+                <td style="width: 10%"><label> Tip: </label></td>
                 <td><select name="tip" id="tip">
                           <option value="Ceo_apartman">Ceo_apartman</option>
                           <option value="Soba">Soba</option>				 
@@ -21,25 +36,26 @@
             <tr>
                 <td>Broj soba:</td>
                 <td><input type="text" name="brojSoba" id="brSoba"></td>
-                <td><span id="greskaBrSobaPor"></span></td>
+                <td><span  id="greskaBrSobaPor"></span></td>
             </tr> 
             <tr>
                 <td><label> Broj gostiju: </label></td>
                 <td><input type="text" name="brojGostiju" id="brGostiju"></td>
-                <td><span id="greskaBrGostijuPor"></span></td>
-            </tr>
-            <tr>
-                <td><label> Lokacija: </label></td>
-                <td><input type="text" name="lokacija" id="lokacija"></td>
-                <td><span id="greskaLokacijaPor"></span></td>
+                <td><span  id="greskaBrGostijuPor"></span></td>
             </tr>
             <tr>
                 <td><label> Cena po noci: </label></td>
                 <td><input type="text" name="cena" id="cena"></td>
-                <td><span id="greskaCenaPor"></span></td>
+                <td><span  id="greskaCenaPor"></span></td>
+            </tr>
+            <tr class='blank_row'>
+            	<td></td>
             </tr>
             <tr>
-                <td colspan="2">Slobodni datumi za izdavanje</td>
+                <td colspan="2"> <b> <i> Slobodni datumi za izdavanje </i> </b> </td>
+            </tr>
+            <tr class='blank_row'>
+            	<td></td>
             </tr>
             <tr>
                 <td>Od:</td>
@@ -48,6 +64,36 @@
             <tr>
                 <td>Do: </td>
                 <td><input type="date" id="datumZaIzdDO"></td>
+            </tr>
+            <tr class='blank_row'>
+            	<td></td>
+            </tr>
+            <tr>
+            	<td> <b><i> Lokacija </i></b> </td>
+            	<td> </td>
+            </tr>
+            <tr class='blank_row'>
+            	<td></td>
+            </tr>
+            <tr>
+                <td><label> Ulica i broj: </label>
+                <td><input type='text' id='ulica'><label id="greskaUlica" style="color: red;"> Polje prazno!</label></td>
+            </tr>
+            <tr>
+                <td><label> Naseljeno mesto: </label>
+                <td><input type='text' id='mesto' oninput="sirinaDuzinaFunkcija()"><label id="greskaMesto" style="color: red;"> Polje prazno! </label></td>
+            </tr>
+            <tr>
+                <td><label> Poštanski broj mesta: </label>
+                <td><input type='text' id='postanskiBroj'><label id="greskaPostanskiBroj" style="color: red;"> Polje prazno! </label></td>
+            </tr>
+            <tr>
+                <td><label> Geografska širina: </label>
+                <td><label id="geoSirina"></label></td>
+            </tr>
+            <tr>
+                <td><label> Geografska dužina: </label>
+                <td><label id="geoDuzina"></label></td>
             </tr>
             <tr>
                 <td><label> Komentar: </label></td>

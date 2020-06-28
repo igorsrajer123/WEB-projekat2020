@@ -48,7 +48,7 @@ $(document).ready(function(){
             $("#lokacija:text").val(apartman.lokacija);
             $("#cena:text").val(apartman.cenaPoNoci);
             $("#komentar:text").val(apartman.komentar);
-            document.getElementById("statusLabela").innerHTML = apartman.status;
+            document.getElementById("statusLabela").innerHTML = "<b>" + apartman.status + "</b>";
 
             let statusApp = document.getElementById("statusLabela").textContent;
 
@@ -56,10 +56,10 @@ $(document).ready(function(){
                 event.preventDefault();
         
                 if( document.getElementById("statusLabela").textContent == "Aktivno"){
-                    document.getElementById("statusLabela").innerHTML = "Neaktivno";
+                    document.getElementById("statusLabela").innerHTML = "<b>Neaktivno</b>";
                 }
                 else if(document.getElementById("statusLabela").textContent == "Neaktivno"){
-                    document.getElementById("statusLabela").innerHTML = "Aktivno";
+                    document.getElementById("statusLabela").innerHTML = "<b>Aktivno</b>";
                 }
             })
 		}

@@ -1,6 +1,9 @@
 var cekiraniSadrzaj = new Array();
 var podaciSadrzaj = [];
 
+var podaciAdresa = {};
+var podaciLokacija = {};
+
 $(document).ready(function() {
 
     $('#PozPorApp').hide();
@@ -22,6 +25,18 @@ $(document).ready(function() {
     });
     
     ucitajSadrzajApartmana();
+
+    document.getElementById("greskaBrSobaPor").hidden = true;
+    document.getElementById("greskaBrGostijuPor").hidden = true;
+    document.getElementById("greskaCenaPor").hidden = true;
+    document.getElementById("greskaUlica").hidden = true;
+    document.getElementById("greskaMesto").hidden = true;
+    document.getElementById("greskaPostanskiBroj").hidden = true;
+
+    
+    let ulicaIspravna = false;
+    let mestoIspravno = false;
+    let postanskiBrIspravan = false;
 });
 
 function pozdravPorukaApp(korisnik) {
@@ -39,6 +54,17 @@ function dodajApartman(korisnik) {
     var datumOD = new Date($('#datumZaIzdOD').val());
     var datumDO = new Date($('#datumZaIzdDO').val());
 
+    formirajAdresu();
+
+        let geoSirina = document.getElementById("geoSirina").textContent;
+        let geoDuzina = document.getElementById("geoDuzina").textContent;
+
+        podaciLokacija = {
+            "geoSirina" : geoSirina,
+            "geoDuzina" : geoDuzina,
+            "adresa" : podaciAdresa
+        }
+
     postavljanjeSadrzaja();
     
     var datumiZaIzdavanjeList = getDates(datumOD, datumDO);
@@ -52,9 +78,10 @@ function dodajApartman(korisnik) {
         "domacin": korisnik.korisnicko_ime,
         "datumiZaIzdavanje": datumiZaIzdavanjeList,
         "dostupnostPoDatumima": datumiZaIzdavanjeList,
+        "lokacija": podaciLokacija,
         "sadrzajAp": podaciSadrzaj
     }
-    alert("Lokacija: " + lokacija);
+    //alert("Lokacija: " + lokacija);
 
     let korIme = korisnik.korisnicko_ime;
 
@@ -174,3 +201,29 @@ function getDates(startDate, stopDate) {
     }
     return dateArray;
 }
+
+function formirajAdresu(){
+
+    let ulicaBroj = $("#ulica").val();
+    let mesto = $("#mesto").val();
+    let postanskiBroj = $("#postanskiBroj").val();
+
+    podaciAdresa = {
+            "ulicaIBroj": ulicaBroj,
+            "naseljenoMesto": mesto,
+            "postanskiBrMesta": postanskiBroj
+        }
+}
+
+function sirinaDuzinaFunkcija(){
+
+    var precision1 = 1000000; // 2 decimals
+    var randomnum1 = Math.floor(Math.random() * (100 * precision1 - 1 * precision1) + 1 * precision1) / (1*precision1);
+
+    var precision2 = 1000000; // 2 decimals
+    var randomnum2 = Math.floor(Math.random() * (100 * precision2 - 1 * precision2) + 1 * precision2) / (1*precision2);
+
+    document.getElementById('geoSirina').innerHTML =  "<b>"+ randomnum1 + "</b>";
+    document.getElementById('geoDuzina').innerHTML = "<b>"+ randomnum2 + "</b>";
+}
+
