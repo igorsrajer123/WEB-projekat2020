@@ -21,10 +21,17 @@ $(document).ready(function(){
     document.getElementById("greskaBrSobaPor").hidden = true;
     document.getElementById("greskaBrGostijuPor").hidden = true;
     document.getElementById("greskaCenaPor").hidden = true;
+    document.getElementById("greskaUlica").hidden = true;
+    document.getElementById("greskaMesto").hidden = true;
+    document.getElementById("greskaPostanskiBroj").hidden = true;
 
     let brSobaIspravan = false;
     let brGostijuIspravan = false;
     let cenaIspravna = false;
+
+    let ulicaIspravna = false;
+    let mestoIspravno = false;
+    let postanskiBrIspravan = false;
 
 	$.ajax({
 		type: 'GET',
@@ -72,6 +79,36 @@ $(document).ready(function(){
             "adresa" : podaciAdresa
         }
 
+        let ulicaBroj =  document.getElementById("ulica").value;
+
+        if(ulicaBroj == "" || ulicaBroj == " "){
+            document.getElementById("greskaUlica").hidden = false;
+            ulicaIspravna = false;
+        }else {
+            document.getElementById("greskaUlica").hidden = true;
+            ulicaIspravna = true;
+        }
+
+        let mesto = document.getElementById("mesto").value;
+
+        if(mesto == "" || mesto == " "){
+            document.getElementById("greskaMesto").hidden = false;
+            mestoIspravno = false;
+        }else {
+            document.getElementById("greskaMesto").hidden = true;
+            mestoIspravno = true;
+        }
+
+        let postBr = document.getElementById("postanskiBroj").value;
+
+        if(postBr == "" || postBr == " "){
+            document.getElementById("greskaPostanskiBroj").hidden = false;
+            postanskiBrIspravan = false;
+        }else {
+            document.getElementById("greskaPostanskiBroj").hidden = true;
+            postanskiBrIspravan = true;
+        }
+
         let statusApartmana = document.getElementById("statusLabela").textContent;
         let brSobaApartmana = document.getElementById("brSoba").value;
         let brGostijuApartmana = document.getElementById("brGostiju").value;
@@ -104,7 +141,7 @@ $(document).ready(function(){
         postavljanjeSadrzaja();
         alert(podaciSadrzaj);
 
-        if(brGostijuIspravan == true && brSobaIspravan == true && cenaIspravna == true){
+        if(brGostijuIspravan == true && brSobaIspravan == true && cenaIspravna == true && ulicaIspravna == true && mestoIspravno == true && postanskiBrIspravan == true){
 
             podaciZaSlanje = { 
 				"status": statusApartmana,
