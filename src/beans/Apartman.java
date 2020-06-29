@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
+
 public class Apartman {
 
 	public enum Tip {
@@ -29,7 +31,7 @@ public class Apartman {
 	private String vrZaOdjavu;
 	private Status status;
 	private ArrayList<SadrzajApartmana> sadrzajAp;
-	private List<Rezervacija> rezervacije;
+	private ArrayList<Rezervacija> rezervacije = new ArrayList<Rezervacija>();
 
 	private Boolean uklonjen = false;
 	private String idApartmana = UUID.randomUUID().toString();
@@ -40,7 +42,7 @@ public class Apartman {
 	}
 
 	public Apartman(Tip tip, int brSoba, int brGostiju, Lokacija lokacija, ArrayList<Date> datum, String d,
-			String slika, ArrayList<SadrzajApartmana> sadrzaj, double cena, Boolean uklonjen, String id) {
+			String slika, ArrayList<SadrzajApartmana> sadrzaj ,double cena, Boolean uklonjen, String id) {
 		super();
 		this.tip = tip;
 		this.brSoba = brSoba;
@@ -56,7 +58,6 @@ public class Apartman {
 		this.vrZaPrijavu = "";
 		this.status = Status.Aktivno;
 		this.sadrzajAp = new ArrayList<SadrzajApartmana>();
-		this.rezervacije = new ArrayList<Rezervacija>();
 		this.uklonjen = uklonjen;
 		this.idApartmana = id;
 	}
@@ -183,11 +184,11 @@ public class Apartman {
 		this.sadrzajAp = sadrzajAp;
 	}
 
-	public List<Rezervacija> getRezervacije() {
+	public ArrayList<Rezervacija> getRezervacije() {
 		return rezervacije;
 	}
 
-	public void setRezervacije(List<Rezervacija> rezervacije) {
+	public void setRezervacije(ArrayList<Rezervacija> rezervacije) {
 		this.rezervacije = rezervacije;
 	}
 
@@ -205,5 +206,12 @@ public class Apartman {
 
 	public void setIdApartmana(String idApartmana) {
 		this.idApartmana = idApartmana;
+	}
+	
+	//dodajemo apartmanu novu rezervaciju u listu
+	public void dodajRezervaciju(Rezervacija r) {
+		System.out.println("USAO SAM OVDE!");
+		rezervacije.add(r);
+		System.out.println("Ovde isto!");
 	}
 }

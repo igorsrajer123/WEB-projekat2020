@@ -35,10 +35,8 @@ function nabaviApartman(korisnik){
                 $('#dostupniDatumi').text(apartman.dostupnostPoDatumima);
                 $('#potvrdi').click(function(event){
                     event.preventDefault();
-                    posaljiRezervaciju(data.responseJSON);
+                    posaljiRezervaciju(data.responseJSON,korisnik);
                 })
-                
-                
             }
         })
 
@@ -53,11 +51,13 @@ function nabaviApartman(korisnik){
     }
 }
 
-function posaljiRezervaciju(apartman) {   
+function posaljiRezervaciju(apartman,korisnik) {   
     var datumPocetkaRez = new Date($('#datumRezervacije').val());
+    var datumPocetni = JSON.stringify(datumPocetkaRez);
+    alert(datumPocetni);
     let brNocenja = $('#brNocenja').val();
     let datumKrajaRez = datumPocetkaRez.addDays(parseInt(brNocenja, 10));
-    alert(datumPocetkaRez);
+    alert("ALOOOOOOOOO: " + datumPocetkaRez);
     let datumPocetkaRezString = (JSON.stringify(datumPocetkaRez)).substr(1,10);
     alert(datumPocetkaRezString)
     alert(brNocenja);
@@ -83,22 +83,24 @@ function posaljiRezervaciju(apartman) {
             break;
         }
     } 
-
+    // "listaRezervisanihDatuma": listaRezervisanih,
     alert(n);
-
-    if (n) {
+    alert(korisnik.korisnicko_ime);
+    if (n == true) {
         let podaci = {
-            "apartman": apartman,
+            "apartman": apartman.idApartmana,
             "pocetniDatum": datumPocetkaRez,
             "brNocenja": brNocenja,
-            "listaRezervisanihDatuma": listaRezervisanih,
+            "ukCena": 0,
+            "poruka": "AA",
+            "gost": korisnik.korisnicko_ime
         }
     
         let s = JSON.stringify(podaci);
         alert(s);
     
         $.ajax ({
-            url: 'rest/rezervacija/dodajRezervaciju/',
+            url: 'rest/rezervacija/dodajRezervaciju/' + apartman.idApartmana,
             type: 'POST',
             data: s,
             contentType: 'application/json',

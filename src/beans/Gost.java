@@ -3,10 +3,12 @@ package beans;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
+
 public class Gost extends Korisnik {
 
-	private List<Apartman> iznajmljeniAp;
-	private List<Rezervacija> rezervacije;
+	private ArrayList<Apartman> iznajmljeniAp;
+	private ArrayList<Rezervacija> rezervacije = new ArrayList<Rezervacija>();
 	
 	public Gost() {
 		super();
@@ -14,14 +16,14 @@ public class Gost extends Korisnik {
 	
 	public Gost(String korisnickoIme, String lozinka) {
 		super(korisnickoIme, lozinka);
-		iznajmljeniAp = new ArrayList<Apartman>();
-		rezervacije = new ArrayList<Rezervacija>();
+		//iznajmljeniAp = new ArrayList<Apartman>();
+	//	rezervacije = new ArrayList<Rezervacija>();
 	}
 	
 	public Gost(String ki, String loz, String ime, String prz, String pol) {
 		super(ki, loz, ime, prz, pol, Uloga.Domacin);
-		iznajmljeniAp = new ArrayList<Apartman>();
-		rezervacije = new ArrayList<Rezervacija>();
+	//	iznajmljeniAp = new ArrayList<Apartman>();
+	//	rezervacije = new ArrayList<Rezervacija>();
 	}
 	
 	public Gost(Korisnik k) {
@@ -31,19 +33,24 @@ public class Gost extends Korisnik {
 		
 	}
 
-	public List<Apartman> getIznajmljeniAp() {
+	public ArrayList<Apartman> getIznajmljeniAp() {
 		return iznajmljeniAp;
 	}
 
-	public void setIznajmljeniAp(List<Apartman> iznajmljeniAp) {
+	public void setIznajmljeniAp(ArrayList<Apartman> iznajmljeniAp) {
 		this.iznajmljeniAp = iznajmljeniAp;
 	}
 
-	public List<Rezervacija> getRezervacije() {
+	public ArrayList<Rezervacija> getRezervacije() {
 		return rezervacije;
 	}
 
-	public void setRezervacije(List<Rezervacija> rezervacije) {
+	public void setRezervacije(ArrayList<Rezervacija> rezervacije) {
 		this.rezervacije = rezervacije;
+	}
+	
+	//dodajemo gostu novu rezervaciju u listu
+	public void dodajRezervaciju(Rezervacija r) {
+		rezervacije.add(r);
 	}
 }

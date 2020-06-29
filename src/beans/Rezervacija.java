@@ -7,12 +7,12 @@ public class Rezervacija {
 	
 	public enum Status {Kreirana, Odbijena, Odustanak, Prihvacena, Zavrsena}
 	
-	private Apartman apartman;
+	private String apartman;
 	private Date pocetniDatum;
 	private int brNocenja;
 	private double ukCena;
 	private String poruka;
-	private Gost gost;
+	private String gost;
 	private Status status;
 	
 	public Rezervacija() {
@@ -20,7 +20,7 @@ public class Rezervacija {
 		this.status = Status.Kreirana;
 	}	
 	
-	public Rezervacija(Apartman apartman, Date pocetniDatum, int brNocenja, double ukCena, String poruka, Gost gost,
+	public Rezervacija(String apartman, Date pocetniDatum, int brNocenja, double ukCena, String poruka, String gost,
 			Status status) {
 		super();
 		this.apartman = apartman;
@@ -32,11 +32,11 @@ public class Rezervacija {
 		this.status = Status.Kreirana;
 	}
 
-	public Apartman getApartman() {
+	public String getApartman() {
 		return apartman;
 	}
 
-	public void setApartman(Apartman apartman) {
+	public void setApartman(String apartman) {
 		this.apartman = apartman;
 	}
 
@@ -72,11 +72,11 @@ public class Rezervacija {
 		this.poruka = poruka;
 	}
 
-	public Gost getGost() {
+	public String getGost() {
 		return gost;
 	}
 
-	public void setGost(Gost gost) {
+	public void setGost(String gost) {
 		this.gost = gost;
 	}
 
