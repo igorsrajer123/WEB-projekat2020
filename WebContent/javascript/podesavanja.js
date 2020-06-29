@@ -42,7 +42,6 @@ function dodatneOpcije(korisnik){
 		$("#acc_buttons").append("<button type='submit' id='rezervacije_Btn' onclick=pregledRezervacija()> Pregled svih rezervacija </button><br/>");
 	}else if(korisnik.uloga == "Gost"){
 		$("#acc_buttons").append("<button type='submit' id='rezervacije' onclick=pregledRezervacija()> Moje rezervacije </button> <br/>");
-		$("#acc_buttons").append("<button type='submit' id='rezervacije_Btn' onclick=pregledRezervacija()> Pregled mojih rezervacija </button><br/>");
 	}else if(korisnik.uloga == "Domacin"){
 		$("#acc_buttons").append("<button type='submit' id='dodajApp_Btn' onclick=dodajApartman()>Dodaj Apartman </button> <br/>");
 		$("#acc_buttons").append("<button type='submit' id='rezervacije_Btn' onclick=pregledRezervacija()> Pregled mojih rezervacija </button><br/>");

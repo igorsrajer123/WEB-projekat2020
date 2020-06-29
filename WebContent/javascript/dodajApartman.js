@@ -8,6 +8,12 @@ $(document).ready(function() {
 
     $('#PozPorApp').hide();
 
+    $("#odustani").click(function(event){
+        event.preventDefault();
+
+        window.location.href = "index.html";
+    })
+
     $.ajax({
 		type: 'GET',
 		url: 'rest/korisnik/getKorisnik',
@@ -226,4 +232,5 @@ function sirinaDuzinaFunkcija(){
     document.getElementById('geoSirina').innerHTML =  "<b>"+ randomnum1 + "</b>";
     document.getElementById('geoDuzina').innerHTML = "<b>"+ randomnum2 + "</b>";
 }
+
 

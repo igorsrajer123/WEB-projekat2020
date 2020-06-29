@@ -2,6 +2,8 @@ package beans;
 
 import java.util.ArrayList;
 
+import beans.Rezervacija.Status;
+
 
 public class Gost extends Korisnik {
 
@@ -50,5 +52,13 @@ public class Gost extends Korisnik {
 	//dodajemo gostu novu rezervaciju u listu
 	public void dodajRezervaciju(Rezervacija r) {
 		rezervacije.add(r);
+	}
+	
+	public void setOdustanak(String id) {
+		for(Rezervacija r : rezervacije) {
+			if(r.getIdRezervacije().equals(id)) {
+				r.setStatus(Status.Odustanak);
+			}
+		}
 	}
 }

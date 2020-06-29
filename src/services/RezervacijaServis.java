@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -20,6 +21,7 @@ import beans.Apartman;
 import beans.Domacin;
 import beans.Gost;
 import beans.Rezervacija;
+import beans.Rezervacija.Status;
 import dao.ApartmanDAO;
 import dao.KorisnikDAO;
 import dao.RezervacijaDAO;
@@ -104,5 +106,47 @@ public class RezervacijaServis {
 		//System.out.println(lista.toString());
 		
 		return lista;
+	}
+	
+	@PUT
+	@Path("/odustanakOdRezervacije/{idRezervacije}/{idApartmana}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response odustaniOdRezervacije(@PathParam("idRezervacije") String idRez, @PathParam("idApartmana") String idAp, @Context HttpServletRequest rq) {
+		
+		RezervacijaDAO dao = (RezervacijaDAO) ctx.getAttribute("rezervacijaDAO");
+		KorisnikDAO daoKor = (KorisnikDAO) ctx.getAttribute("korisnikDAO");
+		ApartmanDAO daoAp = (ApartmanDAO) ctx.getAttribute("apartmanDAO");
+		
+		Gost g = (Gost) rq.getSession().getAttribute("korisnik");
+		g.setOdustanak(idRez);
+		
+		if(dao == null) {
+			System.out.println("NULL REZERVACIJE!");
+			return Response.status(500).build();
+		}
+		
+		ArrayList<Rezervacija> lista = dao.getSveRezervacije();
+		ArrayList<Apartman> listaAp = daoAp.getSveApartmane();
+		
+		for(Apartman a : listaAp) {
+			if(a.getIdApartmana().equals(idAp)) {
+				a.setOdustanak(idRez);
+				break;
+			}
+		}
+		
+		for(Rezervacija r : lista) {
+			if(r.getIdRezervacije().equals(idRez)) {
+				r.setStatus(Status.Odustanak);
+				break;
+			}
+		}
+		
+		dao.sacuvajRezervacije();
+		daoKor.sacuvajKorisnika();
+		daoAp.sacuvajApartmane();
+		
+		System.out.println("Odustanak uspesan!");
+		return Response.ok().build();
 	}
 }

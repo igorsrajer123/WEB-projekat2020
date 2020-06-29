@@ -25,6 +25,8 @@ function nabaviApartman(korisnik){
 
         var number = getUrlVars()["idApartmana"];
 
+        prikaziSadrzaj(number);
+
         $.ajax({
             type: 'GET',
             url: 'rest/apartman/getApartman/'+ number,
@@ -60,21 +62,25 @@ function posaljiRezervaciju(apartman,korisnik) {
     alert("ALOOOOOOOOO: " + datumPocetkaRez);
     let datumPocetkaRezString = (JSON.stringify(datumPocetkaRez)).substr(1,10);
     alert(datumPocetkaRezString)
-    alert(brNocenja);
-    alert(datumKrajaRez);
+  //  alert(brNocenja);
+    //alert(datumKrajaRez);
     let listaRezervisanih = getDates(datumPocetkaRez, datumKrajaRez);
-    alert(listaRezervisanih);
+  //  alert(listaRezervisanih);
     let listaRezervisanihString = JSON.stringify(listaRezervisanih);
-    alert(listaRezervisanihString);
+   // alert(listaRezervisanihString);
     let novalista = [];
      for(var i = 0; i < listaRezervisanih.length; i++){
         novalista[i] = (JSON.stringify(listaRezervisanih[i])).substr(1,10);
         alert(novalista[i]);
     } 
+
+    let poruka = $("#poruka").val();
+    let ukupnaCena = apartman.cenaPoNoci* brNocenja;
+    alert("Ukupna cena!!!! : " + ukupnaCena);
     
     var n = true;
 
-    alert(novalista);
+    //alert(novalista);
 
 
     for(var i = 0; i < novalista.length; i++){
@@ -85,14 +91,14 @@ function posaljiRezervaciju(apartman,korisnik) {
     } 
     // "listaRezervisanihDatuma": listaRezervisanih,
     alert(n);
-    alert(korisnik.korisnicko_ime);
+   // alert(korisnik.korisnicko_ime);
     if (n == true) {
         let podaci = {
             "apartman": apartman.idApartmana,
             "pocetniDatum": datumPocetkaRez,
             "brNocenja": brNocenja,
-            "ukCena": 0,
-            "poruka": "AA",
+            "ukCena": ukupnaCena,
+            "poruka": poruka,
             "gost": korisnik.korisnicko_ime
         }
     
@@ -144,6 +150,22 @@ function getDates(startDate, stopDate) {
         currentDate = currentDate.addDays(1);
     }
     return dateArray;
+}
+
+function prikaziSadrzaj(apartman){
+
+    $.ajax({
+        type: 'GET',
+        url: 'rest/sadrzajApartmana/getSadrzajJednog/' + apartman,
+        complete: function(data){
+
+            var sadrzaj = data.responseJSON;
+
+            for(var i = 0; i < sadrzaj.length; i++){
+               $("#sadrzajRed").append("<tr><td> <label> <i>" + sadrzaj[i].item + "</i></label></td></tr>");
+            }
+        }
+    })
 }
 
 

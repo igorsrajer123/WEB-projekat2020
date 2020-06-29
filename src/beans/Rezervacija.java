@@ -2,6 +2,7 @@ package beans;
 
 
 import java.util.Date;
+import java.util.UUID;
 
 public class Rezervacija {
 	
@@ -15,13 +16,15 @@ public class Rezervacija {
 	private String gost;
 	private Status status;
 	
+	private String idRezervacije = UUID.randomUUID().toString();
+	
 	public Rezervacija() {
 		super();
 		this.status = Status.Kreirana;
 	}	
 	
 	public Rezervacija(String apartman, Date pocetniDatum, int brNocenja, double ukCena, String poruka, String gost,
-			Status status) {
+			Status status, String idRez) {
 		super();
 		this.apartman = apartman;
 		this.pocetniDatum = pocetniDatum;
@@ -30,6 +33,7 @@ public class Rezervacija {
 		this.poruka = poruka;
 		this.gost = gost;
 		this.status = Status.Kreirana;
+		this.idRezervacije = idRez;
 	}
 
 	public String getApartman() {
@@ -93,6 +97,14 @@ public class Rezervacija {
 	@Override
 	public String toString() {
 		return "Rezervacija [apartman=" + apartman + ", pocetniDatum=" + pocetniDatum + ", brNocenja=" + brNocenja
-				+ ", ukCena=" + ukCena + ", poruka=" + poruka + ", gost=" + gost + ", status=" + status + "]";
+				+ ", ukCena=" + ukCena + ", poruka=" + poruka + ", gost=" + gost + ", status=" + status + ", idRezervacije=" + idRezervacije + "]";
+	}
+
+	public String getIdRezervacije() {
+		return idRezervacije;
+	}
+
+	public void setIdRezervacije(String idRezervacije) {
+		this.idRezervacije = idRezervacije;
 	}
 }

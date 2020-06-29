@@ -47,10 +47,14 @@ $(document).ready(function(){
 
             $("#brSoba:text").val(apartman.brSoba);
             $("#brGostiju:text").val(apartman.brGostiju);
-            $("#lokacija:text").val(apartman.lokacija);
             $("#cena:text").val(apartman.cenaPoNoci);
-            $("#komentar:text").val(apartman.komentar);
+            //$("#komentar:text").val(apartman.komentar);
             document.getElementById("statusLabela").innerHTML = "<b>" + apartman.status + "</b>";
+            $("#ulica:text").val(apartman.lokacija.adresa.ulicaIBroj);
+            $("#mesto:text").val(apartman.lokacija.adresa.naseljenoMesto);
+            $("#postanskiBroj").val(apartman.lokacija.adresa.postanskiBrMesta);
+            document.getElementById("geoSirina").innerHTML = "<b>" + apartman.lokacija.geoSirina + "</b>";
+            document.getElementById("geoDuzina").innerHTML = "<b>" + apartman.lokacija.geoDuzina + "</b>";
 
             let statusApp = document.getElementById("statusLabela").textContent;
 
@@ -65,6 +69,12 @@ $(document).ready(function(){
                 }
             })
 		}
+    })
+
+    $("#odustani").click(function(event){
+        event.preventDefault();
+
+        window.location.href = "index.html";
     })
 
     $("#izmeniApp").click(function(event){

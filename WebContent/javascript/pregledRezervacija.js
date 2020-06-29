@@ -35,8 +35,33 @@ function proveriKorisnika(korisnik){
 
 
 		for(var i = 0; i < mojeRezervacije.length; i++){
-			lista.append("<tr><td>"+ mojeRezervacije[i].pocetniDatum + "</td><td>" + mojeRezervacije[i].ukupnaCena + "</td><td>" + "</td><td>" +  mojeRezervacije[i].status +"</td><td><button> Odustanak</button></td></tr>");
-			$("#rezervacijeTabela").append(lista);
+			let pocetni = new Date(mojeRezervacije[i].pocetniDatum);
+			let stvarnoSad = (JSON.stringify(pocetni)).substr(1,10);
+			if(mojeRezervacije[i].status == "Kreirana" || mojeRezervacije[i].status == "Prihvacena"){
+				lista.append("<tr><td>"+ stvarnoSad + "</td><td>" + mojeRezervacije[i].ukCena + "</td><td>" + "</td><td>" +  mojeRezervacije[i].status +"</td><td><button id='" + mojeRezervacije[i].idRezervacije + "'> Odustanak</button></td></tr>");
+				
+				var idR = mojeRezervacije[i].idRezervacije;
+				var app = mojeRezervacije[i].apartman;
+				document.getElementById(idR).onclick = function fun(){
+					
+					$.ajax({
+						type: 'PUT',
+						url: 'rest/rezervacija/odustanakOdRezervacije/'+ idR + '/' + app,
+						complete: function(data){
+							if(data["status"] == 200){
+								alert("Izmena uspesna!");
+							}else {
+								alert("Izmena neuspesna!");
+							}
+						}
+					})
+				}
+				
+				$("#rezervacijeTabela").append(lista);
+			}else if(mojeRezervacije[i].status == "Odustanak"){
+				lista.append("<tr><td>"+ stvarnoSad + "</td><td>" + mojeRezervacije[i].ukCena + "</td><td>" + "</td><td>" +  mojeRezervacije[i].status +"</td></tr>");
+				$("#rezervacijeTabela").append(lista);
+			}
 		}
 
 
@@ -53,8 +78,10 @@ function proveriKorisnika(korisnik){
 
 		let gost = "<td> <b> Rezervaciju izvršio </b></td>";
 		let domacin = "<td> <b> Domaćin <b> </td>";
+		let datumPocetka = "<td><b> Datum početka rezervacije </b></td>";
+		let ukupnaCena = "<td><b> Ukupna cena <b></td>";
 		let status = "<td> <b> Status rezervacije <b> </td>";
-		$("#rezervacijeTabela thead tr").append(gost).append(domacin).append(status);
+		$("#rezervacijeTabela thead tr").append(gost).append(domacin).append(datumPocetka).append(ukupnaCena).append(status);
 
 		$.ajax({
 			type: 'GET',
@@ -64,7 +91,9 @@ function proveriKorisnika(korisnik){
 				let sveRezervacije = data.responseJSON;
 
 				for(var i = 0; i < sveRezervacije.length; i++){
-					lista.append("<tr><td>" + sveRezervacije[i].gost + "</td><td>" + "</td><td>"+ sveRezervacije[i].status +"</td></tr>");
+					let pocetni = new Date(sveRezervacije[i].pocetniDatum);
+					let stvarnoSad = (JSON.stringify(pocetni)).substr(1,10);
+					lista.append("<tr><td>" + sveRezervacije[i].gost + "</td><td>" + "</td><td>"+ stvarnoSad + "</td><td>" + sveRezervacije[i].ukCena +  "</td><td>"+ sveRezervacije[i].status +"</td></tr>");
 					$("#rezervacijeTabela").append(lista);
 				}
 			}
