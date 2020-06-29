@@ -319,4 +319,26 @@ public class ApartmanServis {
 		dao.sacuvajApartmane();
 		return Response.ok().build();
 	}
+	
+	@GET
+	@Path("/getDomacinaApartmana/{idApartmana}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String getDomacina(@PathParam("idApartmana") String idAp) {
+		
+		ApartmanDAO dao = (ApartmanDAO) ctx.getAttribute("apartmanDAO");
+		
+		ArrayList<Apartman> lista = dao.getSveApartmane();
+		
+		String domacin = null;
+		
+		for(Apartman a : lista) {
+			if(a.getIdApartmana().equals(idAp)) {
+				domacin = a.getDomacin();
+				break;
+			}
+		}
+		
+		
+		return domacin;
+	}
 }

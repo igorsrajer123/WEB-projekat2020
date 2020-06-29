@@ -1,9 +1,7 @@
 package beans;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
 
 public class Gost extends Korisnik {
 
