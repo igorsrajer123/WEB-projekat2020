@@ -267,8 +267,8 @@ function prikazApartmana(korisnik) {
 				
 				console.log(apartmani.length);
 
-				let red = "<td> </td>";
-				$("#apartmaniTabela thead tr").append(red);
+			//	let red = "<td> </td>";
+			//	$("#apartmaniTabela thead tr").append(red);
 			
            		for(var i = 0; i < apartmani.length;i++){
 					let x = apartmani[i].uklonjen;   

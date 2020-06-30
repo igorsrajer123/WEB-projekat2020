@@ -67,6 +67,8 @@ public class RezervacijaServis {
 			return Response.status(500).build();
 		}
 		
+		dao.dodajRezervaciju(r);
+		
 		Gost g = (Gost) rq.getSession().getAttribute("korisnik");
 		System.out.println(g.getKorisnicko_ime() + "OVAJ LIK!!");
 		System.out.println(r.toString());
@@ -77,12 +79,9 @@ public class RezervacijaServis {
 			if(a.getIdApartmana().equals(idAp)) {
 				System.out.println(idAp);
 				a.dodajRezervaciju(r);
-				//break;
+				break;
 			}
 		}
-		
-		dao.dodajRezervaciju(r);
-		
 		
 		daoKor.sacuvajKorisnika();
 		daoAp.sacuvajApartmane();
@@ -148,5 +147,31 @@ public class RezervacijaServis {
 		
 		System.out.println("Odustanak uspesan!");
 		return Response.ok().build();
+	}
+	
+	@GET
+	@Path("/getRezervacijeDomacina")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ArrayList<Rezervacija> getRezervacijeDomacina(@Context HttpServletRequest rq){
+		
+		//RezervacijaDAO dao = (RezervacijaDAO) ctx.getAttribute("rezervacijaDAO");
+
+		Domacin d = (Domacin) rq.getSession().getAttribute("korisnik");
+		
+		ArrayList<Apartman> listaAp = d.getApartmani();
+		ArrayList<Rezervacija> listaRez = new ArrayList<Rezervacija>();
+		ArrayList<Rezervacija> povratnaLista = new ArrayList<Rezervacija>();
+		
+		for(Apartman a : listaAp) {
+			if(a.getRezervacije() != null) {
+				listaRez = a.getRezervacije();
+				povratnaLista.addAll(listaRez);
+			}else {
+				continue;
+			}
+		}
+		
+		System.out.println("Domacinove rezervacije: " + povratnaLista);
+		return povratnaLista;
 	}
 }

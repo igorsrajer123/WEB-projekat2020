@@ -52,6 +52,7 @@ public class Gost extends Korisnik {
 	//dodajemo gostu novu rezervaciju u listu
 	public void dodajRezervaciju(Rezervacija r) {
 		rezervacije.add(r);
+		System.out.println("Rezervacija dodata i kod gosta u listu!");
 	}
 	
 	public void setOdustanak(String id) {

@@ -52,8 +52,33 @@ function proveriKorisnika(korisnik){
 
 
 	}else if(korisnik.uloga == "Domacin"){
+
 		$("#naslov").text("Rezervacije nad mojim apartmanima");
 
+		let lista = $("#rezervacijeTabela tbody");
+		lista.empty();
+
+		let gost = "<td> <b> Rezervaciju izvršio </b></td>";
+		let datumPocetka = "<td><b> Datum početka rezervacije </b></td>";
+		let ukupnaCena = "<td><b> Ukupna cena <b></td>";
+		let status = "<td> <b> Status rezervacije <b> </td>";
+		$("#rezervacijeTabela thead tr").append(gost).append(datumPocetka).append(ukupnaCena).append(status);
+
+		$.ajax({
+			type: 'GET',
+			url: 'rest/rezervacija/getRezervacijeDomacina',
+			complete: function(data){
+
+				let mojeRezervacije = data.responseJSON;
+				
+				for(var i = 0; i < mojeRezervacije.length; i++){
+					let pocetni = new Date(mojeRezervacije[i].pocetniDatum);
+					let stvarnoSad = (JSON.stringify(pocetni)).substr(1,10);
+					lista.append("<tr><td>" + mojeRezervacije[i].gost + "</td><td>"+ stvarnoSad + "</td><td>" + mojeRezervacije[i].ukCena +  "</td><td>"+ mojeRezervacije[i].status +"</td></tr>");
+					$("#rezervacijeTabela").append(lista);
+				}
+			}
+		})
 
 	}else if(korisnik.uloga == "Administrator"){
 
