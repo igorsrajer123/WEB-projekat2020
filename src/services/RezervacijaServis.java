@@ -97,7 +97,7 @@ public class RezervacijaServis {
 		Apartman korisnikovApartman = dom.getApartmanPoId(idAp);
 		korisnikovApartman.dodajRezervaciju(r);
 		
-		
+		/*
 		for(Apartman a : lista) {
 			if(a.getIdApartmana().equals(idAp)) {
 				System.out.println(idAp);
@@ -105,7 +105,7 @@ public class RezervacijaServis {
 				System.out.println("Rezervacija dodata u apartman!");
 				break;
 			}
-		}
+		}*/
 		
 		daoKor.sacuvajKorisnika();
 		daoAp.sacuvajApartmane();
@@ -164,6 +164,26 @@ public class RezervacijaServis {
 				break;
 			}
 		}
+		
+		//postavljanje statusa ODUSTANAK kod domacina, u njegovoj listi apartmana
+		Apartman nasApartman = daoAp.getPoIdApartmana(idAp); // nas apartman po id smo nasli
+		
+		String domacinApartmana = nasApartman.getDomacin();
+		Domacin dom = null;
+		for(Korisnik k : daoKor.getKorisnici()) {
+			if(k.getKorisnicko_ime().equals(domacinApartmana)) {
+				dom = (Domacin) k;
+			}
+		}
+		
+		Apartman korisnikovApartman = dom.getApartmanPoId(idAp);
+		for(Rezervacija rez : korisnikovApartman.getRezervacije()) {
+			if(rez.getIdRezervacije().equals(idRez)) {
+				rez.setStatus(Status.Odustanak);
+			}
+		}
+		
+		//------------------------------------------------------------------------
 		
 		dao.sacuvajRezervacije();
 		daoKor.sacuvajKorisnika();
