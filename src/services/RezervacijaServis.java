@@ -52,7 +52,7 @@ public class RezervacijaServis {
 		RezervacijaDAO dao = (RezervacijaDAO) ctx.getAttribute("rezervacijaDAO");
 		ApartmanDAO daoAp = (ApartmanDAO) ctx.getAttribute("apartmanDAO");
 		KorisnikDAO daoKor = (KorisnikDAO) ctx.getAttribute("korisnikDAO");
-		
+		//treba da dodam rezervaciju, na domacinov tacno odredjen apartman sa nekim idjem
 		if(dao == null) {
 			return Response.status(500).build();
 		}
@@ -79,6 +79,7 @@ public class RezervacijaServis {
 			if(a.getIdApartmana().equals(idAp)) {
 				System.out.println(idAp);
 				a.dodajRezervaciju(r);
+				System.out.println("Rezervacija dodata u apartman!");
 				break;
 			}
 		}
@@ -163,12 +164,17 @@ public class RezervacijaServis {
 		ArrayList<Rezervacija> povratnaLista = new ArrayList<Rezervacija>();
 		
 		for(Apartman a : listaAp) {
+			System.out.println("DEBUG: Domacinove rezervacije: " + a.getRezervacije());
+		}
+		
+		for(Apartman a : listaAp) {
 			if(a.getRezervacije() != null) {
 				listaRez = a.getRezervacije();
 				povratnaLista.addAll(listaRez);
+				System.out.println("Povratna lista: " + povratnaLista);
 			}else {
-				continue;
-			}
+				System.out.println("Null lista rezervacija!");
+				continue;			}
 		}
 		
 		System.out.println("Domacinove rezervacije: " + povratnaLista);
