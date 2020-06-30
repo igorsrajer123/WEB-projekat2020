@@ -1,3 +1,7 @@
+
+var idRez = new Array();
+var idAp = new Array();
+
 $(document).ready(function(){
 	
 	$.ajax({
@@ -33,30 +37,12 @@ function proveriKorisnika(korisnik){
 
 		$("#rezervacijeTabela thead tr").append(datumPocetka).append(ukupnaCena).append(domacin).append(status);
 
-
 		for(var i = 0; i < mojeRezervacije.length; i++){
 			let pocetni = new Date(mojeRezervacije[i].pocetniDatum);
 			let stvarnoSad = (JSON.stringify(pocetni)).substr(1,10);
 			if(mojeRezervacije[i].status == "Kreirana" || mojeRezervacije[i].status == "Prihvacena"){
-				lista.append("<tr><td>"+ stvarnoSad + "</td><td>" + mojeRezervacije[i].ukCena + "</td><td>" + "</td><td>" +  mojeRezervacije[i].status +"</td><td><button id='" + mojeRezervacije[i].idRezervacije + "'> Odustanak</button></td></tr>");
-				
-				var idR = mojeRezervacije[i].idRezervacije;
-				var app = mojeRezervacije[i].apartman;
-				document.getElementById(idR).onclick = function fun(){
-					
-					$.ajax({
-						type: 'PUT',
-						url: 'rest/rezervacija/odustanakOdRezervacije/'+ idR + '/' + app,
-						complete: function(data){
-							if(data["status"] == 200){
-								alert("Izmena uspesna!");
-							}else {
-								alert("Izmena neuspesna!");
-							}
-						}
-					})
-				}
-				
+				lista.append("<tr><td>"+ stvarnoSad + "</td><td>" + mojeRezervacije[i].ukCena + "</td><td>" + "</td><td>" +  mojeRezervacije[i].status +"</td><td><button id='" + mojeRezervacije[i].idRezervacije + "' onclick=odustanakRezervacija('" + mojeRezervacije[i].idRezervacije + "','" + mojeRezervacije[i].apartman + "')> Odustanak </button></td></tr>");
+
 				$("#rezervacijeTabela").append(lista);
 			}else if(mojeRezervacije[i].status == "Odustanak"){
 				lista.append("<tr><td>"+ stvarnoSad + "</td><td>" + mojeRezervacije[i].ukCena + "</td><td>" + "</td><td>" +  mojeRezervacije[i].status +"</td></tr>");
@@ -102,3 +88,17 @@ function proveriKorisnika(korisnik){
 }
 
 
+function odustanakRezervacija(idR, idA){
+	$.ajax({
+		type: 'PUT',
+		url: 'rest/rezervacija/odustanakOdRezervacije/'+ idR + '/' + idA,
+		complete: function(data){
+			if(data["status"] == 200){
+				alert("Izmena uspesna!");
+			}else {
+				alert("Izmena neuspesna!");
+			}
+		}
+	})
+	alert("Kraj funkcije!");
+}
