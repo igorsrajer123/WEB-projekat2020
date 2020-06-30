@@ -20,6 +20,7 @@ import javax.ws.rs.core.Response;
 import beans.Apartman;
 import beans.Domacin;
 import beans.Gost;
+import beans.Korisnik;
 import beans.Rezervacija;
 import beans.Rezervacija.Status;
 import dao.ApartmanDAO;
@@ -53,6 +54,11 @@ public class RezervacijaServis {
 		ApartmanDAO daoAp = (ApartmanDAO) ctx.getAttribute("apartmanDAO");
 		KorisnikDAO daoKor = (KorisnikDAO) ctx.getAttribute("korisnikDAO");
 		//treba da dodam rezervaciju, na domacinov tacno odredjen apartman sa nekim idjem
+		
+		//1.treba preko id apartmana da saznam kom domacinu on pripada
+		//2.onda preko dao korisnici nadjem domacina 
+		//3.onda pristupim njegovim apartmanima i dodam tamo na tacno odredjeni apartman sa idjem
+		
 		if(dao == null) {
 			return Response.status(500).build();
 		}
@@ -75,6 +81,23 @@ public class RezervacijaServis {
 		g.dodajRezervaciju(r);
 		
 		ArrayList<Apartman> lista = daoAp.getSveApartmane();
+		ArrayList<Korisnik> listaKorisnika = daoKor.getKorisnici();
+		
+		Apartman nasApartman = daoAp.getPoIdApartmana(idAp); // nas apartman po id smo nasli
+		
+		String domacinApartmana = nasApartman.getDomacin();
+		Domacin dom = null;
+		for(Korisnik k : listaKorisnika) {
+			if(k.getKorisnicko_ime().equals(domacinApartmana)) {
+				dom = (Domacin) k;
+			}
+		}
+		
+		System.out.println("Nadjeni korisnik: " + dom.toString()  + "AAAAAAAAAAAAAAAAAAAAAA");//ronaldo ispisuje
+		Apartman korisnikovApartman = dom.getApartmanPoId(idAp);
+		korisnikovApartman.dodajRezervaciju(r);
+		
+		
 		for(Apartman a : lista) {
 			if(a.getIdApartmana().equals(idAp)) {
 				System.out.println(idAp);

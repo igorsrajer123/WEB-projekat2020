@@ -3,6 +3,8 @@ package beans;
 import java.util.ArrayList;
 import java.util.List;
 
+import jdk.nashorn.internal.runtime.ListAdapter;
+
 public class Domacin extends Korisnik {
 
 	private ArrayList<Apartman> apartmani = new ArrayList<Apartman>();
@@ -49,4 +51,29 @@ public class Domacin extends Korisnik {
 	public void dodajApartman(Apartman a) {
 		apartmani.add(a);
 	}
+	
+	public Apartman getApartmanPoId(String id) {
+		Apartman apartman = null;
+		
+		for(Apartman a : apartmani) {
+			if(a.getIdApartmana().equals(id)) {
+				apartman = a;
+				break;
+			}
+		}
+		
+		return apartman;
+	}
+	
+	public void zameniApartman(Apartman a, String idAp) {
+		for(Apartman app : apartmani) {
+			if(app.getIdApartmana().equals(idAp)) {
+				apartmani.remove(app);
+				apartmani.add(a);
+				System.out.println("USPELI SMO DA ZAMENIMO TAJ APARTMAN BRE! !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+				break;
+			}
+		}
+	}
+	
 }
