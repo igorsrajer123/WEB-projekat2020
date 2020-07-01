@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -118,6 +119,91 @@ public class KomentarServis {
 		System.out.println("Komentari apartmana pronadjeni!");
 		return listaKomentara;
 	}
+	
+	@GET
+	@Path("/getKomentareMogApartmana/{idApartmana}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ArrayList<Komentar> getKomentareMogApartmana(@PathParam("idApartmana") String idAp, @Context HttpServletRequest rq){
+		
+		Domacin d = (Domacin) rq.getSession().getAttribute("korisnik");
+		Apartman a = d.getApartmanPoId(idAp);
+		
+		ArrayList<Komentar> lista = new ArrayList<Komentar>();
+		
+		for(Komentar k : a.getKomentari()){
+			lista.add(k);
+		}
+		
+		return lista;
+	}
+	
+	@PUT
+	@Path("/setVidljivost/{idKomentara}")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response setVidljivost(@PathParam("idKomentara") String idKom, @Context HttpServletRequest rq) {
+		
+		KomentarDAO komentari = (KomentarDAO) ctx.getAttribute("komentarDAO");
+		ApartmanDAO apartmani = (ApartmanDAO) ctx.getAttribute("apartmanDAO");
+		
+		ArrayList<Komentar> lista = komentari.getSveKomentare();
+		
+		//izmena komentara na kontekstu
+		for(Komentar k : lista) {
+			if(k.getIdKomentara().equals(idKom)) {
+				if(k.isKomentarVidljiv()) {
+					k.setKomentarVidljiv(false);
+				}else if(!k.isKomentarVidljiv()) {
+					k.setKomentarVidljiv(true);
+				}
+			}
+		}
+		
+		//izmena kod korisnika u njegovom apartmanu
+		Domacin d = (Domacin) rq.getSession().getAttribute("korisnik");
+		
+		ArrayList<Apartman> korisnikoviApartmani =  d.getApartmani();
+		ArrayList<Komentar> korisnikoviKomentari = new ArrayList<Komentar>();
+		
+		for(Apartman ap : korisnikoviApartmani) {
+			korisnikoviKomentari.addAll(ap.getKomentari());
+		}
+		
+		for(Komentar k : korisnikoviKomentari) {
+			if(k.getIdKomentara().equals(idKom)) {
+				if(k.isKomentarVidljiv()) {
+					k.setKomentarVidljiv(false);
+				}else if(!k.isKomentarVidljiv()) {
+					k.setKomentarVidljiv(true);
+				}
+			}
+		}
+		
+		//izmena u tacno odredjenom apartmanu na kontekstu u kom se nalazi
+		ArrayList<Apartman> novaLista = apartmani.getSveApartmane();
+		ArrayList<Komentar> komentariLista = new ArrayList<Komentar>();
+		
+		for(Apartman a : novaLista) {
+			komentariLista.addAll(a.getKomentari());
+		}
+		
+		for(Komentar kom : komentariLista) {
+			if(kom.getIdKomentara().equals(idKom)) {
+				if(kom.isKomentarVidljiv()) {
+					kom.setKomentarVidljiv(false);
+				}else if(!kom.isKomentarVidljiv()) {
+					kom.setKomentarVidljiv(true);
+				}
+			}
+		}
+		
+		komentari.sacuvajKomentare();
+		apartmani.sacuvajApartmane();
+		
+		return Response.ok().build();
+	}
+	
+	
 	
 	
 	
