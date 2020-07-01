@@ -203,6 +203,8 @@ function prikazApartmana(korisnik) {
 
 								let id = apartmani[i].idApartmana;
 
+								$("#apartmaniTabela").append(lista);
+								
 								document.getElementById(apartmani[i].idApartmana).onclick =function fun(){
 									$.ajax({
 										type: 'PUT',
@@ -218,7 +220,7 @@ function prikazApartmana(korisnik) {
 									})
 								}
 
-							$("#apartmaniTabela").append(lista);
+		
 							}else {
 								lista.append("<tr><td>" + i + "</td>"
 								+ "<td>" + apartmani[i].brSoba + "</td> " + "<td>" 
