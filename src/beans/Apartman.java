@@ -127,11 +127,11 @@ public class Apartman {
 		this.domacin = domacin;
 	}
 
-	public ArrayList<Komentar> getKomentar() {
+	public ArrayList<Komentar> getKomentari() {
 		return komentari;
 	}
 
-	public void setKomentar(ArrayList<Komentar> komentari) {
+	public void setKomentari(ArrayList<Komentar> komentari) {
 		this.komentari = komentari;
 	}
 

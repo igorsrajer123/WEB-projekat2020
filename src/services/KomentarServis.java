@@ -93,6 +93,31 @@ public class KomentarServis {
 		return lista;
 	}
 	
+	@GET
+	@Path("/getKomentareApartmana/{idApartmana}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ArrayList<Komentar> getKomentareApartmana(@PathParam("idApartmana") String idAp){
+		
+		KomentarDAO komentari = (KomentarDAO) ctx.getAttribute("komentarDAO");
+		ApartmanDAO apartmani = (ApartmanDAO) ctx.getAttribute("apartmanDAO");
+		
+		if(komentari == null) {
+			System.out.println("Nema komentara!!!!");
+			return null;
+		}
+		
+		ArrayList<Komentar> listaKomentara = new ArrayList<Komentar>();
+		
+		Apartman a = apartmani.getPoIdApartmana(idAp);
+		for(Komentar k : a.getKomentari()) {
+			if(k.isKomentarVidljiv()) {
+				listaKomentara.add(k);
+			}
+		}
+		
+		System.out.println("Komentari apartmana pronadjeni!");
+		return listaKomentara;
+	}
 	
 	
 	

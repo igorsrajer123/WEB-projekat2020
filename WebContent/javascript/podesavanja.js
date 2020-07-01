@@ -150,24 +150,21 @@ function prikazApartmana(korisnik) {
 				lista.empty();
 				
 				console.log(apartmani.length);
-
-				let red = "<td> </td>";
-				$("#apartmaniTabela thead tr").append(red);
 			
            		for(var i = 0; i < apartmani.length;i++){
 					if(apartmani[i].lokacija != null){
-						lista.append("<tr id='" + apartmani[i].idApartmana + "' onclick=window.location.href='novaRezervacija.html?idApartmana=" +apartmani[i].idApartmana + "'><td>" + i + "</td>"
+						lista.append("<tr id='" + apartmani[i].idApartmana + "'><td>" + i + "</td>"
 						+ "<td>" + apartmani[i].brSoba + "</td> " + "<td>" 
 						+ apartmani[i].brGostiju + "</td>" + "<td>" + apartmani[i].lokacija.adresa.naseljenoMesto + "</td>"
 						+ "<td>" + apartmani[i].domacin + "</td>" + "<td>" + apartmani[i].cenaPoNoci
-						+ "</td>" + "<td> <button id='" + apartmani[i].idApartmana + "'> Rezerviši </button></td> </tr>");
+						+ "</td>" + "<td> <button id='" + apartmani[i].idApartmana + "'  onclick=window.location.href='novaRezervacija.html?idApartmana=" +apartmani[i].idApartmana + "'> Rezerviši </button></td> <td> <button onclick=pregledKomentara('" + apartmani[i].idApartmana + "')> Komentari </button></td> </tr>");
 						$("#apartmaniTabela").append(lista);
 					}else{
-						lista.append("<tr id='" + apartmani[i].idApartmana + "' onclick=window.location.href='novaRezervacija.html?idApartmana=" +apartmani[i].idApartmana + "'><td>" + i + "</td>"
+						lista.append("<tr id='" + apartmani[i].idApartmana + "'><td>" + i + "</td>"
 						+ "<td>" + apartmani[i].brSoba + "</td> " + "<td>" 
 						+ apartmani[i].brGostiju + "</td>" + "<td>" + apartmani[i].lokacija + "</td>"
 						+ "<td>" + apartmani[i].domacin + "</td>" + "<td>" + apartmani[i].cenaPoNoci
-						+ "</td>" + "<td> <button id='" + apartmani[i].idApartmana + "'> Rezerviši </button></td> </tr>");
+						+ "</td>" + "<td> <button id='" + apartmani[i].idApartmana + "' onclick=window.location.href='novaRezervacija.html?idApartmana=" +apartmani[i].idApartmana + "'> Rezerviši </button></td> <td> <button onclick=pregledKomentara('" + apartmani[i].idApartmana + "')> Komentari</button></td> </tr>");
 						$("#apartmaniTabela").append(lista);
 					}
 				}
@@ -320,3 +317,7 @@ function prikazApartmana(korisnik) {
 
 }
 
+function pregledKomentara(idAp){
+
+	window.location.href = "pregledKomentara.html?idApartmana=" + idAp;
+}
