@@ -253,8 +253,8 @@ public class ApartmanServis {
 		
 		Domacin d = (Domacin) rq.getSession().getAttribute("korisnik");
 		System.out.println(d.getKorisnicko_ime());
+		a.setDomacin(d.getKorisnicko_ime());
 		
-	
 		System.out.println(d.getApartmani());
 		d.dodajApartman(a);
 	
@@ -265,8 +265,7 @@ public class ApartmanServis {
 		apartmani.sacuvajApartmane();
 		korisnici.sacuvajKorisnika();
 		
-		return Response.ok().build();
-		
+		return Response.ok().build();	
 	}
 	
 	
@@ -316,6 +315,21 @@ public class ApartmanServis {
 			}
 		}
 		
+		
+		String domacinApartmana = a.getDomacin();
+		System.out.println(a.getDomacin());
+		Domacin dom = null;
+		for(Korisnik k : korisnici.getKorisnici()) {
+			if(k.getKorisnicko_ime().equals(domacinApartmana)) {
+				dom = (Domacin) k;
+			}
+		}
+		System.out.println(dom.getKorisnicko_ime());
+		
+		
+		dom.zameniApartman(a, id);
+		System.out.println("JEL OVDE BIO");
+		korisnici.sacuvajKorisnika();
 		dao.sacuvajApartmane();
 		return Response.ok().build();
 	}

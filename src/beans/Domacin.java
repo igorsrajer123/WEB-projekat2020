@@ -66,6 +66,7 @@ public class Domacin extends Korisnik {
 	}
 	
 	public void zameniApartman(Apartman a, String idAp) {
+		System.out.println("MOLIM TE UDJI U MENE");
 		for(Apartman app : apartmani) {
 			if(app.getIdApartmana().equals(idAp)) {
 				apartmani.remove(app);

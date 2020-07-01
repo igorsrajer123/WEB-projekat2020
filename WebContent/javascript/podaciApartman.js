@@ -41,6 +41,7 @@ $(document).ready(function(){
 		complete: function(data){
 			
             let apartman = data.responseJSON;
+            var domacinApp = apartman.domacin;
             
             let tip = "<td> <b> <i>" + apartman.tip + "</i></b></td>";
             $("#k").append(tip);
@@ -68,124 +69,131 @@ $(document).ready(function(){
                     document.getElementById("statusLabela").innerHTML = "<b>Aktivno</b>";
                 }
             })
-		}
-    })
+            $("#izmeniApp").click(function(event){
+                event.preventDefault();
+
+                izmeniApartman(data.responseJSON, number);
+            });
+        }
+    });
 
     $("#odustani").click(function(event){
         event.preventDefault();
 
         window.location.href = "index.html";
-    })
+    });
 
-    $("#izmeniApp").click(function(event){
-        event.preventDefault();
-
-        formirajAdresu();
-
-        let geoSirina = document.getElementById("geoSirina").textContent;
-        let geoDuzina = document.getElementById("geoDuzina").textContent;
-
-        podaciLokacija = {
-            "geoSirina" : geoSirina,
-            "geoDuzina" : geoDuzina,
-            "adresa" : podaciAdresa
-        }
-
-        let ulicaBroj =  document.getElementById("ulica").value;
-
-        if(ulicaBroj == "" || ulicaBroj == " "){
-            document.getElementById("greskaUlica").hidden = false;
-            ulicaIspravna = false;
-        }else {
-            document.getElementById("greskaUlica").hidden = true;
-            ulicaIspravna = true;
-        }
-
-        let mesto = document.getElementById("mesto").value;
-
-        if(mesto == "" || mesto == " "){
-            document.getElementById("greskaMesto").hidden = false;
-            mestoIspravno = false;
-        }else {
-            document.getElementById("greskaMesto").hidden = true;
-            mestoIspravno = true;
-        }
-
-        let postBr = document.getElementById("postanskiBroj").value;
-
-        if(postBr == "" || postBr == " "){
-            document.getElementById("greskaPostanskiBroj").hidden = false;
-            postanskiBrIspravan = false;
-        }else {
-            document.getElementById("greskaPostanskiBroj").hidden = true;
-            postanskiBrIspravan = true;
-        }
-
-        let statusApartmana = document.getElementById("statusLabela").textContent;
-        let brSobaApartmana = document.getElementById("brSoba").value;
-        let brGostijuApartmana = document.getElementById("brGostiju").value;
-        let cenaApartmana = document.getElementById("cena").value;
-
-        if(brSobaApartmana == "" || brSobaApartmana == " "){
-            document.getElementById("greskaBrSobaPor").hidden = false;
-            brSobaIspravan = false;
-        }else {
-            document.getElementById("greskaBrSobaPor").hidden = true;
-            brSobaIspravan = true;
-        }
-
-        if(brGostijuApartmana == "" || brGostijuApartmana == " "){
-            document.getElementById("greskaBrGostijuPor").hidden = false;
-            brGostijuIspravan = false;
-        }else {
-            document.getElementById("greskaBrGostijuPor").hidden = true;
-            brGostijuIspravan = true;
-        }
-
-        if(cenaApartmana == "" || cenaApartmana == " "){
-            document.getElementById("greskaCenaPor").hidden = false;
-            cenaIspravna = false;
-        }else {
-            document.getElementById("greskaCenaPor").hidden = true;
-            cenaIspravna = true;
-        }
-
-        postavljanjeSadrzaja();
-        alert(podaciSadrzaj);
-
-        if(brGostijuIspravan == true && brSobaIspravan == true && cenaIspravna == true && ulicaIspravna == true && mestoIspravno == true && postanskiBrIspravan == true){
-
-            podaciZaSlanje = { 
-				"status": statusApartmana,
-                "brSoba": brSobaApartmana,
-                "brGostiju": brGostijuApartmana,
-                "cenaPoNoci": cenaApartmana,
-                "lokacija": podaciLokacija,
-                "sadrzajAp": podaciSadrzaj
-            }
-
-            var d = JSON.stringify(podaciZaSlanje);
-            alert(d);
-
-            $.ajax({
-                type: 'PUT',
-                url: 'rest/apartman/izmeniApartman/'+number,
-                data: d,
-                contentType: 'application/json',
-                dataType: 'json',
-                complete: function(data){
-
-                    if(data["status"] == 200){
-                        window.location.href = "index.html";
-                    }else {
-                        alert("Apartman neuspesno izmenjen!");
-                    }
-                }
-            })
-        }
-
-    })
 });
+
+function izmeniApartman(apartman, number) {
+    formirajAdresu();
+
+    let geoSirina = document.getElementById("geoSirina").textContent;
+    let geoDuzina = document.getElementById("geoDuzina").textContent;
+
+    podaciLokacija = {
+        "geoSirina" : geoSirina,
+        "geoDuzina" : geoDuzina,
+        "adresa" : podaciAdresa
+    }    
+   let ulicaBroj =  document.getElementById("ulica").value;
+
+    if(ulicaBroj == "" || ulicaBroj == " "){
+        document.getElementById("greskaUlica").hidden = false;
+        ulicaIspravna = false;
+    }else {
+        document.getElementById("greskaUlica").hidden = true;
+        ulicaIspravna = true;
+    }
+
+    let mesto = document.getElementById("mesto").value;
+
+    if(mesto == "" || mesto == " "){
+        document.getElementById("greskaMesto").hidden = false;
+        mestoIspravno = false;
+    }else {
+        document.getElementById("greskaMesto").hidden = true;
+        mestoIspravno = true;
+    }
+
+    let postBr = document.getElementById("postanskiBroj").value;
+
+    if(postBr == "" || postBr == " "){
+        document.getElementById("greskaPostanskiBroj").hidden = false;
+        postanskiBrIspravan = false;
+    }else {
+        document.getElementById("greskaPostanskiBroj").hidden = true;
+        postanskiBrIspravan = true;
+    }
+
+    let statusApartmana = document.getElementById("statusLabela").textContent;
+    let brSobaApartmana = document.getElementById("brSoba").value;
+    let brGostijuApartmana = document.getElementById("brGostiju").value;
+    let cenaApartmana = document.getElementById("cena").value;
+
+    if(brSobaApartmana == "" || brSobaApartmana == " "){
+    document.getElementById("greskaBrSobaPor").hidden = false;
+    brSobaIspravan = false;
+    }else {
+    document.getElementById("greskaBrSobaPor").hidden = true;
+    brSobaIspravan = true;
+    }
+
+    if(brGostijuApartmana == "" || brGostijuApartmana == " "){
+        document.getElementById("greskaBrGostijuPor").hidden = false;
+        brGostijuIspravan = false;
+    }else {
+        document.getElementById("greskaBrGostijuPor").hidden = true;
+        brGostijuIspravan = true;
+    }
+
+    if(cenaApartmana == "" || cenaApartmana == " "){
+        document.getElementById("greskaCenaPor").hidden = false;
+        cenaIspravna = false;
+    }else {
+        document.getElementById("greskaCenaPor").hidden = true;
+        cenaIspravna = true;
+    }
+
+    postavljanjeSadrzaja();
+    alert(podaciSadrzaj);
+    alert(apartman.domacin + "Ovog domacina saljem");
+
+    if(brGostijuIspravan == true && brSobaIspravan == true && cenaIspravna == true && ulicaIspravna == true && mestoIspravno == true && postanskiBrIspravan == true){
+
+    podaciZaSlanje = { 
+            "idApartmana": number,
+            "domacin": apartman.domacin,
+            "status": statusApartmana,
+            "brSoba": brSobaApartmana,
+            "brGostiju": brGostijuApartmana,
+            "cenaPoNoci": cenaApartmana,
+            "lokacija": podaciLokacija,
+            "sadrzajAp": podaciSadrzaj
+        }
+
+        var d = JSON.stringify(podaciZaSlanje);
+        alert(d);
+
+        $.ajax({
+            type: 'PUT',
+            url: 'rest/apartman/izmeniApartman/'+number,
+            data: d,
+            contentType: 'application/json',
+            dataType: 'json',
+            complete: function(data){
+
+                if(data["status"] == 200){
+                    window.location.href = "index.html";
+                }else {
+                    alert("Apartman neuspesno izmenjen!");
+                }
+            }
+        });
+    }   
+}
+
+
 
 //fja za uzimanje parametra iz url-a koji smo prethodno poslali
 function getUrlVars() {
@@ -235,6 +243,8 @@ function ucitajSadrzajApartmana(){
     })
 }
 
+
+
 function ucitajCekiranSadrzaj(id){
 
     if(document.getElementById(id).checked){
@@ -274,6 +284,8 @@ function postavljanjeSadrzaja(){
         }
     })
 }
+
+
 
 function pomocnaFunkcija(korisnik){
     if(korisnik == undefined){

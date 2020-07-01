@@ -75,7 +75,7 @@ function proveriKorisnika(korisnik){
 				let mojeRezervacije = data.responseJSON;
 				
 				for(var i = 0; i < mojeRezervacije.length; i++){
-					
+					/*
 					if(mojeRezervacije[i].status == "Kreirana"){
 						
 						let pocetni = new Date(mojeRezervacije[i].pocetniDatum);
@@ -84,7 +84,7 @@ function proveriKorisnika(korisnik){
 							 		"<button> Prihvati </button></td><td><button> Odbij </button></td></tr>");				
 						$("#rezervacijeTabela").append(lista);
 
-					}else if(mojeRezervacije[i].status == "Prihvacena"){ 
+					}else*/ if(mojeRezervacije[i].status == "Kreirana"){ //prihvaceno
 						
 						let pocetni = new Date(mojeRezervacije[i].pocetniDatum);
 						let stvarnoSad = (JSON.stringify(pocetni)).substr(1,10);

@@ -95,6 +95,7 @@ public class RezervacijaServis {
 		
 		System.out.println("Nadjeni korisnik: " + dom.toString()  + "AAAAAAAAAAAAAAAAAAAAAA");//ronaldo ispisuje
 		Apartman korisnikovApartman = dom.getApartmanPoId(idAp);
+		System.out.println(korisnikovApartman);
 		korisnikovApartman.dodajRezervaciju(r);
 		
 		/*
