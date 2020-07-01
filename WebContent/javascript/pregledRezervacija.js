@@ -47,7 +47,7 @@ function proveriKorisnika(korisnik){
 			}else if(mojeRezervacije[i].status == "Odustanak"){
 				lista.append("<tr><td>"+ stvarnoSad + "</td><td>" + mojeRezervacije[i].ukCena + "</td><td>" + "</td><td>" +  mojeRezervacije[i].status +"</td></tr>");
 				$("#rezervacijeTabela").append(lista);
-			}else if(mojeRezervacije[i].status == "Odbijena"){
+			}else if(mojeRezervacije[i].status == "Odbijena" || mojeRezervacije[i].status == "Zavrsena"){
 				lista.append("<tr><td>"+ stvarnoSad + "</td><td>" + mojeRezervacije[i].ukCena + "</td><td>" + "</td><td>" +  mojeRezervacije[i].status +"</td></tr>");
 				$("#rezervacijeTabela").append(lista);
 			}
@@ -75,6 +75,7 @@ function proveriKorisnika(korisnik){
 				let mojeRezervacije = data.responseJSON;
 				
 				for(var i = 0; i < mojeRezervacije.length; i++){
+					
 					if(mojeRezervacije[i].status == "Kreirana"){
 						
 						let pocetni = new Date(mojeRezervacije[i].pocetniDatum);
@@ -83,15 +84,15 @@ function proveriKorisnika(korisnik){
 							 		"<button> Prihvati </button></td><td><button> Odbij </button></td></tr>");				
 						$("#rezervacijeTabela").append(lista);
 
-					}else if(mojeRezervacije[i].status == "Prihvacena"){
+					}else if(mojeRezervacije[i].status == "Prihvacena"){ 
 						
 						let pocetni = new Date(mojeRezervacije[i].pocetniDatum);
 						let stvarnoSad = (JSON.stringify(pocetni)).substr(1,10);
-						lista.append("<tr><td>" + mojeRezervacije[i].gost + "</td><td>"+ stvarnoSad + "</td><td>" + mojeRezervacije[i].ukCena +  "</td><td>"+ mojeRezervacije[i].status +"</td><td>"+
-											"</td><td><button> Odbij </button></td></tr>");
+						lista.append("<tr><td>" + mojeRezervacije[i].gost + "</td><td>"+ stvarnoSad + "</td><td>" + mojeRezervacije[i].ukCena +  "</td><td>"+ mojeRezervacije[i].status +"</td>"+
+											"<td><button onclick=zavrsenaRezervacija('" + mojeRezervacije[i].idRezervacije + "','" + mojeRezervacije[i].apartman + "')> Završi </button></td><td><button> Odbij </button></td></tr>");
 						$("#rezervacijeTabela").append(lista);
 
-					}else if(mojeRezervacije[i].status == "Odustanak" || mojeRezervacije[i].status == "Odbijena"){
+					}else if(mojeRezervacije[i].status == "Odustanak" || mojeRezervacije[i].status == "Odbijena" || mojeRezervacije[i].status == "Zavrsena"){
 
 						let pocetni = new Date(mojeRezervacije[i].pocetniDatum);
 						let stvarnoSad = (JSON.stringify(pocetni)).substr(1,10);
@@ -148,4 +149,19 @@ function odustanakRezervacija(idR, idA){
 		}
 	})
 	alert("Kraj funkcije!");
+}
+
+function zavrsenaRezervacija(idR, idA){
+	$.ajax({
+		type: 'PUT',
+		url: 'rest/rezervacija/zavrsiRezervaciju/' + idR + '/' + idA,
+		complete: function(data){
+			if(data["status"] == 200){
+				alert("Izmena uspesna!");
+			}else {
+				alert("Izmena neuspesna!");
+			}
+		}
+	})
+	alert("This is the end!");
 }

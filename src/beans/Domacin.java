@@ -70,7 +70,7 @@ public class Domacin extends Korisnik {
 			if(app.getIdApartmana().equals(idAp)) {
 				apartmani.remove(app);
 				apartmani.add(a);
-				System.out.println("USPELI SMO DA ZAMENIMO TAJ APARTMAN BRE! !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+				System.out.println("USPELI SMO DA ZAMENIMO");
 				break;
 			}
 		}

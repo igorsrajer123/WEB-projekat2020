@@ -22,6 +22,7 @@ import beans.Domacin;
 import beans.Gost;
 import beans.Korisnik;
 import beans.Rezervacija;
+import beans.Korisnik.Uloga;
 import beans.Rezervacija.Status;
 import dao.ApartmanDAO;
 import dao.KorisnikDAO;
@@ -222,5 +223,67 @@ public class RezervacijaServis {
 		
 		System.out.println("Domacinove rezervacije: " + povratnaLista);
 		return povratnaLista;
+	}
+	
+	@PUT
+	@Path("/zavrsiRezervaciju/{idRezervacije}/{idApartmana}")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response zavrsiRezervaciju(@PathParam("idRezervacije") String idRez, @PathParam("idApartmana") String idAp, @Context HttpServletRequest rq) {
+		
+		RezervacijaDAO rezervacijeDAO = (RezervacijaDAO) ctx.getAttribute("rezervacijaDAO");
+		KorisnikDAO korisniciDAO = (KorisnikDAO) ctx.getAttribute("korisnikDAO");
+
+		//izmena na kontekstu rezervacija
+		ArrayList<Rezervacija> listaR = rezervacijeDAO.getSveRezervacije();
+
+		for(Rezervacija r : listaR) {
+			if(r.getIdRezervacije().equals(idRez)) {
+				r.setStatus(Status.Zavrsena);
+				System.out.println("IZMENJENO NA KONTEKSTU");
+				break;
+			}
+		}
+		
+		//izmena kod gosta kome pripada rezervacija
+		ArrayList<Korisnik> listaK = korisniciDAO.getKorisnici();
+		ArrayList<Gost> listaGosti = new ArrayList<Gost>();
+		
+		Gost g = null;
+		for(Korisnik k : listaK) {
+			if(k.getUloga().equals(Uloga.Gost)) {
+				g = (Gost) k;
+				listaGosti.add(g);
+			}
+		}
+		System.out.println("Lista gostiju: " + listaGosti);
+		
+		for(Gost g2 : listaGosti) {
+			for(Rezervacija r2 : g2.getRezervacije()) {
+				if(r2.getIdRezervacije().equals(idRez)) {
+					r2.setStatus(Status.Zavrsena);
+					System.out.println("Status rezervacije promenjen u: " + r2.getStatus());
+					break;
+				}
+			}
+		}
+		
+		//izmena kod domacina, u njegovom apartmanu(sa sesije ga uzimamo)
+		Domacin d = (Domacin) rq.getSession().getAttribute("korisnik");
+
+		Apartman apDomacina = d.getApartmanPoId(idAp);
+		
+		ArrayList<Rezervacija> rez = apDomacina.getRezervacije();
+		
+		for(Rezervacija r : rez) {
+			if(r.getIdRezervacije().equals(idRez)) {
+				r.setStatus(Status.Zavrsena);
+			}
+		}
+		
+		rezervacijeDAO.sacuvajRezervacije();
+		korisniciDAO.sacuvajKorisnika();
+		
+		return Response.ok().build();
 	}
 }

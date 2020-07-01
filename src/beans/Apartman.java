@@ -223,4 +223,13 @@ public class Apartman {
 			}
 		}
 	}
+	
+	public void setZavrsetak(String id) {
+		for(Rezervacija r : rezervacije) {
+			if(r.getIdRezervacije().equals(id)) {
+				r.setStatus(Rezervacija.Status.Odustanak);
+				System.out.println("Rezervacija zavrsena kod apartmana!");
+			}
+		}
+	}
 }
