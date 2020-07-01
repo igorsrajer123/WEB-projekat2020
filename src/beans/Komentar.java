@@ -1,39 +1,44 @@
 package beans;
 
+import java.util.UUID;
+
 public class Komentar {
 	
-	private Gost gost;
-	private Apartman apartman;
+	private String gost;
+	private String apartman;
 	private String tekst;
 	private double ocena;
-	
+	private boolean komentarVidljiv = true;
+	private String idKomentara = UUID.randomUUID().toString();
 
 	public Komentar() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	
-	public Komentar(Gost gost, Apartman apartman, String tekst, double ocena) {
+	public Komentar(String gost, String apartman, String tekst, double ocena, boolean vidljiv, String id) {
 		super();
 		this.gost = gost;
 		this.apartman = apartman;
 		this.tekst = tekst;
 		this.ocena = ocena;
+		this.komentarVidljiv = vidljiv;
+		this.idKomentara = id;
 	}
 
-	public Gost getGost() {
+	public String getGost() {
 		return gost;
 	}
 
-	public void setGost(Gost gost) {
+	public void setGost(String gost) {
 		this.gost = gost;
 	}
 
-	public Apartman getApartman() {
+	public String getApartman() {
 		return apartman;
 	}
 
-	public void setApartman(Apartman apartman) {
+	public void setApartman(String apartman) {
 		this.apartman = apartman;
 	}
 
@@ -55,7 +60,23 @@ public class Komentar {
 
 	@Override
 	public String toString() {
-		return "Komentar [gost=" + gost + ", apartman=" + apartman + ", tekst=" + tekst + ", ocena=" + ocena + "]";
+		return "Komentar [gost=" + gost + ", apartman=" + apartman + ", tekst=" + tekst + ", ocena=" + ocena + ", vidljiv= " + komentarVidljiv + ", idKomentara= " + idKomentara + "]";
+	}
+
+	public boolean isKomentarVidljiv() {
+		return komentarVidljiv;
+	}
+
+	public void setKomentarVidljiv(boolean komentarVidljiv) {
+		this.komentarVidljiv = komentarVidljiv;
+	}
+
+	public String getIdKomentara() {
+		return idKomentara;
+	}
+
+	public void setIdKomentara(String idKomentara) {
+		this.idKomentara = idKomentara;
 	}
 	
 }

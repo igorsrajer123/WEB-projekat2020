@@ -24,7 +24,7 @@ public class Apartman {
 	private ArrayList<Date> datumiZaIzdavanje;
 	private ArrayList<Date> dostupnostPoDatumima;
 	private String domacin;
-	private Komentar komentar;
+	private ArrayList<Komentar> komentari = new ArrayList<Komentar>();
 	private String slika;// vise slika treba
 	private double cenaPoNoci;
 	private String vrZaPrijavu;
@@ -51,7 +51,6 @@ public class Apartman {
 		this.datumiZaIzdavanje = datum;
 		this.dostupnostPoDatumima = new ArrayList<Date>();
 		this.domacin = d;
-		this.komentar = null;
 		this.slika = slika;
 		this.cenaPoNoci = cena;
 		this.vrZaOdjavu = "";
@@ -78,7 +77,7 @@ public class Apartman {
 	public String toString() {
 		return "Apartman [tip=" + tip + ", brSoba=" + brSoba + ", brGostiju=" + brGostiju + ", lokacija=" + lokacija
 				+ ", datumiZaIzdavanje=" + datumiZaIzdavanje + ", dostupnostPoDatumima=" + dostupnostPoDatumima
-				+ ", domacin=" + domacin + ", komentar=" + komentar + ", slika=" + slika + ", cenaPoNoci=" + cenaPoNoci
+				+ ", domacin=" + domacin + ", komentar=" + komentari + ", slika=" + slika + ", cenaPoNoci=" + cenaPoNoci
 				+ ", vrZaPrijavu=" + vrZaPrijavu + ", vrZaOdjavu=" + vrZaOdjavu + ", status=" + status + ", sadrzajAp="
 				+ sadrzajAp + ", rezervacije=" + rezervacije + ", uklonjen=" + uklonjen + ", idApartmana=" + idApartmana
 				+ "]";
@@ -128,12 +127,12 @@ public class Apartman {
 		this.domacin = domacin;
 	}
 
-	public Komentar getKomentar() {
-		return komentar;
+	public ArrayList<Komentar> getKomentar() {
+		return komentari;
 	}
 
-	public void setKomentar(Komentar komentar) {
-		this.komentar = komentar;
+	public void setKomentar(ArrayList<Komentar> komentari) {
+		this.komentari = komentari;
 	}
 
 	public String getSlika() {
@@ -210,16 +209,13 @@ public class Apartman {
 	
 	//dodajemo apartmanu novu rezervaciju u listu
 	public void dodajRezervaciju(Rezervacija r) {
-		System.out.println("USAO SAM OVDE!");
 		rezervacije.add(r);
-		System.out.println("Ovde isto!");
 	}
 	
 	public void setOdustanak(String id) {
 		for(Rezervacija r : rezervacije) {
 			if(r.getIdRezervacije().equals(id)) {
 				r.setStatus(Rezervacija.Status.Odustanak);
-				System.out.println("Odustanak rezervacije (iz apartmana)!");
 			}
 		}
 	}
@@ -228,8 +224,11 @@ public class Apartman {
 		for(Rezervacija r : rezervacije) {
 			if(r.getIdRezervacije().equals(id)) {
 				r.setStatus(Rezervacija.Status.Odustanak);
-				System.out.println("Rezervacija zavrsena kod apartmana!");
 			}
 		}
+	}
+	
+	public void dodajKomentar(Komentar k) {
+		komentari.add(k);
 	}
 }
