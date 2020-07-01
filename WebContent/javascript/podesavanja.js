@@ -40,6 +40,7 @@ function dodatneOpcije(korisnik){
 		$("#acc_buttons").append("<button type='submit' id='korisnici_Btn' onclick=pregledKorisnika()>Pregled korisnika </button> <br/>");
 		$("#acc_buttons").append("<button type='submit' id='sadrzaj_Btn' onclick=pregledSadrzajaApartmana()> Pregled sadržaja apartmana </button><br/>");
 		$("#acc_buttons").append("<button type='submit' id='rezervacije_Btn' onclick=pregledRezervacija()> Pregled svih rezervacija </button><br/>");
+		$("#acc_buttons").append("<button type='submit' id='komentari_Btn' onclick=pregledKomentara()> Pegled svih komentara </button> <br/>");
 	}else if(korisnik.uloga == "Gost"){
 		$("#acc_buttons").append("<button type='submit' id='rezervacije' onclick=pregledRezervacija()> Moje rezervacije </button> <br/>");
 	}else if(korisnik.uloga == "Domacin"){
@@ -90,6 +91,10 @@ function pregledSadrzajaApartmana(){
 
 function pregledRezervacija(){
 	window.location.href = "pregledRezervacija.html";
+}
+
+function pregledKomentara(){
+	window.location.href = "pregledKomentara.html";
 }
 
 function pozdravPoruka(korisnik) {
