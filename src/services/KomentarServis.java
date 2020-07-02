@@ -7,6 +7,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -22,6 +23,8 @@ import beans.Domacin;
 import beans.Gost;
 import beans.Komentar;
 import beans.Korisnik;
+import beans.Rezervacija;
+import beans.Rezervacija.Status;
 import dao.ApartmanDAO;
 import dao.KomentarDAO;
 import dao.KorisnikDAO;
@@ -203,8 +206,42 @@ public class KomentarServis {
 		return Response.ok().build();
 	}
 	
-	
-	
-	
-	
+	@GET
+	@Path("/moguceOstavitiKomentarApartmani")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public ArrayList<Apartman> moguceOstavitiKomentar(@Context HttpServletRequest rq) {
+		
+		ApartmanDAO apartmani = (ApartmanDAO) ctx.getAttribute("apartmanDAO");
+		
+		Gost g = (Gost) rq.getSession().getAttribute("korisnik");
+		
+		ArrayList<Rezervacija> gostoveRezervacije = g.getRezervacije();
+		ArrayList<Rezervacija> rezervacijeKojeTrazimo = new ArrayList<Rezervacija>();
+		
+		for(Rezervacija r : gostoveRezervacije) {
+			if(r.getStatus() == Status.Odbijena || r.getStatus() == Status.Zavrsena) {
+				rezervacijeKojeTrazimo.add(r);
+			}
+		}
+		
+		ArrayList<Apartman> lista = apartmani.getAktivne();
+		ArrayList<Apartman> apartmaniKojeTrazimo = new ArrayList<Apartman>();
+		ArrayList<String> idApartmana = new  ArrayList<String>();
+		
+		for(Rezervacija r : rezervacijeKojeTrazimo) {
+			idApartmana.add(r.getApartman());
+		}
+		
+		for(Apartman a : lista) {
+			for(String id : idApartmana) {
+				if(id.equals(a.getIdApartmana())) {
+					apartmaniKojeTrazimo.add(a);
+				}
+			}
+		}
+		
+		System.out.println("------------------------------ : " + apartmaniKojeTrazimo);
+		return apartmaniKojeTrazimo;
+	}
 }

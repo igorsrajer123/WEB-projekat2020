@@ -4,34 +4,14 @@ $(document).ready(function(){
         type: 'GET',
         url: 'rest/korisnik/getKorisnik',
         complete: function(data){
+
+            var number = getUrlVars()["idApartmana"];
+
             pomocnaFunkcija(data.responseJSON);
+            ucitajCekiraniStatus(number);
         }
     })
 
-    var number = getUrlVars()["idApartmana"];
-
-    $.ajax({
-        type: 'GET',
-        url: 'rest/komentar/getKomentareMogApartmana/'+ number,
-        complete: function(data){
-
-            let komentariApartmana = data.responseJSON;
-            alert(komentariApartmana);
-
-            for(var i = 0; i < komentariApartmana.length; i++){
-                if(komentariApartmana[i].komentarVidljiv == true){
-                    //alert(komentariApartmana[i].idKomentara);
-                    let a = document.getElementById(komentariApartmana[i].idKomentara);//.checked = true;
-                    a.checked = true;
-                   // $("checkbox[name=" + komentariApartmana[i].idKomentara + "]").prop('checked', true);
-                }else if(komentariApartmana[i].komentarVidljiv == false){
-                    let a = document.getElementById(komentariApartmana[i].idKomentara);//.checked = false;
-                    a.checked = false;
-                 //$("checkbox[name=" + komentariApartmana[i].idKomentara + "]").prop('checked', false);
-                }
-            }
-        }
-    })
 });
 
 function pomocnaFunkcija(korisnik){
@@ -109,8 +89,8 @@ function prikazKomentaraDomacin(idAp){
             
             for(var i = 0; i < sviKomentari.length; i++){
                 var newDiv = document.createElement("div"); 
-                newDiv.innerHTML = "<br/> Komentar postavio: <b>" + sviKomentari[i].gost + "</b><br/><br/>  " + sviKomentari[i].tekst + 
-                    "<br/><br/> Ocena korisnika:<b> " + sviKomentari[i].ocena + "</b><br/><br/><input type='checkbox' id='"+ sviKomentari[i].idKomentara +"' onclick=sakrijKomentar('" + sviKomentari[i].idKomentara + "')><br/>"; 
+                newDiv.innerHTML = "Komentar postavio: <b>" + sviKomentari[i].gost + "</b><br/><br/>  " + sviKomentari[i].tekst + 
+                    "<br/><br/> Ocena korisnika:<b> " + sviKomentari[i].ocena + "</b><br/><br/> <label for='" + sviKomentari[i].idKomentara + "'>Vidljiv komentar</label><input type='checkbox' styleId='" + sviKomentari[i].tekst + "' id='"+ sviKomentari[i].idKomentara +"' onclick=sakrijKomentar('" + sviKomentari[i].idKomentara + "')><br/>"; 
                 $("#formaKomentari").append(newDiv);
             }
         }
@@ -137,6 +117,31 @@ function sakrijKomentar(idKom){
                 alert("Vidljivost uspesno postavljena!");
             }else {
                 alert("Neuspesno postavljanje vidljivosti!");
+            }
+        }
+    })
+}
+
+function ucitajCekiraniStatus(idAp){
+
+    $.ajax({
+        type: 'GET',
+        url: 'rest/komentar/getKomentareApartmana/'+ idAp,
+        complete: function(data){
+
+            let komentariApartmana = data.responseJSON;
+
+            for(var i = 0; i < komentariApartmana.length; i++){
+                if(komentariApartmana[i].komentarVidljiv == true){
+                    //alert(komentariApartmana[i].idKomentara);
+                    let a = document.getElementById(komentariApartmana[i].idKomentara);//.checked = true;
+                    a.checked = true;
+                   // $("checkbox[name=" + komentariApartmana[i].idKomentara + "]").prop('checked', true);
+                }else if(komentariApartmana[i].komentarVidljiv == false){
+                    let a = document.getElementById(komentariApartmana[i].idKomentara);//.checked = false;
+                    a.checked = false;
+                 //$("checkbox[name=" + komentariApartmana[i].idKomentara + "]").prop('checked', false);
+                }
             }
         }
     })
