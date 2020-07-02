@@ -349,7 +349,7 @@ function apartmaniZaKomentarisanje(){
 
 			for(var i = 0; i < sviApartmani.length; i++){
 				var id = sviApartmani[i].idApartmana;
-				$("#"+ id).append("<td><button onclick=window.location.href='dodajKomentar.html?idApartmana="+ id +  "'> Dugmeeee </button></td>");
+				$("#"+ id).append("<td><button onclick=window.location.href='dodajKomentar.html?idApartmana="+ id +  "'> Postavite komentar </button></td>");
 			}
 		}
 	})

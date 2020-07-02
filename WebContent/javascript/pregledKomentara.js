@@ -45,7 +45,7 @@ function prikazKomentaraAdmin(){
 
             for(var i = 0; i < sviKomentari.length; i++){
                 var newDiv = document.createElement("div"); 
-                newDiv.innerHTML = "<br/> Komentar postavio: <b>" + sviKomentari[i].gost + "</b><br/> Apartman: <a href='index.html'> Pogledaj apartman </a> <br/><br/>  " + sviKomentari[i].tekst + 
+                newDiv.innerHTML = "<br/> Komentar postavio: <b>" + sviKomentari[i].gost + "</b><br/> Apartman: <a href='pregledPodatakaApartman.html?idApartmana=" + sviKomentari[i].apartman + "'> Pogledaj apartman </a> <br/><br/>  " + sviKomentari[i].tekst + 
                     "<br/><br/> Ocena korisnika:<b> " + sviKomentari[i].ocena + "</b><br/><br/>"; 
                 $("#formaKomentari").append(newDiv);
             }
@@ -67,7 +67,7 @@ function prikazKomentaraGost(idAp){
             for(var i = 0; i < sviKomentari.length; i++){
                 if(sviKomentari[i].komentarVidljiv == true){
                     var newDiv = document.createElement("div"); 
-                    newDiv.innerHTML = "<br/> Komentar postavio: <b>" + sviKomentari[i].gost + "</b><br/> Apartman: <a href='index.html'> Pogledaj apartman </a> <br/><br/>  " + sviKomentari[i].tekst + 
+                    newDiv.innerHTML = "<br/> Komentar postavio: <b>" + sviKomentari[i].gost + "</b><br/> " + sviKomentari[i].tekst + 
                         "<br/><br/> Ocena korisnika:<b> " + sviKomentari[i].ocena + "</b><br/><br/>"; 
                     $("#formaKomentari").append(newDiv);
                 }
