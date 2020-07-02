@@ -1,8 +1,6 @@
 $(document).ready(function(){
 	$('#pozdravPor').hide();
 
-
-
 	$.ajax({
 		type: 'GET',
 		url: 'rest/korisnik/getKorisnik',
@@ -150,7 +148,9 @@ function prikazApartmana(korisnik) {
 				lista.empty();
 				
 				console.log(apartmani.length);
-			
+				
+				apartmaniZaKomentarisanje();
+
            		for(var i = 0; i < apartmani.length;i++){
 					if(apartmani[i].lokacija != null){
 						lista.append("<tr id='" + apartmani[i].idApartmana + "'><td>" + i + "</td>"
@@ -317,4 +317,40 @@ function prikazApartmana(korisnik) {
 function pregledKomentara(idAp){
 
 	window.location.href = "pregledKomentara.html?idApartmana=" + idAp;
+}
+
+function apartmaniZaKomentarisanje(){
+
+	$.ajax({
+		type: 'GET',
+		url: 'rest/komentar/moguceOstavitiKomentarApartmani',
+		complete: function(data){
+			let sviApartmani = data.responseJSON;
+/*
+			var dugmad = [];
+
+			for(var j = 0; j < sviApartmani.length; j++){
+				var btn = document.createElement("BUTTON");
+				btn.innerHTML = "Postavite komentar"; 
+				btn.id = sviApartmani[j].idApartmana;
+				dugmad.push(btn);
+			}
+
+			for(var i = 0; i < sviApartmani.length; i++){
+				for(k = 0; k < dugmad.length; k++){
+					if(dugmad[k].id == sviApartmani[i].idApartmana){
+						dugmad[k].addEventListener('click', function() {
+							//window.location.href="dodajKomentar.html?idApartmana=" + sviApartmani[i].idApartmana;
+						}, false);
+						document.getElementById(sviApartmani[i].idApartmana).append(dugmad[k]);
+					}
+				}
+			}*/
+
+			for(var i = 0; i < sviApartmani.length; i++){
+				var id = sviApartmani[i].idApartmana;
+				$("#"+ id).append("<td><button onclick=window.location.href='dodajKomentar.html?idApartmana="+ id +  "'> Dugmeeee </button></td>");
+			}
+		}
+	})
 }
