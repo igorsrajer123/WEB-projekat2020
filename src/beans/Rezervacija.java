@@ -1,7 +1,9 @@
 package beans;
 
 
-import java.util.Date;
+import java.sql.Date;
+import java.util.ArrayList;
+
 import java.util.UUID;
 
 public class Rezervacija {
@@ -15,6 +17,7 @@ public class Rezervacija {
 	private String poruka;
 	private String gost;
 	private Status status;
+	private ArrayList<Date> datumiRezervacije;
 	
 	private String idRezervacije = UUID.randomUUID().toString();
 	
@@ -107,4 +110,14 @@ public class Rezervacija {
 	public void setIdRezervacije(String idRezervacije) {
 		this.idRezervacije = idRezervacije;
 	}
+
+	public ArrayList<Date> getDatumiRezervacije() {
+		return datumiRezervacije;
+	}
+
+	public void setDatumiRezervacije(ArrayList<Date> datumiRezervacije) {
+		this.datumiRezervacije = datumiRezervacije;
+	}
+	
+	
 }

@@ -1,5 +1,6 @@
 package services;
 
+import java.sql.Date;
 import java.util.ArrayList;
 
 import javax.annotation.PostConstruct;
@@ -155,19 +156,25 @@ public class RezervacijaServis {
 		for(Apartman a : listaAp) {
 			if(a.getIdApartmana().equals(idAp)) {
 				a.setOdustanak(idRez);
+				
 				break;
 			}
 		}
 		
+		Rezervacija rez1 = null;
 		for(Rezervacija r : lista) {
 			if(r.getIdRezervacije().equals(idRez)) {
 				r.setStatus(Status.Odustanak);
+				rez1 = r;
 				break;
 			}
 		}
 		
 		//postavljanje statusa ODUSTANAK kod domacina, u njegovoj listi apartmana
 		Apartman nasApartman = daoAp.getPoIdApartmana(idAp); // nas apartman po id smo nasli
+		ArrayList<Date> listaZauzetih = rez1.getDatumiRezervacije();
+		
+		nasApartman.getDostupnostPoDatumima().addAll(listaZauzetih);
 		
 		String domacinApartmana = nasApartman.getDomacin();
 		Domacin dom = null;
@@ -178,6 +185,9 @@ public class RezervacijaServis {
 		}
 		
 		Apartman korisnikovApartman = dom.getApartmanPoId(idAp);
+		System.out.println(korisnikovApartman.getDostupnostPoDatumima() + " OVDE TREBA DA UBACIM DATUME IZ REZERVACIJE");
+		korisnikovApartman.getDostupnostPoDatumima().addAll(listaZauzetih);
+		System.out.println(korisnikovApartman.getDostupnostPoDatumima() + " VRATIO DATUMEEE");
 		for(Rezervacija rez : korisnikovApartman.getRezervacije()) {
 			if(rez.getIdRezervacije().equals(idRez)) {
 				rez.setStatus(Status.Odustanak);
@@ -283,6 +293,85 @@ public class RezervacijaServis {
 		
 		rezervacijeDAO.sacuvajRezervacije();
 		korisniciDAO.sacuvajKorisnika();
+		
+		return Response.ok().build();
+	}
+	
+	@PUT
+	@Path("/prihvatiRezervaciju/{idRezervacije}/{idApartmana}")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response prihvatiRezervaciju(@PathParam("idRezervacije") String idRez, @PathParam("idApartmana") String idAp, @Context HttpServletRequest rq) {
+		RezervacijaDAO rezervacijeDAO = (RezervacijaDAO) ctx.getAttribute("rezervacijaDAO");
+		ApartmanDAO apartmaniDAO = (ApartmanDAO) ctx.getAttribute("apartmanDAO");
+		Domacin d = (Domacin) rq.getSession().getAttribute("korisnik");
+		System.out.println("IMALI ME OVDE???");
+		//MENJANJE KOD DOMACINA BAS SA SESIJE
+		
+		Apartman a = d.getApartmanPoId(idAp);
+		ArrayList<Rezervacija> rezl = a.getRezervacije();
+		
+		Rezervacija rez = null;
+		for(Rezervacija r : rezl) {
+			if(r.getIdRezervacije().equals(idRez)) {
+				System.out.println(r);
+				r.setStatus(Status.Prihvacena);
+				rez = r;
+				
+			}
+		}
+		
+		System.out.println(rez.getDatumiRezervacije() + "DATUMI KOJE JE GOST REZERVISAO");
+		System.out.println(a);
+		//System.out.println(r);
+		
+		//System.out.println(r.getDatumiRezervacije());
+		System.out.println(a.getDostupnostPoDatumima() + "DATUMI GDE TREBA DA IH UKOLNIM");
+		for(Date date : a.getDostupnostPoDatumima()) {
+			System.out.println(date + "  ovo je clan liste getDatumiZadIzdavanje pre brisanja\n");
+		}
+		
+		(a.getDostupnostPoDatumima()).removeAll(rez.getDatumiRezervacije());
+		
+		for(Date date : a.getDostupnostPoDatumima()) {
+			System.out.println(date + "  ovo je clan liste getDatumiZadIzdavanje posle brisanja\n");
+		}
+		
+		ArrayList<Date> listaSlobodnihDatuma1 = a.getDostupnostPoDatumima();
+		//MENJANJE NA APARMANU SA KONTEKSTA
+	
+		ArrayList<Apartman> apartmaniLista = apartmaniDAO.getSveApartmane();
+		ArrayList<Date> listaSlobodnihDatuma2 = null;
+		for (Apartman app : apartmaniLista) {
+			if(app.getIdApartmana().equals(idAp)) {
+				System.out.println(app + " OVAJ APARTMAN MENJAM SA KONTEKSTa");
+				app.setPrihvacena(idRez);
+				(app.getDostupnostPoDatumima()).removeAll(rez.getDatumiRezervacije());
+				System.out.println(app.getDostupnostPoDatumima() + "   TREbA DA BUDE ISTA KAO GOREEEE");
+				listaSlobodnihDatuma2 = app.getDostupnostPoDatumima();
+				break;
+			}
+		}
+		
+		
+		
+		//MENJANJE STATUSA NA REZERVACIJI SA KONTEKSTA 
+		
+		ArrayList<Rezervacija> lista = rezervacijeDAO.getSveRezervacije();
+		
+		for(Rezervacija r : lista) {
+			if(r.getIdRezervacije().equals(idRez)) {
+				r.setStatus(Status.Prihvacena);
+				break;
+			}
+		}
+		
+		System.out.println(listaSlobodnihDatuma1);
+		System.out.println(listaSlobodnihDatuma2);
+		
+		rezervacijeDAO.sacuvajRezervacije();
+		apartmaniDAO.sacuvajApartmane();
+		
 		
 		return Response.ok().build();
 	}

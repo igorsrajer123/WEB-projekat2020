@@ -1,9 +1,9 @@
 package beans;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Date;
 
-import jdk.nashorn.internal.runtime.ListAdapter;
+import beans.Rezervacija.Status;
 
 public class Domacin extends Korisnik {
 
@@ -75,6 +75,26 @@ public class Domacin extends Korisnik {
 				break;
 			}
 		}
+	}
+	
+	public void prihvatiRezervaciju(String idAp, String idRez) {
+		Apartman a = getApartmanPoId(idAp);
+		
+		Rezervacija r = a.getRezervacijuID(idRez);
+		
+		r.setStatus(Status.Prihvacena);
+		
+		ArrayList<java.sql.Date> slobodniDatumi = a.getdatumiZaIzdavanje();
+		ArrayList<java.sql.Date> datumiZaZauzimanje = r.getDatumiRezervacije();
+		
+		System.out.println("USAO SAM U MESO");
+		
+		
+	
+		
+		
+		
+		
 	}
 	
 }

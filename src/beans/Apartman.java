@@ -1,5 +1,6 @@
 package beans;
 
+
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
@@ -228,7 +229,29 @@ public class Apartman {
 		}
 	}
 	
+	public void setPrihvacena(String id) {
+		for(Rezervacija r : rezervacije) {
+			if(r.getIdRezervacije().equals(id)) {
+				r.setStatus(Rezervacija.Status.Prihvacena);
+			}
+		}
+	}
+	
 	public void dodajKomentar(Komentar k) {
 		komentari.add(k);
 	}
+	
+	public Rezervacija getRezervacijuID(String id) {
+		Rezervacija rezervacija = null;
+		for (Rezervacija r : rezervacije) {
+			if (r.getIdRezervacije().equals(id)) {
+				rezervacija =  r;
+				System.out.println("IMA LI ME ODJEEE????");
+				break;
+			}	
+		}
+		return rezervacija;
+	}
+	
+	
 }

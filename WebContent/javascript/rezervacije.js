@@ -66,7 +66,7 @@ function posaljiRezervaciju(apartman,korisnik) {
     //alert(datumKrajaRez);
     let listaRezervisanih = getDates(datumPocetkaRez, datumKrajaRez);
   //  alert(listaRezervisanih);
-    let listaRezervisanihString = JSON.stringify(listaRezervisanih);
+
    // alert(listaRezervisanihString);
     let novalista = [];
      for(var i = 0; i < listaRezervisanih.length; i++){
@@ -94,6 +94,7 @@ function posaljiRezervaciju(apartman,korisnik) {
    // alert(korisnik.korisnicko_ime);
     if (n == true) {
         let podaci = {
+            "datumiRezervacije": listaRezervisanih,
             "apartman": apartman.idApartmana,
             "pocetniDatum": datumPocetkaRez,
             "brNocenja": brNocenja,

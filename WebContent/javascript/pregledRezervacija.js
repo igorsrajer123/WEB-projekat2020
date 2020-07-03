@@ -81,10 +81,14 @@ function proveriKorisnika(korisnik){
 						let pocetni = new Date(mojeRezervacije[i].pocetniDatum);
 						let stvarnoSad = (JSON.stringify(pocetni)).substr(1,10);
 						lista.append("<tr><td>" + mojeRezervacije[i].gost + "</td><td>"+ stvarnoSad + "</td><td>" + mojeRezervacije[i].ukCena +  "</td><td>"+ mojeRezervacije[i].status +"</td><td>" +
-							 		"<button> Prihvati </button></td><td><button> Odbij </button></td></tr>");				
+							 		"<button onclick=prihvatiRezervaciju('" + mojeRezervacije[i].idRezervacije + "','" + mojeRezervacije[i].apartman + "')> Prihvati </button></td><td><button> Odbij </button></td></tr>");				
 						$("#rezervacijeTabela").append(lista);
 
+<<<<<<< Updated upstream
 					}else if(mojeRezervacije[i].status == "Prihvacena"){ //Prihvacena
+=======
+					}else if(mojeRezervacije[i].status == "Prihvacena"){ 
+>>>>>>> Stashed changes
 						
 						let pocetni = new Date(mojeRezervacije[i].pocetniDatum);
 						let stvarnoSad = (JSON.stringify(pocetni)).substr(1,10);
@@ -149,6 +153,20 @@ function odustanakRezervacija(idR, idA){
 		}
 	})
 	alert("Kraj funkcije!");
+}
+
+function prihvatiRezervaciju(idR, idA) {
+	$.ajax({
+		type: 'PUT',
+		url: 'rest/rezervacija/prihvatiRezervaciju/'+ idR + '/' + idA,
+		complete: function(data){
+			if(data["status"] == 200){
+				alert("Izmena uspesna!");
+			}else {
+				alert("Izmena neuspesna!");
+			}
+		}
+	})
 }
 
 function zavrsenaRezervacija(idR, idA){

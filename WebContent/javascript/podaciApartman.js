@@ -162,6 +162,10 @@ function izmeniApartman(apartman, number) {
     if(brGostijuIspravan == true && brSobaIspravan == true && cenaIspravna == true && ulicaIspravna == true && mestoIspravno == true && postanskiBrIspravan == true){
 
     podaciZaSlanje = { 
+            "tip": apartman.tip,
+            "datumiZaIzdavanje": apartman.datumiZaIzdavanje,
+            "dostupnostPoDatumima": apartman.dostupnostPoDatumima,
+            "rezervacije": apartman.rezervacije,
             "idApartmana": number,
             "domacin": apartman.domacin,
             "status": statusApartmana,
