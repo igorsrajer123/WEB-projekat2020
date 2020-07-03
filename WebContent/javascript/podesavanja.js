@@ -354,3 +354,35 @@ function apartmaniZaKomentarisanje(){
 		}
 	})
 }
+
+function filtrirajStatus(){
+
+	var selektovano = $("#filtracijaStatus option:selected").text();
+	
+	if(selektovano == "Aktivno"){
+
+		alert(selektovano);
+		$.ajax({
+			type: 'GET',
+			url: 'rest/apartman/filtrirajStatus/' + selektovano,
+			complete: function(data){
+
+				var apartmani = data.responseJSON;
+
+			}
+		})
+
+	}else if(selektovano == "Neaktivno"){
+		alert(selektovano);
+		$.ajax({
+			type: 'GET',
+			url: 'rest/apartman/filtrirajStatus/' + selektovano,
+			complete: function(data){
+
+				var apartmani = data.responseJSON;
+
+				
+			}
+		})
+	}
+}

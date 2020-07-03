@@ -355,4 +355,42 @@ public class ApartmanServis {
 		
 		return domacin;
 	}
+	
+	@GET
+	@Path("/filtrirajStatus/{status}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ArrayList<Apartman> filtrirajStatus(@PathParam("status") Apartman.Status status) {
+		
+		ApartmanDAO dao = (ApartmanDAO) ctx.getAttribute("apartmanDAO");
+		
+		ArrayList<Apartman> lista = dao.getSveApartmane();
+		ArrayList<Apartman> povratna = new ArrayList<Apartman>();
+		
+		for(Apartman a : lista) {
+			if(a.getStatus() == status) {
+				povratna.add(a);
+			}
+		}
+		
+		return povratna;
+	}
+	
+	@GET
+	@Path("/filtrirajTip/{tip}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ArrayList<Apartman> filtrirajTip(@PathParam("tip") Apartman.Tip tip){
+
+		ApartmanDAO dao = (ApartmanDAO) ctx.getAttribute("apartmanDAO");
+		
+		ArrayList<Apartman> lista = dao.getSveApartmane();
+		ArrayList<Apartman> povratna = new ArrayList<Apartman>();
+		
+		for(Apartman a : lista) {
+			if(a.getTip() == tip) {
+				povratna.add(a);
+			}
+		}
+		
+		return povratna;
+	}
 }

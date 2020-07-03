@@ -44,13 +44,17 @@ $(document).ready(function(){
         event.preventDefault();
 
         let korIme = $("#korImePretraga").val();
+        let polKor = $("#pol option:selected" ).text();
+        let uloga = $("#uloga option:selected").text();
+        alert(polKor + " " + uloga);
 
         $.ajax({
             type: 'GET',
-            url: 'rest/korisnik/pretraga/'+korIme,
+            url: 'rest/korisnik/pretrazi/'+ korIme + '/' + uloga + '/' + polKor,
             complete: function(data){
 
                 let korisnik = data.responseJSON;
+                alert(korisnik);
 
                 if(korisnik == null){
                     if(korIme == ""){
@@ -67,30 +71,30 @@ $(document).ready(function(){
                     let lista = $("#korisniciTabela tbody");
                     lista.empty();
 
-                    if(korisnik.uloga == "Administrator"){
-                        lista.append("<tr><td>" + korisnik.korisnicko_ime + "</td>"
-                        + "<td>" + korisnik.lozinka + "</td> " + "<td>" 
-                        + korisnik.ime + "</td>" + "<td>" + korisnik.prezime + "</td>"
-                        + "<td>" + korisnik.pol + "</td>" + "<td>" + korisnik.uloga 
+                    if(korisnik[0].uloga == "Administrator"){
+                        lista.append("<tr><td>" + korisnik[0].korisnicko_ime + "</td>"
+                        + "<td>" + korisnik[0].lozinka + "</td> " + "<td>" 
+                        + korisnik[0].ime + "</td>" + "<td>" + korisnik[0].prezime + "</td>"
+                        + "<td>" + korisnik[0].pol + "</td>" + "<td>" + korisnik[0].uloga 
                         + "</td>" + "<td></td>" );
                         $("#korisniciTabela").append(lista);
-                    }else if(korisnik.uloga == "Domacin"){
-                        lista.append("<tr><td>" + korisnik.korisnicko_ime + "</td>"
-                        + "<td>" + korisnik.lozinka + "</td> " + "<td>" 
-                        + korisnik.ime + "</td>" + "<td>" + korisnik.prezime + "</td>"
-                        + "<td>" + korisnik.pol + "</td>" + "<td>" + korisnik.uloga 
+                    }else if(korisnik[0].uloga == "Domacin"){
+                        lista.append("<tr><td>" + korisnik[0].korisnicko_ime + "</td>"
+                        + "<td>" + korisnik[0].lozinka + "</td> " + "<td>" 
+                        + korisnik[0].ime + "</td>" + "<td>" + korisnik[0].prezime + "</td>"
+                        + "<td>" + korisnik[0].pol + "</td>" + "<td>" + korisnik[0].uloga 
                         + "</td>" + "<td></td>" );
                         $("#korisniciTabela").append(lista);
                     }else {
-                        lista.append("<tr><td>" + korisnik.korisnicko_ime + "</td>"
-                        + "<td>" + korisnik.lozinka + "</td> " + "<td>" 
-                        + korisnik.ime + "</td>" + "<td>" + korisnik.prezime + "</td>"
-                        + "<td>" + korisnik.pol + "</td>" + "<td>" + korisnik.uloga 
-                        + "</td>" + "<td><button id='" + korisnik.korisnicko_ime + "'> Ažuriraj ulogu </button></td>" );
+                        lista.append("<tr><td>" + korisnik[0].korisnicko_ime + "</td>"
+                        + "<td>" + korisnik[0].lozinka + "</td> " + "<td>" 
+                        + korisnik[0].ime + "</td>" + "<td>" + korisnik[0].prezime + "</td>"
+                        + "<td>" + korisnik[0].pol + "</td>" + "<td>" + korisnik[0].uloga 
+                        + "</td>" + "<td><button id='" + korisnik[0].korisnicko_ime + "'> Ažuriraj ulogu </button></td>" );
                         
-                        let korisnicko = korisnik.korisnicko_ime;
+                        let korisnicko = korisnik[0].korisnicko_ime;
 
-                        document.getElementById(korisnik.korisnicko_ime).onclick = function fun(){
+                        document.getElementById(korisnik[0].korisnicko_ime).onclick = function fun(){
                             $.ajax({
                                 type: 'PUT',
                                 url: 'rest/korisnik/azurirajUlogu/'+ korisnicko,
@@ -111,8 +115,67 @@ $(document).ready(function(){
         })        
     })
 
+    $("#ponisti").click(function(event){
+        event.preventDefault();
+        
+        $.ajax({
+            type: 'GET',
+            url: 'rest/korisnik/getSveKorisnike',
+            complete: function(data){
+    
+                let korisnici = data.responseJSON;
+    
+                let lista = $("#korisniciTabela tbody");
+                lista.empty();
+    
+                console.log(korisnici.length);
+    
+                for(var i = 0; i < korisnici.length;i++){
+                    if(korisnici[i].uloga == "Administrator"){
+                         lista.append("<tr><td>" + korisnici[i].korisnicko_ime + "</td>"
+                       + "<td>" + korisnici[i].lozinka + "</td> " + "<td>" 
+                       + korisnici[i].ime + "</td>" + "<td>" + korisnici[i].prezime + "</td>"
+                       + "<td>" + korisnici[i].pol + "</td>" + "<td>" + korisnici[i].uloga 
+                       + "</td>" + "<td></td>" );
+                    $("#korisniciTabela").append(lista);
+                    }else if(korisnici[i].uloga == "Domacin"){
+                        lista.append("<tr><td>" + korisnici[i].korisnicko_ime + "</td>"
+                        + "<td>" + korisnici[i].lozinka + "</td> " + "<td>" 
+                        + korisnici[i].ime + "</td>" + "<td>" + korisnici[i].prezime + "</td>"
+                        + "<td>" + korisnici[i].pol + "</td>" + "<td>" + korisnici[i].uloga 
+                        + "</td>" + "<td></td>" );
+                     $("#korisniciTabela").append(lista);
+                    }else { 
+                         lista.append("<tr><td>" + korisnici[i].korisnicko_ime + "</td>"
+                        + "<td>" + korisnici[i].lozinka + "</td> " + "<td>" 
+                        + korisnici[i].ime + "</td>" + "<td>" + korisnici[i].prezime + "</td>"
+                        + "<td>" + korisnici[i].pol + "</td>" + "<td>" + korisnici[i].uloga 
+                        + "</td>" + "<td><button id='"+ korisnici[i].korisnicko_ime + "'> Ažuriraj ulogu</button></td>");
+                        
+                        let korisnicko = korisnici[i].korisnicko_ime;
+    
+                        document.getElementById(korisnici[i].korisnicko_ime).onclick = function fun(){
+                            $.ajax({
+                                type: 'PUT',
+                                url: 'rest/korisnik/azurirajUlogu/'+ korisnicko,
+                                complete: function(data){
+    
+                                    if(data["status"] == 200){
+                                        window.location.href = "pregledKorisnika.html";
+                                    }else if(data["status"] == 500){
+                                        alert("Nece da moze!");
+                                    }
+                                }
+                            })
+                        }
+    
+                        $("#korisniciTabela").append(lista);
+                    }
+                }
+            }
+        })
 
-
+    })
 });
 
 function odrediKorisnika(korisnik){

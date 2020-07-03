@@ -74,8 +74,24 @@
 				<td><input type="text" id="brOsoba"/></td>	
 				<td><label id="brOsobaPrazan" style="color:red"> Unesite odgovarajuću vrednost! </label></td>
 			</tr>
+			<tr>
 				<td></td>
 				<td><button id="pretrazi"> Pretraži </button></td>
+			</tr>
+			<tr>
+				<td> <label> Filtriraj po tipu apartmana: </label></td>
+				<td> <select id='filtracijaTip'>
+						<option> Soba </option>
+						<option> Ceo_apartman </option>
+					</select></td>
+			</tr>
+			<tr>
+				<td> <label> Filtriraj po statusu apartmana: </label></td>
+				<td> <select id='filtracijaStatus' onchange=filtrirajStatus()>
+						<option> Aktivno </option>
+						<option> Neaktivno </option>
+					</select></td>
+			</tr>
 		</table>
 	</form>
 

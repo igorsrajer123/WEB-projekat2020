@@ -204,4 +204,51 @@ public class KorisnikServis {
 		
 		
 	}
+	
+	@GET
+	@Path("/pretrazi/{korIme}/{uloga}/{pol}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ArrayList<Korisnik> pronadjiKorisnika(@PathParam("korIme") String korIme, @PathParam("uloga") Korisnik.Uloga uloga, @PathParam("pol") String pol) {
+		
+		KorisnikDAO dao = (KorisnikDAO) ctx.getAttribute("korisnikDAO");
+	
+		
+		ArrayList<Korisnik> korisnici = dao.getKorisnici();
+		
+		ArrayList<Korisnik> korPol = new ArrayList<Korisnik>();
+		ArrayList<Korisnik> korUloga = new ArrayList<Korisnik>();
+		ArrayList<Korisnik> oneKorisnik = new ArrayList<Korisnik>();
+
+		for(Korisnik k : korisnici) {
+			if(k.getKorisnicko_ime().equals(korIme)) {
+				oneKorisnik.add(k);
+			}
+		}
+		
+		for(Korisnik k1 : korisnici) {
+			System.out.println(k1.toString());
+			if(k1.getPol() != null) {
+				if(k1.getPol().equals(pol)) {
+					korPol.add(k1);
+				}
+			}
+		}
+		
+		for(Korisnik k2 : korisnici) {
+			if(k2.getUloga() == uloga) {
+				korUloga.add(k2);
+			}
+		}
+		
+		oneKorisnik.retainAll(korUloga);
+		oneKorisnik.retainAll(korPol);
+		
+		if(oneKorisnik == null) {
+			System.out.println("--------------------------KORISNIK NIJE PRONADJEN!");
+			return null;
+		}else {
+			System.out.println("-------------------------------KORISNIK PRONADJEN!!");
+			return oneKorisnik;
+		}
+	}
 }
