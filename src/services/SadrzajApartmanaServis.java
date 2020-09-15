@@ -117,8 +117,7 @@ public class SadrzajApartmanaServis {
 				break;
 			}
 		}
-		
-		
+			
 		dao.sacuvajSadrzajApartmana();
 		return Response.ok().build();
 	}

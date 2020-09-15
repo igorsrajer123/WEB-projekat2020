@@ -138,7 +138,6 @@ public class KorisnikDAO {
 			
 			for(Domacin domacin: list3) {
 				this.korisnici.put(domacin.getKorisnicko_ime(), domacin);
-				System.out.println("DOMACINEE");
 				System.out.println(domacin.toString());
 			}
 				
@@ -148,7 +147,6 @@ public class KorisnikDAO {
 		json = "";
 		
 		if(file.exists()) {
-			System.out.println("jel ovde mozda usao>");
 			try(BufferedReader br = new BufferedReader(new FileReader(file))) { 
 				while ((temp = br.readLine()) != null) {
 					json += temp;
@@ -160,7 +158,6 @@ public class KorisnikDAO {
 			
 			for(Gost gost: list2) {
 				this.korisnici.put(gost.getKorisnicko_ime(), gost);
-				System.out.println("jel radi ovo??");
 				System.out.println(gost.toString());
 			}
 				

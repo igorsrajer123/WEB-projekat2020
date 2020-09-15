@@ -179,15 +179,12 @@ public class KorisnikServis {
 		System.out.println("KURCINAAA");
 		
 		if (korisnici == null) {
-			System.out.println("KEPASAAAAAAAAAAAAAAa");
 			return Response.status(500).build();
 		}
 		
 		if (korisnici.postojiKorisnickoIme(k.getKorisnicko_ime())) {
-			System.out.println("USAO SAM OVDEEEE");
 			return Response.status(500).entity("Korisnicko ime").build();
 		}
-		
 		
 		Gost noviGost = new Gost(k);
 		
@@ -197,12 +194,7 @@ public class KorisnikServis {
 		req.getSession().setAttribute("korisnik", noviGost);
 		System.out.println("Ulogovani korisnik: " + noviGost);
 		
-		System.out.println(noviGost.toString() + "DUPEEEEEEEEEEEE");
-		
-		return Response.ok().build();
-		
-		
-		
+		return Response.ok().build();	
 	}
 	
 	@GET
@@ -242,6 +234,7 @@ public class KorisnikServis {
 		
 		oneKorisnik.retainAll(korUloga);
 		oneKorisnik.retainAll(korPol);
+		
 		
 		if(oneKorisnik == null) {
 			System.out.println("--------------------------KORISNIK NIJE PRONADJEN!");

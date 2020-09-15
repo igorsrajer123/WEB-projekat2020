@@ -29,14 +29,10 @@ public class Domacin extends Korisnik {
 	}
 
 	public ArrayList<Apartman> getApartmani() {
-		
-		return apartmani; 
-			
-		
+		return apartmani; 			
 	}
 	
 	
-
 	public void setApartmani(ArrayList<Apartman> apartmani) {
 		this.apartmani = apartmani;
 	}
@@ -71,7 +67,6 @@ public class Domacin extends Korisnik {
 			if(app.getIdApartmana().equals(idAp)) {
 				apartmani.remove(app);
 				apartmani.add(a);
-				System.out.println("USPELI SMO DA ZAMENIMO");
 				break;
 			}
 		}
@@ -88,13 +83,6 @@ public class Domacin extends Korisnik {
 		ArrayList<java.sql.Date> datumiZaZauzimanje = r.getDatumiRezervacije();
 		
 		System.out.println("USAO SAM U MESO");
-		
-		
-	
-		
-		
-		
-		
 	}
 	
 }

@@ -45,7 +45,6 @@ public class ApartmanServis {
 		
 		ApartmanDAO dao = (ApartmanDAO) ctx.getAttribute("apartmanDAO");
 		
-		System.out.println(dao.getSveApartmane() + "SVISSSSSSSSSSSSSSSSSSSSSS");
 		return dao.getSveApartmane();
 		
 	}
@@ -99,7 +98,6 @@ public class ApartmanServis {
 	public ArrayList<Apartman> getAktivneApartmane() {
 		ApartmanDAO dao = (ApartmanDAO) ctx.getAttribute("apartmanDAO");
 		
-		System.out.println(dao.getAktivne() + "AKTIVNIIIIIIIIIIIAAAAAAAAAAAAAAAAAA");
 		return dao.getAktivne();
 	}
 	@GET
@@ -245,9 +243,8 @@ public class ApartmanServis {
 	@Path("/dodajApartman")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response dodajApartman(Apartman a, @Context HttpServletRequest rq) {
-		System.out.println("DA LI SE OVO DESIII");
+		
 		System.out.println(a);
-		//System.out.println(korisnicko_ime);
 		ApartmanDAO apartmani = (ApartmanDAO) ctx.getAttribute("apartmanDAO");
 		KorisnikDAO korisnici = (KorisnikDAO) ctx.getAttribute("korisnikDAO");
 		
@@ -260,7 +257,6 @@ public class ApartmanServis {
 	
 		System.out.println(d.getApartmani());
 		apartmani.dodajApartman(a);
-		System.out.println(apartmani.getSveApartmane() + "JEL  IMA SAVARINOG OVDEEE?");
 		
 		apartmani.sacuvajApartmane();
 		korisnici.sacuvajKorisnika();
@@ -328,7 +324,6 @@ public class ApartmanServis {
 		
 		
 		dom.zameniApartman(a, id);
-		System.out.println("JEL OVDE BIO");
 		korisnici.sacuvajKorisnika();
 		dao.sacuvajApartmane();
 		return Response.ok().build();
@@ -351,7 +346,6 @@ public class ApartmanServis {
 				break;
 			}
 		}
-		
 		
 		return domacin;
 	}

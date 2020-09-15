@@ -88,7 +88,7 @@ public class KomentarServis {
 		KomentarDAO dao = (KomentarDAO) ctx.getAttribute("komentarDAO");
 		
 		if(dao == null){
-			System.out.println("7Komentari prazni!");
+			System.out.println("Komentari prazni!");
 			return null;
 		}
 		
@@ -106,7 +106,7 @@ public class KomentarServis {
 		ApartmanDAO apartmani = (ApartmanDAO) ctx.getAttribute("apartmanDAO");
 		
 		if(komentari == null) {
-			System.out.println("Nema komentara!!!!");
+			System.out.println("Nema komentara!");
 			return null;
 		}
 		
@@ -118,12 +118,12 @@ public class KomentarServis {
 				a = aa;
 			}
 		}
-		System.out.println(a + "OVAJ APARTMAN HOCU DA VIDIM");
+
 		for(Komentar k : a.getKomentari()) {
 			if(a.getKomentari() != null) {
-			if(k.isKomentarVidljiv()) {
-				listaKomentara.add(k);
-			}
+				if(k.isKomentarVidljiv()) {
+					listaKomentara.add(k);
+				}
 			}
 		}
 		
