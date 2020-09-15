@@ -4,6 +4,7 @@
 	<title> Registracija novog korisnika</title>
 	<script src="javascript/jquery-3.3.1.min.js"></script>
 	<script src="javascript/registracija.js"></script>
+	<link rel="stylesheet" href="css/registracija.css">
 	
 </head>
 <body>
@@ -13,44 +14,46 @@
 <form id="registracija_korisnika">
 <table>
 	<tr>
-		<td>Korisnicko ime:</td>
-		<td><input type="text" name="korisnickoIme" id="korIme"></td>
-		<td><span id="greskaKorImePor"></span></td>
+		<td><label class="labele">Korisničko ime: </label></td>
+		<td><input type="text" name="korisnickoIme" id="korIme" class="polja"></td>
+		<td><span id="greskaKorImePor" class="error"></span></td>
 	</tr>
 	
 	<tr>
-		<td><label> Lozinka: </label></td>
-		<td><input type="password" name="lozinka" id="loz"></td>
-		<td><span id="greskaLozPor"></span></td>
+		<td><label class="labele"> Lozinka: </label></td>
+		<td><input type="password" name="lozinka" id="loz" class="polja"></td>
+		<td><span id="greskaLozPor" class="error"></span></td>
 	</tr>
 	<tr>
-		<td><label> Ponovi lozinku: </label></td>
-		<td><input type="password" name="ponoviLozinku" id="ponLoz"></td>
-		<td><span id="greskaPonLozPor"></span></td>
+		<td><label class="labele"> Ponovi lozinku: </label></td>
+		<td><input type="password" name="ponoviLozinku" id="ponLoz" class="polja"></td>
+		<td><span id="greskaPonLozPor" class="error"></span></td>
 	</tr>
 	
 	<tr>
-		<td><label> Ime: </label></td>
-		<td><input type="text" name="imeKorisnika" id="imeKorisnika"></td>
-		<td><span id="greskaImePor"></span></td>
+		<td><label class="labele"> Ime: </label></td>
+		<td><input type="text" name="imeKorisnika" id="imeKorisnika" class="polja"></td>
+		<td><span id="greskaImePor" class="error"></span></td>
 	</tr>
 	<tr>	
-		<td><label> Prezime: </label></td>
-		<td><input type="text" name="przKorisnika" id="przKorisnika"></td>		
-		<td><span id="greskaPrzPor"></span></td>
+		<td><label class="labele"> Prezime: </label></td>
+		<td><input type="text" name="przKorisnika" id="przKorisnika" class="polja"></td>		
+		<td><span id="greskaPrzPor" class="error"></span></td>
 	</tr>
 	
 	<tr>
-		<td><label> Pol: </label></td>
-		<td><select name="pol" id="pol">
-				  <option value="muski">Muski</option>
-				  <option value="zenski">Zenski</option>				 
+		<td><label class="labele"> Pol: </label></td>
+		<td><select name="pol" id="pol" class="combo">
+				  <option value="muski">Muški</option>
+				  <option value="zenski">Ženski</option>				 
 		</select></td>
 	</tr>
 	
 	<tr>
-		<td><button class="btn1" type="submit" id="registruj"> Potvrdi </button></td>
-		<td><button class="btn2" type="submit" id="odustani"> Odustani </button></td>
+		<div class = "register">
+			<td><button class="btn1" type="submit" id="registruj"> Potvrdi </button></td>
+			<td><button class="btn2" type="submit" id="odustani"> Odustani </button></td>
+		</div>
 	</tr>
 </table>
 </form>

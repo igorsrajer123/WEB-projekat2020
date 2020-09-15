@@ -13,18 +13,20 @@
 <form id="prijava_korisnika">
 	<table>
 		<tr>
-			<td><label id="lab"> Korisničko ime: </label></td>
-			<td><input type="text" id="korIme" placeholder="Korisničko ime"></td>
+			<td><label id="lab" class="labele"> Korisničko ime: </label></td>
+			<td><input type="text" id="korIme" placeholder="Korisničko ime" class="polja"></td>
 		</tr>
 		<tr>
-			<td><label> Lozinka: </label></td>
-			<td><input type="password" id="loz"></td>
+			<td><label class="labele"> Lozinka: </label></td>
+			<td><input type="password" id="loz" placeholder="Lozinka" class="polja"></td>
 		</tr>
 		<tr>
 			<td> </td>
-			<td><button  type="submit" id="prijavi"> Potvrdi </button>
-				<button type="submit" id="odustani"> Odustani </button> 
+			<div class="register">
+			<td><button  type="submit" id="prijavi" class="btn1"> Potvrdi </button>
+				<button type="submit" id="odustani" class=btn2> Odustani </button> 
 			</td>
+			</div>
 		</tr>
 	</table>
 </form>
