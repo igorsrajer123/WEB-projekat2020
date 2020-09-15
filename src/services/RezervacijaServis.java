@@ -99,7 +99,7 @@ public class RezervacijaServis {
 		System.out.println(korisnikovApartman);
 		korisnikovApartman.dodajRezervaciju(r);
 		
-		/*
+		
 		for(Apartman a : lista) {
 			if(a.getIdApartmana().equals(idAp)) {
 				System.out.println(idAp);
@@ -107,7 +107,7 @@ public class RezervacijaServis {
 				System.out.println("Rezervacija dodata u apartman!");
 				break;
 			}
-		}*/
+		}
 		
 		daoKor.sacuvajKorisnika();
 		daoAp.sacuvajApartmane();
@@ -372,6 +372,123 @@ public class RezervacijaServis {
 		rezervacijeDAO.sacuvajRezervacije();
 		apartmaniDAO.sacuvajApartmane();
 		
+		
+		return Response.ok().build();
+	}
+	
+	@PUT
+	@Path("/odbijRezervaciju/{idRezervacije}/{idApartmana}")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response odbijReezervaciju(@PathParam("idRezervacije") String idRez, @PathParam("idApartmana") String idAp, @Context HttpServletRequest rq) {
+		
+		ApartmanDAO apartmaniDAO = (ApartmanDAO) ctx.getAttribute("apartmanDAO");
+		RezervacijaDAO rezervacijeDAO = (RezervacijaDAO) ctx.getAttribute("rezervacijaDAO");
+		KorisnikDAO korisniciDAO = (KorisnikDAO) ctx.getAttribute("korisnikDAO");
+		
+		//izmena kod domacina, sa sesije
+		Domacin domacinSession = (Domacin) rq.getSession().getAttribute("korisnik");
+		
+		Apartman a = domacinSession.getApartmanPoId(idAp);
+		Rezervacija rezervacijaXd = a.getRezervacijuID(idRez);
+		ArrayList<Date> datumiRez = rezervacijaXd.getDatumiRezervacije();
+		System.out.println(" ------------------------ aaaaaaaaaaaaaa-----------" + rezervacijaXd);
+		
+		if(rezervacijaXd.getStatus() == Status.Prihvacena) {
+			System.out.println("VRACANJE DATUMA NA APARTMAN NA DOMACINA SA SESIJE");
+			a.getDostupnostPoDatumima().addAll(datumiRez);
+			System.out.println(a.getDostupnostPoDatumima() + "  APARMAN NA DOMACINU SA SESIJE ");
+			rezervacijaXd.setStatus(Status.Odbijena);
+		} else if(rezervacijaXd.getStatus() == Status.Kreirana) {
+			rezervacijaXd.setStatus(Status.Odbijena);
+		}
+		
+		
+		
+		//izmena na kontekstu rezervacija
+		ArrayList<Rezervacija> listaR = rezervacijeDAO.getSveRezervacije();
+
+		for(Rezervacija r : listaR) {
+			if(r.getIdRezervacije().equals(idRez)) {
+				r.setStatus(Status.Odbijena);
+				System.out.println("IZMENJENO NA KONTEKSTU");
+				break;
+			}
+		}
+		
+		//izmena na kontekstu apartmana
+		ArrayList<Apartman> listaA = apartmaniDAO.getSveApartmane();
+		Apartman apartman = null;
+		for(Apartman aa :listaA) {
+			if(aa.getIdApartmana().equals(idAp)) {
+				apartman = aa;
+			}
+		}
+		
+		System.out.println(apartman + "APARTMAN SA KONTEKSTA\n\n");
+		
+		Rezervacija rezervacija = null;
+		for(Rezervacija rr : apartman.getRezervacije()) {
+			if(rr.getIdRezervacije().equals(idRez)) {
+				rezervacija = rr;
+			}
+		}
+		
+		System.out.println(rezervacija + "REZERVACIJA SA KONTEKSTA\n\n");
+		
+	
+		apartman.getDostupnostPoDatumima().addAll(datumiRez);
+		System.out.println(apartman.getDostupnostPoDatumima() + "NA KONTEKSTU APARTMANA DATUMI \n\n");
+		
+		
+		
+		/*for(Apartman apartman1 : listaA) {
+			if(apartman1.getIdApartmana().equals(idAp)) {
+				Rezervacija rez = apartman1.getRezervacijuID(idRez);
+				System.out.println("PREEEEEE NULLLLLL\n");
+				if(rez != null) {
+					if(rez.getStatus() == Status.Prihvacena) {
+						System.out.println("POSLE NULLLLLL\n");
+						System.out.println("VRACANJE DATUMA NA APARTMAN SA KONTEKSTA");
+						apartman1.getDostupnostPoDatumima().addAll(datumiRez);
+						System.out.println(apartman1.getDostupnostPoDatumima() + "NA KONTEKSTU APARTMANA DATUMI \n\n");
+						apartman1.setOdbijena(idRez);
+						System.out.println(apartman1.getDostupnostPoDatumima() + "       APARTMAN NA KONTEKSTU APARTmANA");
+					}  else if (rez.getStatus() == Status.Kreirana) {
+						apartman1.setOdbijena(idRez);
+					}
+				}
+			} 
+		}*/
+		
+		
+		
+		//izmena kod gosta kome pripada rezervacija
+		ArrayList<Korisnik> listaK = korisniciDAO.getKorisnici();
+		ArrayList<Gost> listaGosti = new ArrayList<Gost>();
+		
+		Gost g = null;
+		for(Korisnik k : listaK) {
+			if(k.getUloga().equals(Uloga.Gost)) {
+				g = (Gost) k;
+				listaGosti.add(g);
+			}
+		}
+		System.out.println("Lista gostiju: " + listaGosti);
+		
+		for(Gost g2 : listaGosti) {
+			for(Rezervacija r2 : g2.getRezervacije()) {
+				if(r2.getIdRezervacije().equals(idRez)) {
+					r2.setStatus(Status.Odbijena);
+					System.out.println("Status rezervacije promenjen u: " + r2.getStatus());
+					break;
+				}
+			}
+		}
+		
+		rezervacijeDAO.sacuvajRezervacije();
+		apartmaniDAO.sacuvajApartmane();
+		korisniciDAO.sacuvajKorisnika();
 		
 		return Response.ok().build();
 	}

@@ -253,5 +253,24 @@ public class Apartman {
 		return rezervacija;
 	}
 	
+	public void setOdbijena(String id) {
+		for(Rezervacija r : rezervacije) {
+			if(r.getIdRezervacije().equals(id)) {
+				r.setStatus(Rezervacija.Status.Odbijena);
+			}
+		}
+	}
+	
+	/*public Status getStatusRezervacijeId(String id) {
+		Status status = null;
+		for(Rezervacija r : rezervacije) {
+			if(r.getIdRezervacije().equals(id)) {
+				status = r.getStatus();
+			}
+		}
+		return status;
+	}*/
+	
+	
 	
 }

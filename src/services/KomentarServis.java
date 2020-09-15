@@ -88,7 +88,7 @@ public class KomentarServis {
 		KomentarDAO dao = (KomentarDAO) ctx.getAttribute("komentarDAO");
 		
 		if(dao == null){
-			System.out.println("Komentari prazni!");
+			System.out.println("7Komentari prazni!");
 			return null;
 		}
 		
@@ -112,10 +112,18 @@ public class KomentarServis {
 		
 		ArrayList<Komentar> listaKomentara = new ArrayList<Komentar>();
 		
-		Apartman a = apartmani.getPoIdApartmana(idAp);
+		Apartman a = null;
+		for(Apartman aa : apartmani.getSveApartmane()) {
+			if (aa.getIdApartmana().equals(idAp)) {
+				a = aa;
+			}
+		}
+		System.out.println(a + "OVAJ APARTMAN HOCU DA VIDIM");
 		for(Komentar k : a.getKomentari()) {
+			if(a.getKomentari() != null) {
 			if(k.isKomentarVidljiv()) {
 				listaKomentara.add(k);
+			}
 			}
 		}
 		
@@ -235,7 +243,7 @@ public class KomentarServis {
 		
 		for(Apartman a : lista) {
 			for(String id : idApartmana) {
-				if(id.equals(a.getIdApartmana())) {
+				if(id.equals(a.getIdApartmana()) && !apartmaniKojeTrazimo.contains(a)) {
 					apartmaniKojeTrazimo.add(a);
 				}
 			}

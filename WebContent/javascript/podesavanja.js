@@ -326,26 +326,6 @@ function apartmaniZaKomentarisanje(){
 		url: 'rest/komentar/moguceOstavitiKomentarApartmani',
 		complete: function(data){
 			let sviApartmani = data.responseJSON;
-/*
-			var dugmad = [];
-
-			for(var j = 0; j < sviApartmani.length; j++){
-				var btn = document.createElement("BUTTON");
-				btn.innerHTML = "Postavite komentar"; 
-				btn.id = sviApartmani[j].idApartmana;
-				dugmad.push(btn);
-			}
-
-			for(var i = 0; i < sviApartmani.length; i++){
-				for(k = 0; k < dugmad.length; k++){
-					if(dugmad[k].id == sviApartmani[i].idApartmana){
-						dugmad[k].addEventListener('click', function() {
-							//window.location.href="dodajKomentar.html?idApartmana=" + sviApartmani[i].idApartmana;
-						}, false);
-						document.getElementById(sviApartmani[i].idApartmana).append(dugmad[k]);
-					}
-				}
-			}*/
 
 			for(var i = 0; i < sviApartmani.length; i++){
 				var id = sviApartmani[i].idApartmana;

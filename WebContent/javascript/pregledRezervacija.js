@@ -81,17 +81,16 @@ function proveriKorisnika(korisnik){
 						let pocetni = new Date(mojeRezervacije[i].pocetniDatum);
 						let stvarnoSad = (JSON.stringify(pocetni)).substr(1,10);
 						lista.append("<tr><td>" + mojeRezervacije[i].gost + "</td><td>"+ stvarnoSad + "</td><td>" + mojeRezervacije[i].ukCena +  "</td><td>"+ mojeRezervacije[i].status +"</td><td>" +
-							 		"<button onclick=prihvatiRezervaciju('" + mojeRezervacije[i].idRezervacije + "','" + mojeRezervacije[i].apartman + "')> Prihvati </button></td><td><button> Odbij </button></td></tr>");				
+							 		"<button onclick=prihvatiRezervaciju('" + mojeRezervacije[i].idRezervacije + "','" + mojeRezervacije[i].apartman + "')> Prihvati </button></td><td><button onclick=odbijRezervaciju('"  + mojeRezervacije[i].idRezervacije + "','" + mojeRezervacije[i].apartman + "')> Odbij </button></td></tr>");				
 						$("#rezervacijeTabela").append(lista);
 
 
 					}else if(mojeRezervacije[i].status == "Prihvacena"){ //Prihvacena
-
 						
 						let pocetni = new Date(mojeRezervacije[i].pocetniDatum);
 						let stvarnoSad = (JSON.stringify(pocetni)).substr(1,10);
 						lista.append("<tr><td>" + mojeRezervacije[i].gost + "</td><td>"+ stvarnoSad + "</td><td>" + mojeRezervacije[i].ukCena +  "</td><td>"+ mojeRezervacije[i].status +"</td>"+
-											"<td><button onclick=zavrsenaRezervacija('" + mojeRezervacije[i].idRezervacije + "','" + mojeRezervacije[i].apartman + "')> Završi </button></td><td><button> Odbij </button></td></tr>");
+											"<td><button onclick=zavrsenaRezervacija('" + mojeRezervacije[i].idRezervacije + "','" + mojeRezervacije[i].apartman + "')> Završi </button></td><td><button onclick=odbijRezervaciju('"  + mojeRezervacije[i].idRezervacije + "','" + mojeRezervacije[i].apartman + "')> Odbij </button></td></tr>");
 						$("#rezervacijeTabela").append(lista);
 
 					}else if(mojeRezervacije[i].status == "Odustanak" || mojeRezervacije[i].status == "Odbijena" || mojeRezervacije[i].status == "Zavrsena"){
@@ -171,6 +170,22 @@ function zavrsenaRezervacija(idR, idA){
 	$.ajax({
 		type: 'PUT',
 		url: 'rest/rezervacija/zavrsiRezervaciju/' + idR + '/' + idA,
+		complete: function(data){
+			if(data["status"] == 200){
+				alert("Izmena uspesna!");
+			}else {
+				alert("Izmena neuspesna!");
+			}
+		}
+	})
+	alert("This is the end!");
+}
+
+function odbijRezervaciju(idR, idA){
+
+	$.ajax({
+		type: 'PUT',
+		url: 'rest/rezervacija/odbijRezervaciju/' + idR + '/' + idA,
 		complete: function(data){
 			if(data["status"] == 200){
 				alert("Izmena uspesna!");
