@@ -84,11 +84,9 @@ function proveriKorisnika(korisnik){
 							 		"<button onclick=prihvatiRezervaciju('" + mojeRezervacije[i].idRezervacije + "','" + mojeRezervacije[i].apartman + "')> Prihvati </button></td><td><button> Odbij </button></td></tr>");				
 						$("#rezervacijeTabela").append(lista);
 
-<<<<<<< Updated upstream
+
 					}else if(mojeRezervacije[i].status == "Prihvacena"){ //Prihvacena
-=======
-					}else if(mojeRezervacije[i].status == "Prihvacena"){ 
->>>>>>> Stashed changes
+
 						
 						let pocetni = new Date(mojeRezervacije[i].pocetniDatum);
 						let stvarnoSad = (JSON.stringify(pocetni)).substr(1,10);
