@@ -28,33 +28,10 @@ button{
 	cursor: pointer;
 	transition: 0.8s;
 	position: hidden;
-}
-
-.btn1{
 	color: #1E90FF;
 }
 
-.btn2{
-	color: #1E90FF;
-}
-
-.btn3{
-	color: #1E90FF;
-}
-
-.btn4{
-	color: #1E90FF;
-}
-
-.btn5{
-	color: #1E90FF;
-}
-
-.btn6{
-    color: #1E90FF;
-}
-
-.btn1:hover, .btn2:hover, .btn3:hover, .btn4:hover, .btn5:hover, .btn6:hover{
+button:hover {
 	border: 1px solid #fff;
 	background: #1E90FF;
 	color: #fff;
@@ -73,7 +50,7 @@ button{
 	height: 25px;
 }
 
-.kolone {
+td{
     background: none;
 	padding: 5px 5px;
 	font-size: 13px;
