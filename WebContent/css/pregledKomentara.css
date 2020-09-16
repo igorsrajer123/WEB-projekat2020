@@ -1,0 +1,30 @@
+body{
+	margin: 5;
+	padding: 0;
+	background-image: url("building2.jpg");
+	background-size: cover;
+	background-attachment: fixed;	
+}
+
+h2{
+	color: #FFFF;
+	font-family: "Comic Sans MS", "Comic Sans", cursive;
+	text-shadow: 2px 1px #0000FF;
+}
+
+div{
+    border:2px solid rgb(36, 162, 235);
+    width: 300px !important;
+    padding: 5px;
+    border-radius: 15px;
+    border-style: dotted;
+    color: white;
+    font-family: serif;
+}
+
+div>*{
+    font-size: 15px;
+    color: #FFFF;
+    font-family: "Comic Sans MS", "Comic Sans", cursive;	
+    font-weight: bold;
+}

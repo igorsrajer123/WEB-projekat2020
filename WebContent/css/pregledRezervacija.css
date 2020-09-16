@@ -3,7 +3,6 @@ body{
 	padding: 0;
 	background-image: url("building.jpg");
 	background-size: cover;
-    background-color: rgb(4, 0, 255);
 	background-attachment: fixed;	
 }
 
@@ -39,19 +38,6 @@ button:hover {
 	color: #fff;
 }
 
-.labele {
-	font-size: 15px;
-	font-family: "Comic Sans MS", "Comic Sans", cursive;
-	color: #FFFF;
-}
-
-.polja {
-	border: 2px solid #3498db;	
-	margin-top: -13px;
-	position: absolute;
-	height: 25px;
-}
-
 td{
     background: none;
 	padding: 5px 5px;
@@ -60,27 +46,8 @@ td{
     color: #FFFF;
 }
 
-.combo{
-    border: 1px solid #3498db;
-	position: relative;
-	height: 25px;
-	font-family: "Comic Sans MS", "Comic Sans", cursive;
-	color: #1E90FF;
-}
-
-.btn3{
-    position: relative;
-    margin-left: -40px;
-}
-
-p{
-	position: relative;
-	margin-left: 60px;
-	font-family: "Comic Sans MS", "Comic Sans", cursive;
-}
-
 .tabela1{
-	border: 3px solid #3498db;
+    border: 3px solid #3498db;
 	border-collapse: collapse;
 	text-align: center;
 }
@@ -98,5 +65,3 @@ thead{
 .tabela1>tbody>tr:nth-child(odd){
 	background-color: #56cfcf;
 }
-
-

@@ -3,80 +3,52 @@ body{
 	padding: 0;
 	background-image: url("building.jpg");
 	background-size: cover;
-    background-color: rgb(4, 0, 255);
+	background-color: rgb(4, 0, 255);
 	background-attachment: fixed;	
 }
 
 h2{
-    color: #FFFF;
+	color: #FFFF;
 	font-family: "Comic Sans MS", "Comic Sans", cursive;
 	text-shadow: 2px 1px #0000FF;
 }
 
 h3{
-    color: #FFFF;
+	color: #FFFF;
 	font-family: "Comic Sans MS", "Comic Sans", cursive;
 	text-shadow: 2px 1px #0000FF;
+}
+
+label{
+    font-size: 17px;
+	font-family: "Comic Sans MS", "Comic Sans", cursive;
+	color: white;
 }
 
 button{
 	border: 2px solid #FFFF;
 	background: white;
-	padding: 5px 5px;
-	font-size: 13px;
+	padding: 3px 3px;
+	font-size: 15px;
 	font-family: "Comic Sans MS", "Comic Sans", cursive;
 	margin: 5px;
 	cursor: pointer;
 	transition: 0.8s;
-	position: hidden;
-	color: #1E90FF;
-	font-weight: bold;
+    position: hidden;
+    height: 30px;
+    color: #1E90FF;
+    font-weight: bold;
 }
 
-button:hover {
-	border: 1px solid #fff;
+button:hover{
+    border: 1px solid #fff;
 	background: #1E90FF;
 	color: #fff;
 }
 
-.labele {
-	font-size: 15px;
-	font-family: "Comic Sans MS", "Comic Sans", cursive;
-	color: #FFFF;
-}
-
-.polja {
-	border: 2px solid #3498db;	
-	margin-top: -13px;
-	position: absolute;
-	height: 25px;
-}
-
-td{
-    background: none;
-	padding: 5px 5px;
-	font-size: 13px;
-    font-family: "Comic Sans MS", "Comic Sans", cursive;
-    color: #FFFF;
-}
-
-.combo{
-    border: 1px solid #3498db;
+.btn2{
 	position: relative;
-	height: 25px;
-	font-family: "Comic Sans MS", "Comic Sans", cursive;
-	color: #1E90FF;
-}
-
-.btn3{
-    position: relative;
-    margin-left: -40px;
-}
-
-p{
-	position: relative;
-	margin-left: 60px;
-	font-family: "Comic Sans MS", "Comic Sans", cursive;
+	margin-left: -45px;
 }
 
 .tabela1{
@@ -99,4 +71,10 @@ thead{
 	background-color: #56cfcf;
 }
 
-
+td{
+    background: none;
+	padding: 5px 5px;
+	font-size: 13px;
+    font-family: "Comic Sans MS", "Comic Sans", cursive;
+    color: #FFFF;
+}

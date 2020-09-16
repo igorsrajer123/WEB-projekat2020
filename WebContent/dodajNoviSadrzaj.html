@@ -4,12 +4,13 @@
     <title> Pregled dostupnih sadrzaja</title>
     <script src="javascript/jquery-3.3.1.min.js"></script>
     <script src="javascript/dodajNoviSadrzaj.js"></script>
+    <link rel="stylesheet" href="css/dodajNoviSadrzaj.css">
 </head>
 <body>
     <h2> Pregled mogućeg sadržaja apartmana </h2>
 
     <form>
-        <table id="sadrzajApartmana" border="3">
+        <table id="sadrzajApartmana" class="tabela1">
             <thead>
                 <tr>
                     <td><b> ID </b></td>
@@ -39,8 +40,8 @@
                 <td> <label id="nazivPoruka" style="color:red"> Polje prazno! </label></td>
             </tr>
             <tr>
-                <td> <button id="dodajStavku"> Dodaj </button></td>
-                <td> <button id="odustani"> Odustani </button></td>
+                <td> <button id="dodajStavku" class="btn1"> Dodaj </button></td>
+                <td> <button id="odustani" class="btn2"> Odustani </button></td>
             </tr>
         </table>
     </form>

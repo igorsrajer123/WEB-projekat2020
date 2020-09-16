@@ -4,21 +4,16 @@
 	<title> Nova rezervacija </title>
 	<script src="javascript/jquery-3.3.1.min.js"></script>
     <script src="javascript/rezervacije.js"></script>
+    <link rel="stylesheet" href="css/novaRezervacija.css">
     
-    <style type="text/css">
-            .blank_row
-				{
-				    height: 10px !important; /* overwrites any other rules */
-				    background-color: white;
-				}
-    </style>
+
 
 </head>
 <body>
     <h2> Nova rezervacija </h2>
 
     <form>
-        <table>
+        <table class="tabela1">
             <tr>
                 <td style="width: 11%"><label> Domaćin apartmana: </label></td>
                 <td><label id='domacin'> <b></b> </label></td> 
@@ -29,15 +24,15 @@
             </tr>
             <tr>
                 <td><label> Datum rezervacije:</label></td>
-                <td><input type='date' id='datumRezervacije'/></td> 
+                <td><input type='date' id='datumRezervacije' class="datum"/></td> 
             </tr>
             <tr>
                 <td><label> Broj noćenja: </label></td>
-                <td><input type='text' id='brNocenja'/></td> 
+                <td><input type='text' id='brNocenja' class="polja"/></td> 
             </tr>
             <tr>
                 <td><label> Poruka domaćinu: </label></td>
-                <td><input type='text' id='poruka'/></td> 
+                <td><input type='text' id='poruka' class="polja"/></td> 
             </tr>
             <tr class='blank_row'>
             	<td></td>
@@ -53,7 +48,7 @@
             </tr>
             <tr>
                 <td id='potvrdi'><button> Potvrdi </button></td>
-                <td> <button id='odustani'> Odustani </button></td>
+                <td> <button id='odustani' class="btn2"> Odustani </button></td>
             </tr>
         </table>
     </form>

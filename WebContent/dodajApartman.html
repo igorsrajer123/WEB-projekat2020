@@ -3,19 +3,8 @@
         <meta charset="UTF-8">
         <title> Registracija novog korisnika</title>
         <script src="javascript/jquery-3.3.1.min.js"></script>
-        <script src="javascript/dodajApartman.js"></script>   
-
-        <style type="text/css">
-            .tabelica {
-                            table-layout: fixed;
-                      }
-            
-            .blank_row
-                    {
-                        height: 10px !important; /* overwrites any other rules */
-                        background-color: white;
-                    }
-        </style>
+        <script src="javascript/dodajApartman.js"></script>  
+        <link rel="stylesheet" href="css/dodajApartman.css"> 
     </head>
 <body>
     <h2>Dodavanje Apartmana</h2>
@@ -28,64 +17,63 @@
             </tr>
             <tr>
                 <td style="width: 10%"><label> Tip: </label></td>
-                <td><select name="tip" id="tip">
+                <td><select name="tip" id="tip" class="combo">
                           <option value="Ceo_apartman">Ceo_apartman</option>
                           <option value="Soba">Soba</option>				 
                 </select></td>
             </tr>
             <tr>
-                <td>Broj soba:</td>
-                <td><input type="text" name="brojSoba" id="brSoba"></td>
-                <td><span  id="greskaBrSobaPor"></span></td>
+                <td> <label>Broj soba: </label></td>
+                <td><input type="text" name="brojSoba" id="brSoba" class="polja"></td>
+                <td><span  id="greskaBrSobaPor" class="error"></span></td>
             </tr> 
             <tr>
                 <td><label> Broj gostiju: </label></td>
-                <td><input type="text" name="brojGostiju" id="brGostiju"></td>
-                <td><span  id="greskaBrGostijuPor"></span></td>
+                <td><input type="text" name="brojGostiju" id="brGostiju" class="polja"></td>
+                <td><span  id="greskaBrGostijuPor" class="error"></span></td>
             </tr>
             <tr>
-                <td><label> Cena po noci: </label></td>
-                <td><input type="text" name="cena" id="cena"></td>
-                <td><span  id="greskaCenaPor"></span></td>
+                <td><label> Cena po noći: </label></td>
+                <td><input type="text" name="cena" id="cena" class="polja"></td>
+                <td><span  id="greskaCenaPor" class="error"></span></td>
             </tr>
             <tr class='blank_row'>
             	<td></td>
             </tr>
-            <tr>
+            <tr class="podnaslovi">
                 <td colspan="2"> <b> <i> Slobodni datumi za izdavanje </i> </b> </td>
             </tr>
             <tr class='blank_row'>
             	<td></td>
             </tr>
             <tr>
-                <td>Od:</td>
-                <td><input type="date" id="datumZaIzdOD"></td>
+                <td><label> Od: </label></td>
+                <td><input type="date" id="datumZaIzdOD" class="kalendari"></td>
             </tr>
             <tr>
-                <td>Do: </td>
-                <td><input type="date" id="datumZaIzdDO"></td>
+                <td><label>Do: </label></td>
+                <td><input type="date" id="datumZaIzdDO" class="kalendari"></td>
             </tr>
             <tr class='blank_row'>
             	<td></td>
             </tr>
-            <tr>
-            	<td> <b><i> Lokacija </i></b> </td>
-            	<td> </td>
+            <tr class="podnaslovi">
+            	<td colspan="2"> <b><i> Lokacija </i></b> </td>
             </tr>
             <tr class='blank_row'>
             	<td></td>
             </tr>
             <tr>
                 <td><label> Ulica i broj: </label>
-                <td><input type='text' id='ulica'><label id="greskaUlica" style="color: red;"> Polje prazno!</label></td>
+                <td><input type='text' id='ulica' class="polja"><label id="greskaUlica" style="color: red;" class="error"> Polje prazno!</label></td>
             </tr>
             <tr>
                 <td><label> Naseljeno mesto: </label>
-                <td><input type='text' id='mesto' oninput="sirinaDuzinaFunkcija()"><label id="greskaMesto" style="color: red;"> Polje prazno! </label></td>
+                <td><input type='text' id='mesto' oninput="sirinaDuzinaFunkcija()" class="polja"><label id="greskaMesto" style="color: red;" class="error"> Polje prazno! </label></td>
             </tr>
             <tr>
                 <td><label> Poštanski broj mesta: </label>
-                <td><input type='text' id='postanskiBroj'><label id="greskaPostanskiBroj" style="color: red;"> Polje prazno! </label></td>
+                <td><input type='text' id='postanskiBroj' class="polja"><label id="greskaPostanskiBroj" style="color: red;" class="error"> Polje prazno! </label></td>
             </tr>
             <tr>
                 <td><label> Geografska širina: </label>
@@ -97,15 +85,15 @@
             </tr>
             <tr>
                 <td><label> Slika: </label>
-                <td><input id="slika" type="file" onchange="readURL(this);"></td>
+                <td><input id="slika" type="file" onchange="readURL(this);" class="file"></td>
             </tr>
             <tr>
                 <td></td>
-                <td><img  id="blah" src="#" alt="your image" style="height: 100px; width: 100px;" /> </td>
+                <td><img  id="blah" src="#" alt="set image..." style="height: 100px; width: 100px;" class="picture" /> </td>
             </tr>
         </table>
 
-        <h3> <i>Sadržaj apartmana</i> </h3>
+        <h3 class="podnaslovi"> <i>Sadržaj apartmana</i> </h3>
         
         <table id="tabelaSadrzaj">
             <tbody>

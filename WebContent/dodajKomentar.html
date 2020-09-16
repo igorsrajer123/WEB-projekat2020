@@ -4,6 +4,7 @@
     <title> Komentarisi </title>
     <script src="javascript/jquery-3.3.1.min.js"></script>
     <script src="javascript/dodajKomentar.js"></script>
+    <link rel="stylesheet" href="css/dodajKomentar.css">
 </head>
 <body>
     <h3> Ostavite komentar </h3>
@@ -17,10 +18,10 @@
     <table>
         <tr> 
             <td>
-                Ocenite uslugu:
+                <label> Ocenite uslugu: </label>
             </td>
             <td>
-                <input type='text' id='ocena'/>
+                <input type='text' id='ocena' class="polje"/>
             </td>
             <td>
                 <label><b> (1-5) </b></label>
@@ -28,9 +29,8 @@
         </tr>
         <tr>
             <td> <button id='postaviKomentar'> Postavi </button></td>
-            <td> <button> Odustani </button></td>
+            <td> <button class="btn2"> Odustani </button></td>
         </tr>
-
     </table>
     
     
