@@ -10,7 +10,7 @@
 	<h2> Pregled svih korisnika </h2>
 	
 	<form>
-		<table border="1" id="korisniciTabela">
+		<table  id="korisniciTabela" class="tabela1">
 			<thead>
 				<td> Korisničko ime </td>
 				<td> Lozinka </td>
@@ -34,27 +34,27 @@
 		<h3> Pretraga </h3>
 			<table>
 				<tr> 
-					<td> Korisničko ime: </td>
-					<td id="k"> <input type="text" id="korImePretraga"/></td>
+					<td class="labele"> Korisničko ime: </td>
+					<td id="k"> <input type="text" id="korImePretraga" class="polja"/></td>
 				</tr>
 				<tr> 
-					<td> Uloga korisnika: </td>
-					<td id="k2"> <select id='uloga'>
+					<td class="labele"> Uloga korisnika: </td>
+					<td id="k2"> <select id='uloga' class="combo">
 									<option>Domacin</option>
 									<option>Administrator</option>
 									<option>Gost</option>
 								</select></td>
 				</tr>
 				<tr> 
-					<td> Pol: </td>
-					<td id="k3"> <select id='pol'>
-									<option>Muski</option>
-									<option>Zenski</option>
+					<td class="labele"> Pol: </td>
+					<td id="k3"> <select id='pol' class="combo">
+									<option>muski</option>
+									<option>zenski</option>
 								</select></td>
 				</tr>
 				<tr>
-					<td> <button type="submit" id="pretrazi"> Pretraži </button></td>
-					<td> <button type="submit" id="ponisti"> Poništi pretragu </button></td>
+					<td> <button type="submit" id="pretrazi" class="btn2"> Pretraži </button></td>
+					<td> <button type="submit" id="ponisti" class="btn3"> Poništi pretragu </button></td>
 				</tr>
 			</table>
 	</div>

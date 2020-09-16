@@ -4,6 +4,7 @@
     <title> Korisnicki nalog </title>
     <script src="javascript/jquery-3.3.1.min.js"></script>
     <script src="javascript/nalog.js"></script>
+    <link rel="stylesheet" href="css/nalog.css">
 </head>
 <body>
     <h2> Korisnički nalog </h2>
@@ -11,40 +12,40 @@
     <form>
         <table id="nalogTabela">
             <tr id='u'>
-                <td><label id='uloga'> Uloga korisnika: </label></td>
+                <td><label id='uloga' class="labele"> Uloga korisnika: </label></td>
             </tr>
             <tr> 
-                <td> <label id='lab'> Korisničko ime: </label></td>
-                <td><input id='korIme' type='text' disabled='disabled'> </td>
+                <td> <label id='lab' class="labele"> Korisničko ime: </label></td>
+                <td><input id='korIme' type='text' disabled='disabled' class="polja"> </td>
             </tr>
             <tr> 
-                <td><label id='lab2'> Lozinka: </label></td>
-                <td><input id='staraLoz' type='password' disabled='disabled'/></td>
-                <td><button id='izmeni'> Izmeni </button></td>
+                <td><label id='lab2' class="labele"> Lozinka: </label></td>
+                <td><input id='staraLoz' type='password' disabled='disabled' class="polja"/></td>
+                <td><button id='izmeni' class="btn1"> Izmeni </button></td>
             </tr>
             <tr>
-                <td><label id='lab3'> Nova lozinka: </label></td>
-                <td><input id='novaLoz' type='password'/></td>
+                <td><label id='lab3' class="labele"> Nova lozinka: </label></td>
+                <td><input id='novaLoz' type='password' class="polja"/></td>
                 <td><p id='novaP' style='color:red'> Lozinka mora imati najmanje 5 karaktera! </p> </td>
             </tr>
             <tr>
-                <td><label id='lab4'>Ponovite lozinku: </label></td>
-                <td><input id='novaLoz2' type='password'/></td>
+                <td><label id='lab4' class="labele">Ponovite lozinku: </label></td>
+                <td><input id='novaLoz2' type='password' class="polja"/></td>
                 <td><p id='ponoviP' style='color:red'> Lozinke se ne poklapaju! </p> </td>
             </tr>
             <tr>
-                <td><label id='lab5'> Ime: </label></td>
-                <td><input id='ime' type='text'/></td>
+                <td><label id='lab5' class="labele"> Ime: </label></td>
+                <td><input id='ime' type='text' class="polja"/></td>
                 <td><p id='imeP' style='color:red'> Polje prazno! </p> </td>
             </tr>
             <tr>
-                <td><label id='lab6'> Prezime: </label></td>
-                <td><input id='prz' type='text'/> </td>  
+                <td><label id='lab6' class="labele"> Prezime: </label></td>
+                <td><input id='prz' type='text' class="polja"/> </td>  
                 <td><p id='przP' style='color:red'> Polje prazno! </p></td>
             </tr>
             <tr>
-                <td><label id='lab7'> Pol: </label></td>
-                <td><select name='pol' id='pol'>
+                <td><label id='lab7' class="labele"> Pol: </label></td>
+                <td><select name='pol' id='pol' class="combo">
                         <option value='muski'> Muski</option> 
                         <option value='zenski'>Zenski</option>
                     </select></td>
@@ -53,8 +54,8 @@
 
         <br/>
         <div>
-            <button id='sacuvaj'> Sačuvaj izmene </button>
-            <button id='odustani'> Odustani </button>
+            <button id='sacuvaj' class="btn2"> Sačuvaj izmene </button>
+            <button id='odustani' class="btn3"> Odustani </button>
         </div>
     </form>
 </body>
