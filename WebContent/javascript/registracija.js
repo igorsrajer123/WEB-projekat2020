@@ -126,7 +126,7 @@ $(document).ready(function(){
 			
 			var s = JSON.stringify(podaci);
 			
-			alert(s);
+		//	alert(s);
 
 			$.ajax ({
 				url: 'rest/korisnik/registruj',
@@ -136,17 +136,17 @@ $(document).ready(function(){
 				dataType: 'json',
 				complete: function(data) {
 					if (data["status"] == 200) {
-						alert("uspesno registrovan i ulogovan");
+						alert("Korisnik uspesno registrovan i ulogovan!");
 						window.location.href = "index.html";
 					} else if(data["status"] == 500){
-						alert("postojij korisnik sa istim korisnickim imenom");
+						alert("Postoji korisnik sa istim korisnickim imenom!");
 					} else {
 						alert("Neuspesna registracija!");
 					}
 				}
 			});
 		} else {
-			alert("Niste isparavno popunili sva polja");
+			alert("Niste isparavno popunili sva polja!");
 		}
 				
 });

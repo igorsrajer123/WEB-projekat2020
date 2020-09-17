@@ -149,7 +149,7 @@ function odustanakRezervacija(idR, idA){
 			}
 		}
 	})
-	alert("Kraj funkcije!");
+	//alert("Kraj funkcije!");
 }
 
 function prihvatiRezervaciju(idR, idA) {
@@ -178,7 +178,7 @@ function zavrsenaRezervacija(idR, idA){
 			}
 		}
 	})
-	alert("This is the end!");
+	//alert("This is the end!");
 }
 
 function odbijRezervaciju(idR, idA){

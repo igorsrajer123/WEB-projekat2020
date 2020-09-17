@@ -46,7 +46,7 @@ $(document).ready(function(){
         let korIme = $("#korImePretraga").val();
         let polKor = $("#pol option:selected" ).text();
         let uloga = $("#uloga option:selected").text();
-        alert(polKor + " " + uloga);
+       // alert(polKor + " " + uloga);
 
         $.ajax({
             type: 'GET',
@@ -54,7 +54,7 @@ $(document).ready(function(){
             complete: function(data){
 
                 let korisnik = data.responseJSON;
-                alert(korisnik);
+              //  alert(korisnik);
 
                 if(korisnik == null){
                     if(korIme == ""){
@@ -103,7 +103,7 @@ $(document).ready(function(){
                                     if(data["status"] == 200){
                                         window.location.href = "pregledKorisnika.html";
                                     }else if(data["status"] == 500){
-                                        alert("Nece da moze!");
+                                        alert("Doslo je do greske!");
                                     }
                                 }
                             })
@@ -163,7 +163,7 @@ $(document).ready(function(){
                                     if(data["status"] == 200){
                                         window.location.href = "pregledKorisnika.html";
                                     }else if(data["status"] == 500){
-                                        alert("Nece da moze!");
+                                        alert("Doslo je do greske!");
                                     }
                                 }
                             })
@@ -234,7 +234,7 @@ function odrediKorisnika(korisnik){
                                     if(data["status"] == 200){
                                         window.location.href = "pregledKorisnika.html";
                                     }else if(data["status"] == 500){
-                                        alert("Nece da moze!");
+                                        alert("Doslo je do greske!");
                                     }
                                 }
                             })

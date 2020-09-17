@@ -56,12 +56,12 @@ function nabaviApartman(korisnik){
 function posaljiRezervaciju(apartman,korisnik) {   
     var datumPocetkaRez = new Date($('#datumRezervacije').val());
     var datumPocetni = JSON.stringify(datumPocetkaRez);
-    alert(datumPocetni);
+  //  alert(datumPocetni);
     let brNocenja = $('#brNocenja').val();
     let datumKrajaRez = datumPocetkaRez.addDays(parseInt(brNocenja, 10));
-    alert("ALOOOOOOOOO: " + datumPocetkaRez);
+  //  alert("ALOOOOOOOOO: " + datumPocetkaRez);
     let datumPocetkaRezString = (JSON.stringify(datumPocetkaRez)).substr(1,10);
-    alert(datumPocetkaRezString)
+ //   alert(datumPocetkaRezString)
   //  alert(brNocenja);
     //alert(datumKrajaRez);
     let listaRezervisanih = getDates(datumPocetkaRez, datumKrajaRez);
@@ -71,12 +71,12 @@ function posaljiRezervaciju(apartman,korisnik) {
     let novalista = [];
      for(var i = 0; i < listaRezervisanih.length; i++){
         novalista[i] = (JSON.stringify(listaRezervisanih[i])).substr(1,10);
-        alert(novalista[i]);
+    //    alert(novalista[i]);
     } 
 
     let poruka = $("#poruka").val();
     let ukupnaCena = apartman.cenaPoNoci* brNocenja;
-    alert("Ukupna cena!!!! : " + ukupnaCena);
+  //  alert("Ukupna cena!!!! : " + ukupnaCena);
     
     var n = true;
 
@@ -90,7 +90,7 @@ function posaljiRezervaciju(apartman,korisnik) {
         }
     } 
     // "listaRezervisanihDatuma": listaRezervisanih,
-    alert(n);
+   // alert(n);
    // alert(korisnik.korisnicko_ime);
     if (n == true) {
         let podaci = {
@@ -104,7 +104,7 @@ function posaljiRezervaciju(apartman,korisnik) {
         }
     
         let s = JSON.stringify(podaci);
-        alert(s);
+    //    alert(s);
     
         $.ajax ({
             url: 'rest/rezervacija/dodajRezervaciju/' + apartman.idApartmana,
@@ -114,15 +114,15 @@ function posaljiRezervaciju(apartman,korisnik) {
             dataType: 'json',
             complete: function(data) {
                 if (data["status"] == 200) {
-                    alert("uspesno dodata rezervacija");
+                    alert("Uspesno dodata rezervacija!");
                     window.location.href = "index.html";
                 } else {
-                    alert("neuspesno dodata rezervacija");
+                    alert("Neuspesno dodata rezervacija!");
                 }
             }
         });
     } else {
-        alert("Datumi rezervacije nisu slobodni");
+        alert("Datumi rezervacije nisu slobodni!");
     }
     
     

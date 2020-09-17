@@ -27,13 +27,13 @@ function getUrlVars() {
 function pomocnaFunkcija(korisnik){
 
     if(korisnik == undefined){
-        alert("Nedostupan sadrzaj nebitni lice!");
+        alert("Nedostupan sadrzaj!");
         window.location.href = "index.html";
     }else if(korisnik.uloga == "Domacin"){
-        alert("Nedostupan sadrzaj domacine!");
+        alert("Nedostupan sadrzaj!");
         window.location.href = "index.html";
     }else if(korisnik.uloga == "Gost"){
-        alert("Nedostupan sadrzaj gostu jedan!");
+        alert("Nedostupan sadrzaj!");
         window.location.href = "index.html";
     }else if(korisnik.uloga == "Administrator"){
         var number = getUrlVars()["idApartmana"];

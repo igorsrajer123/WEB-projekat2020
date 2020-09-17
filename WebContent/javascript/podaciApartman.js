@@ -156,8 +156,8 @@ function izmeniApartman(apartman, number) {
     }
 
     postavljanjeSadrzaja();
-    alert(podaciSadrzaj);
-    alert(apartman.domacin + "Ovog domacina saljem");
+   // alert(podaciSadrzaj + "------ ovo su podaci izvan funkcije!");
+   // alert(apartman.domacin + "Ovog domacina saljem");
 
     if(brGostijuIspravan == true && brSobaIspravan == true && cenaIspravna == true && ulicaIspravna == true && mestoIspravno == true && postanskiBrIspravan == true){
 
@@ -177,7 +177,7 @@ function izmeniApartman(apartman, number) {
         }
 
         var d = JSON.stringify(podaciZaSlanje);
-        alert(d);
+      //  alert(d);
 
         $.ajax({
             type: 'PUT',
@@ -253,12 +253,12 @@ function ucitajCekiranSadrzaj(id){
 
     if(document.getElementById(id).checked){
         cekiraniSadrzaj.push(id);
-        alert(id);
+     //   alert(id);
     }if(!document.getElementById(id).checked){
         var index = $.inArray(id,cekiraniSadrzaj);
         if(index != -1){
             cekiraniSadrzaj.splice(index, 1);
-            alert(cekiraniSadrzaj);
+         //   alert(cekiraniSadrzaj);
         }
     }
 }
@@ -275,13 +275,15 @@ function postavljanjeSadrzaja(){
             for(var i = 0; i < savSadrzaj.length; i++){
                 for(var j = 0; j < cekiraniSadrzaj.length; j++){
                     if(cekiraniSadrzaj[j] == savSadrzaj[i].id){
-                        alert(cekiraniSadrzaj[j] + "PRONADJEN!");
+                      //  alert(cekiraniSadrzaj[j] + "PRONADJEN!");
                         jednaStavka  = { 
                                         "id": savSadrzaj[i].id,
                                         "item": savSadrzaj[i].item,
                                          "uklonjen": false
                                         }
+                     //   alert("Trenutno postavljen sadrzaj u funkciji: " + podaciSadrzaj);
                         podaciSadrzaj.push(jednaStavka);
+                      //  alert("Trenutno postavljen sadrzaj u funkciji: " + podaciSadrzaj);
                     }
                 }
             }

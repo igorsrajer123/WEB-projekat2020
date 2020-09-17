@@ -114,7 +114,7 @@ $(document).ready(function(){
                                                     if(data["status"] == 200){
                                                         window.location.href = "index.html";
                                                     }else if(data["status"] == 500){
-                                                        alert("Nece da moze!");
+                                                        alert("Doslo je do greske!");
                                                     }
                                                 }		
                                             })

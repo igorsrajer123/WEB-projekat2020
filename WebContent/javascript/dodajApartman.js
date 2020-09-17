@@ -55,8 +55,8 @@ function pozdravPorukaApp(korisnik) {
 }
 
 function dodajApartman(korisnik) {
-    alert($('#datumZaIzdOD').val());
-    alert($('#datumZaIzdDO').val());
+   // alert($('#datumZaIzdOD').val());
+  //  alert($('#datumZaIzdDO').val());
     var datumOD = new Date($('#datumZaIzdOD').val());
     var datumDO = new Date($('#datumZaIzdDO').val());
 
@@ -74,7 +74,7 @@ function dodajApartman(korisnik) {
     postavljanjeSadrzaja();
     
     var datumiZaIzdavanjeList = getDates(datumOD, datumDO);
-    alert(datumiZaIzdavanjeList);
+   // alert(datumiZaIzdavanjeList);
     let podaci  = {
         "brSoba": $('#brSoba').val(),
         "brGostiju": $('#brGostiju').val(),
@@ -92,8 +92,8 @@ function dodajApartman(korisnik) {
     let korIme = korisnik.korisnicko_ime;
 
     let s = JSON.stringify(podaci);
-    alert(s);
-    alert(korIme);
+  //  alert(s);
+  //  alert(korIme);
 
     $.ajax ({
         url: 'rest/apartman/dodajApartman/',
@@ -103,10 +103,10 @@ function dodajApartman(korisnik) {
         dataType: 'json',
         complete: function(data) {
             if (data["status"] == 200) {
-                alert("uspesno dodat apartman");
+                alert("Uspesno dodat apartman!");
                 window.location.href = "index.html";
             } else {
-                alert("Neuspesno");
+                alert("Neuspesno dodat apartman!");
             }
         }
     });
@@ -121,7 +121,7 @@ function ucitajCekiranSadrzaj(id){
         var index = $.inArray(id,cekiraniSadrzaj);
         if(index != -1){
             cekiraniSadrzaj.splice(index, 1);
-            alert(cekiraniSadrzaj);
+          //  alert(cekiraniSadrzaj);
         }
     }
 }
@@ -139,7 +139,7 @@ function postavljanjeSadrzaja(){
             for(var i = 0; i < savSadrzaj.length; i++){
                 for(var j = 0; j < cekiraniSadrzaj.length; j++){
                     if(cekiraniSadrzaj[j] == savSadrzaj[i].id){
-                        alert(cekiraniSadrzaj[j] + "PRONADJEN!");
+                     //   alert(cekiraniSadrzaj[j] + "PRONADJEN!");
                         jednaStavka  = { 
                                         "id": savSadrzaj[i].id,
                                         "item": savSadrzaj[i].item,

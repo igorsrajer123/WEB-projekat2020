@@ -23,8 +23,13 @@ $(document).ready(function(){
                 var number = getUrlVars()["idApartmana"];
                
                 postaviKomentar(korisnik, number);
+                window.location.href = "index.html";
             }
         })
+    })
+
+    $("#odustani").click(function(event){
+        window.location.href = "index.html";
     })
 });
 

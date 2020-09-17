@@ -211,7 +211,7 @@ function prikazApartmana(korisnik) {
 											if(data["status"] == 200){
 												window.location.href = "index.html";
 											}else if(data["status"] == 500){
-												alert("Nece da moze!");
+												alert("Doslo je do greske!");
 											}
 										}		
 									})
@@ -237,7 +237,7 @@ function prikazApartmana(korisnik) {
 											if(data["status"] == 200){
 												window.location.href = "index.html";
 											}else if(data["status"] == 500){
-												alert("Nece da moze!");
+												alert("Doslo je do greske!");
 											}
 										}		
 									})
@@ -284,7 +284,7 @@ function prikazApartmana(korisnik) {
 							let id = apartmani[i].idApartmana;
 
 							document.getElementById(apartmani[i].idApartmana).onclick =function fun(){
-								alert(id);
+							//	alert(id);
 								window.location.href = "podaciApartman.html?idApartmana="+ id;
 							}
 
@@ -299,7 +299,7 @@ function prikazApartmana(korisnik) {
 							let id = apartmani[i].idApartmana;
 
 							document.getElementById(apartmani[i].idApartmana).onclick =function fun(){
-								alert(id);
+							//	alert(id);
 								window.location.href = "podaciApartman.html?idApartmana="+ id;
 							}
 
@@ -341,7 +341,7 @@ function filtrirajStatus(){
 	
 	if(selektovano == "Aktivno"){
 
-		alert(selektovano);
+	//	alert(selektovano);
 		$.ajax({
 			type: 'GET',
 			url: 'rest/apartman/filtrirajStatus/' + selektovano,
@@ -353,7 +353,7 @@ function filtrirajStatus(){
 		})
 
 	}else if(selektovano == "Neaktivno"){
-		alert(selektovano);
+	//	alert(selektovano);
 		$.ajax({
 			type: 'GET',
 			url: 'rest/apartman/filtrirajStatus/' + selektovano,
