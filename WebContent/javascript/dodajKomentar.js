@@ -61,12 +61,12 @@ function pomocnaFunkcija(korisnik){
 
 function postaviKomentar(korisnik, idAp){
 
-    alert("Apartman: " + idAp);
-    alert("Korisnik: " + korisnik.korisnicko_ime);
+  //  alert("Apartman: " + idAp);
+  //  alert("Korisnik: " + korisnik.korisnicko_ime);
     let b =  $("#ocena").val();
     let a = $("#textKomentara").val();
-    alert("Ocena: " + b);
-    alert("Tekst: " + a);
+   // alert("Ocena: " + b);
+   // alert("Tekst: " + a);
     let podaci = {
         "gost": korisnik.korisnicko_ime,
         "apartman": idAp,
